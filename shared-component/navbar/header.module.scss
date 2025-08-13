@@ -1,0 +1,99 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  /* Remove background-color property */
+  position: relative; /* Add this for proper z-index stacking */
+}
+
+.navbarLeft {
+  img {
+    height: 100px;
+    transition: 0.3s;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+}
+
+.navbarLinks {
+  display: flex;
+  gap: 16px;
+  transition: left 0.3s ease;
+
+  a {
+    text-decoration: none;
+    color: black; /* Changed to match your original blue color */
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-weight: 500; /* Added for better visibility */
+
+    &:hover {
+      background-color: #dbae58;
+      color: #344160;
+    }
+  }
+}
+
+/* Hamburger hidden by default */
+.hamburger {
+  display: none;
+  font-size: 28px;
+  color: #2f6ec1; /* Changed to match your blue color */
+  cursor: pointer;
+}
+
+/* Mobile Drawer: Below 768px */
+@media (max-width: 768px) {
+  .navbar{
+    padding: 0px 10px;
+  }
+  .navbarLinks {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    flex-direction: column;
+    background-color: #1c4171;
+    height: 100%;
+    width: 250px;
+    padding-top: 60px;
+    gap: 0;
+    transition: left 0.3s ease;
+    z-index: 100;
+
+    a {
+      color: white; /* Keep white in mobile menu */
+      padding: 14px 20px;
+      font-size: 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  .active {
+    left: 0;
+  }
+
+  .hamburger {
+    display: block;
+    z-index: 200;
+  }
+}
+
+.closeIcon {
+  display: none;
+  font-size: 26px;
+  color: white;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .closeIcon {
+    display: block;
+  }
+}

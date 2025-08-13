@@ -1,0 +1,236 @@
+.header {
+  position: relative;
+  width: 100%;
+}
+
+.heroImage {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(
+      to right,
+      rgba(54, 103, 164, 0.776),
+      rgba(50, 70, 147, 0.8)
+    ),
+    url("../../../public/homebackground.png") no-repeat center/cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+
+  @media (max-width: 1024px) {
+    min-height: 80vh;
+  }
+
+  @media (max-width: 768px) {
+    min-height: 70vh;
+  }
+}
+
+.headerContent {
+  position: relative;
+  z-index: 1;
+  padding-top: 150px;
+
+  @media (max-width: 768px) {
+    padding-top: 100px;
+  }
+
+  h1 {
+    margin: 30px 65px;
+    font-size: 50px;
+    color: white;
+    max-width: 700px;
+    font-weight: bolder;
+
+    @media (max-width: 1024px) {
+      font-size: 40px;
+      max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 35px;
+      max-width: 70%;
+      margin-left: 5%;
+      padding-right: 5%;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 24px;
+      margin-left: 5%;
+    }
+  }
+
+  p {
+    color: rgb(224, 223, 223);
+    font-size: 25px;
+    max-width: 670px;
+    margin: 0px 65px;
+    line-height: 1.4;
+
+    @media (max-width: 1024px) {
+      font-size: 20px;
+      max-width: 600px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 18px;
+      max-width: 100%;
+      margin-left: 5%;
+      padding-right: 5%;
+    }
+
+    @media (max-width: 480px) {
+      font-size: 16px;
+    }
+  }
+
+  .btn {
+    margin-left: 50px;
+
+    @media (max-width: 768px) {
+      margin-left: 20px;
+    }
+
+    .btn1 {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background: transparent;
+      border: 2px solid white;
+      padding: 15px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 20px 10px;
+
+      &:hover {
+        background-color: #dbae58;
+        border-color: #dbae58;
+        color: #344160;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        padding: 8px 12px;
+        margin: 20px 5px;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+        padding: 6px 10px;
+        margin: 20px 2px;
+      }
+    }
+  }
+}
+
+.socialIcons {
+  background-color: white;
+  padding: 20px;
+  width: 45px;
+  height: 120px;
+  position: absolute;
+  right: 0;
+  bottom: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  .fa {
+    font-size: 20px;
+    color: black; // Black icons by default
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #dbae58;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: 40px;
+    height: 110px;
+    padding: 15px;
+  }
+
+  @media (max-width: 768px) {
+    background-color: transparent; // Remove white bg
+    box-shadow: none; // Remove shadow
+    width: auto;
+    height: auto;
+    padding: 10px;
+    flex-direction: row;
+    gap: 12px;
+    right: auto;
+    left: 5px; // Bottom-left
+    bottom: 0; // Touch bottom
+    border-radius: 0;
+  }
+
+  @media (max-width: 480px) {
+    gap: 10px;
+    padding: 8px;
+    bottom: 0;
+    left: 5px;
+  }
+}
+
+.socialIcons {
+  background-color: white;
+  padding: 20px;
+  width: 45px;
+  height: 120px;
+  position: absolute;
+  right: 0;
+  bottom: 22%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  border-radius: 8px 0 0 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  z-index: 10; // ensures it stays above other content
+
+  .fa {
+    font-size: 20px;
+    color: black; // black icons
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: #dbae58;
+    }
+  }
+
+  @media (max-width: 1024px) {
+    width: 40px;
+    height: 110px;
+    padding: 15px;
+  }
+
+  @media (max-width: 768px) {
+    background-color: transparent;
+    box-shadow: none;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    flex-direction: row;
+    gap: 12px;
+    right: auto;
+    left: 5px;
+    bottom: 0;
+    border-radius: 0;
+    z-index: 10; // keep it above even on mobile
+  }
+
+  @media (max-width: 480px) {
+    gap: 10px;
+    padding: 8px;
+    bottom: 0;
+    left: 5px;
+  }
+}
+

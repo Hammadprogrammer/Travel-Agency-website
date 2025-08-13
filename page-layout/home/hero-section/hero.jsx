@@ -15,14 +15,14 @@ const Hero = () => {
         </p>
         <div className={style.btn}>
         <button className={style.btn1}>EXPLORE PACKAGES</button>
-        <button className={style.btn1}>BOOK YOUR JOURNEY</button>
+        <button className={style.btn2}>BOOK YOUR JOURNEY</button>
         </div>
       </div>
 
      <div className={style.socialIcons}>
-<i className="fab fa-facebook-f" style={{ color: "black" }}></i>
-<i className="fab fa-instagram" style={{ color: "black" }}></i>
-<i className="fab fa-twitter" style={{ color: "black" }}></i>
+<i className="fab fa-facebook-f" ></i>
+<i className="fab fa-instagram" ></i>
+<i className="fab fa-twitter" ></i>
 
 </div>
     </header>

@@ -12,7 +12,7 @@
       rgba(50, 70, 147, 0.8)
     ),
     url("../../../public/homebackground.png") no-repeat center/cover;
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
   z-index: -1;
@@ -24,15 +24,17 @@
   @media (max-width: 768px) {
     min-height: 100vh;
   }
-   @media (max-width: 768px) {
-    min-height: 100vh;
-  }
+  //  @media (max-width: 768px) {
+  //   min-height: 100vh;
+  // }
 }
 
 .headerContent {
   position: relative;
   z-index: 1;
   padding-top: 150px;
+  max-width: 1500px;
+  margin: auto;
 
   @media (max-width: 768px) {
     padding-top: 140px;
@@ -100,7 +102,7 @@
     flex-direction: column; // 768px se niche stack vertically
     align-items: flex-start;
     margin-left: 20px;
-    margin-top: 30px;
+    margin-top: 10px;
     gap: 0px;
   }
 
@@ -124,9 +126,9 @@
 
     @media (max-width: 768px) {
       font-size: 14px;
-      padding: 20px 14px;
+      padding: 10px 6px;
       margin: 0;
-      margin-top: 50px;
+      margin-top: 20px;
       width: 92%; // full width on small & medium screens
     }
 

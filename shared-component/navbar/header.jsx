@@ -14,6 +14,7 @@ const Navbar = () => {
   };
 
   return (
+    
     <nav className={style.navbar}>
       <div className={style.navbarLeft}>
         <img src="/logo.png" alt="Logo" className={style.logo} />

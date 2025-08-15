@@ -1,0 +1,109 @@
+.whyChooseUsSection {
+  background-color: #f9f9f9;
+  padding: 2rem 2rem;
+
+  .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .header {
+    font-size: 32px;
+    margin-bottom: 2rem;
+    font-weight: bold;
+    color: black;
+    font-family: sans-serif;
+
+    span {
+      color: #69a6da;
+      font-weight: 700;
+    }
+  }
+
+  /* Desktop grid of images */
+  .desktopView {
+    display: block;
+  }
+
+  .imageGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1rem;
+
+    img {
+      width: 95%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  /* Mobile view (slider) */
+  .mobileView {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .desktopView {
+      display: none;
+    }
+
+    .mobileView {
+      display: block;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease;
+          justify-content: center; // Center the cards inside
+
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 12px;
+      object-fit: cover;
+    }
+    .slide {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    }
+
+    .sliderIndicators {
+      display: flex;
+      justify-content: center;
+      margin-top: 1rem;
+      gap: 0.5rem;
+
+      .indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background-color: #ccc;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+
+        &.active {
+          background-color: #000;
+        }
+      }
+    }
+  }
+  @media (max-width: 576px) {
+    .slide {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    }
+
+   
+  }
+}
+

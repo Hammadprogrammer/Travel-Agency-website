@@ -1,0 +1,196 @@
+.footer {
+  width: 100%;
+}
+
+.lastSection {
+  background-color: black;
+
+  .bottomOne {
+    color: #f8f8f8;
+    padding: 50px 0;
+    display: flex;
+    gap: 150px;
+    width: 100%;
+    max-width: 1440px;  
+    margin: 0 auto;    
+    justify-content: center;
+    @media (max-width: 1400px) {
+    gap: 70px;
+    }
+
+    
+    .boxOne {
+      max-width: 360px;
+      font-family: "Lato", sans-serif;
+      font-size: 15px;
+
+      .latoFamily {
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 1px;
+      }
+    }
+
+    .box {
+      max-width: 220px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      h4 {
+        color: white;
+        font-family: "Lato", sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .qPad {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        li:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+
+        a {
+          text-decoration: none;
+          font-size: 14px;
+          color: white;
+        }
+      }
+
+      .contactSection {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        .callSection {
+          display: flex;
+          gap: 10px;
+          align-items: center;
+
+          .content {
+            display: flex;
+            flex-direction: column;
+
+            .helpCare {
+              font-size: 12px;
+              margin: 0;
+            }
+
+            a {
+              color: white;
+              font-size: 13px;
+              text-decoration: none;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .bottomTwo {
+    width: 100%;
+    padding: 15px 40px;
+    background-color: #202020;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+
+    .sectionMid {
+      font-family: "Lato", sans-serif;
+      color: white;
+      text-align: center;
+      font-size: 14px;
+      flex: 1;
+    }
+
+    .section {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .lastSection {
+    .bottomOne {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      justify-items: center;
+
+      .boxOne,
+      .box {
+        max-width: 100%;
+        font-size: 13px;
+
+        h4 {
+          font-size: 16px;
+        }
+
+        .latoFamily,
+        .qPad a,
+        .contactSection .content a {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+/* 992px se niche - 2 columns */
+@media (max-width: 992px) {
+  .lastSection {
+    .bottomOne {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 30px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      justify-items: center;
+    }
+  }
+}
+
+@media (max-width: 568px) {
+  .lastSection {
+    .bottomOne {
+      grid-template-columns: 1fr;
+      text-align: left;   // left align text
+      max-width: 100%;
+      justify-items: flex-start; // items left side par
+    }
+
+    .boxOne,
+    .box {
+      max-width: 100%;
+      text-align: left; 
+    }
+
+    .bottomTwo {
+      flex-direction: column;
+      gap: 10px;
+      text-align: left;
+      align-items: flex-start;
+
+      .section {
+        justify-content: flex-start; 
+      }
+    }
+  }
+}
+

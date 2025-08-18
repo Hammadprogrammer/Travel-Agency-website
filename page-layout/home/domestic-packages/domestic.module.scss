@@ -21,7 +21,6 @@
     }
   }
 
-  /* Desktop grid of images */
   .desktopView {
     display: block;
   }
@@ -44,7 +43,6 @@
     }
   }
 
-  /* Mobile view (slider) */
   .mobileView {
     display: none;
   }
@@ -61,7 +59,7 @@
     .slider {
       display: flex;
       transition: transform 0.5s ease;
-          justify-content: center; // Center the cards inside
+          justify-content: center;
 
     }
 

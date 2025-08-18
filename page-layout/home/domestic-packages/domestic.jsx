@@ -14,12 +14,10 @@ const DomesticPakage = () => {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Go to next image
   const nextSlide = () => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
   };
 
-  // Auto change every 3 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 3000);
     return () => clearInterval(interval);
@@ -60,7 +58,6 @@ const DomesticPakage = () => {
             </div>
           </div>
 
-          {/* Dots Navigation */}
           <div className={style.sliderIndicators}>
             {images.map((_, index) => (
               <div

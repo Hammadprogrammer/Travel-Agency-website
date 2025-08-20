@@ -1,196 +1,152 @@
 .footer {
   width: 100%;
+  background: black;
+  color: white;
+  font-family: "Lato", sans-serif;
 }
 
 .lastSection {
-  background-color: black;
-
   .bottomOne {
-    color: #f8f8f8;
-    padding: 50px 0;
-    display: flex;
-    gap: 150px;
-    width: 100%;
-    max-width: 1440px;  
-    margin: 0 auto;    
-    justify-content: center;
-    @media (max-width: 1400px) {
-    gap: 70px;
-    }
-
-    
-    .boxOne {
-      max-width: 360px;
-      font-family: "Lato", sans-serif;
-      font-size: 15px;
-
-      .latoFamily {
-        font-size: 14px;
-        line-height: 22px;
-        letter-spacing: 1px;
-      }
-    }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 40px 20px;
 
     .box {
-      max-width: 220px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
+      font-size: 14px;
+      line-height: 22px;
 
       h4 {
-        color: white;
-        font-family: "Lato", sans-serif;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: 600;
+        margin-bottom: 12px;
         text-transform: uppercase;
       }
 
-      .qPad {
-        list-style-type: none;
+      ul {
+        list-style: none;
         padding: 0;
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 6px;
 
-        li:hover {
-          text-decoration: underline;
-          cursor: pointer;
-        }
-
-        a {
+        li a {
+          color: white;
           text-decoration: none;
           font-size: 14px;
-          color: white;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
 
       .contactSection {
         display: flex;
         flex-direction: column;
-        gap: 20px;
+        gap: 10px;
 
         .callSection {
           display: flex;
-          gap: 10px;
           align-items: center;
+          gap: 6px;
 
-          .content {
-            display: flex;
-            flex-direction: column;
-
-            .helpCare {
-              font-size: 12px;
-              margin: 0;
-            }
-
-            a {
-              color: white;
-              font-size: 13px;
-              text-decoration: none;
-            }
+          a {
+            color: white;
+            font-size: 13px;
+            text-decoration: none;
           }
         }
       }
     }
+
+    .logoBox {
+      max-width: 360px;
+      p {
+        font-size: 13px;
+        margin-top: 10px;
+      }
+    }
+
+    .bottomGroup {
+      display: contents; // default: distribute 3 boxes normally
+    }
   }
 
   .bottomTwo {
-    width: 100%;
-    padding: 15px 40px;
-    background-color: #202020;
+    background: #202020;
+    padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
 
-    .sectionMid {
-      font-family: "Lato", sans-serif;
-      color: white;
-      text-align: center;
+    p {
       font-size: 14px;
+      margin: 0;
+      text-align: center;
       flex: 1;
     }
 
-    .section {
+    .social {
       display: flex;
-      justify-content: flex-end;
-      gap: 10px;
+      gap: 12px;
+      font-size: 20px;
     }
   }
 }
 
+/* --- Responsive --- */
 
-@media (max-width: 1200px) {
-  .lastSection {
-    .bottomOne {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px;
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      justify-items: center;
-
-      .boxOne,
-      .box {
-        max-width: 100%;
-        font-size: 13px;
-
-        h4 {
-          font-size: 16px;
-        }
-
-        .latoFamily,
-        .qPad a,
-        .contactSection .content a {
-          font-size: 12px;
-        }
-      }
-    }
-  }
-}
-
-/* 992px se niche - 2 columns */
+/* Tablet: 2x2 grid */
 @media (max-width: 992px) {
   .lastSection {
     .bottomOne {
       grid-template-columns: repeat(2, 1fr);
-      gap: 30px;
-      width: 100%;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 40px 20px;
-      justify-items: center;
     }
   }
 }
 
-@media (max-width: 568px) {
+/* Mobile: logo top, 3 boxes row-wise equal space */
+@media (max-width: 576px) {
   .lastSection {
     .bottomOne {
-      grid-template-columns: 1fr;
-      text-align: left;   // left align text
-      max-width: 100%;
-      justify-items: flex-start; // items left side par
-    }
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
 
-    .boxOne,
-    .box {
-      max-width: 100%;
-      text-align: left; 
+      .logoBox {
+        text-align: center;
+      }
+
+      .bottomGroup {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+
+        .box {
+          flex: 1;
+          font-size: 12px;
+          h4 {
+            font-size: 14px;
+          }
+          p, a, li a {
+            font-size: 12px;
+          }
+        }
+      }
     }
 
     .bottomTwo {
       flex-direction: column;
+      align-items: center;
+      text-align: center;
       gap: 10px;
-      text-align: left;
-      align-items: flex-start;
 
-      .section {
-        justify-content: flex-start; 
+      .social {
+        justify-content: center;
       }
     }
   }
 }
-

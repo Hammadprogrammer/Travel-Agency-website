@@ -1,0 +1,108 @@
+.experienceSection {
+  width: 100%;
+  padding-top: 80px;
+
+  .experienceTopSection {
+    display: flex;
+    justify-content: center;
+    color: white;
+    gap: 15px;
+    align-items: center;
+    text-align: center;
+
+    .color {
+      font-family: "Lato", sans-serif;
+      font-size: 18px;
+      font-weight: 300;
+      color: #c19a52;
+      margin: 0;
+    }
+    .line {
+      color: #c19a52;
+      width: 25%;
+      border-bottom: 2px solid;
+    }
+  }
+
+  h3 {
+    color: black;
+    text-align: center;
+    padding: 15px;
+    font-family: "Lato", sans-serif;
+    font-size: 34px;
+  }
+
+  .boxes {
+    padding: 20px 0;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    gap: 26px;
+    flex-wrap: wrap;
+    max-width: 1140px;
+
+    .group {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      .box {
+        border-radius: 15px;
+        background-color: #c19a51;
+        color: aliceblue;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: 0.4s;
+        height: 200px;
+        width: 200px;
+
+        @media (max-width: 1440px) {
+          height: 160px;
+          width: 160px;
+        }
+        @media (max-width: 1060px) {
+          height: 140px;
+          width: 140px;
+        }
+        @media (max-width: 550px) {
+          height: 100px;
+          width: 100px;
+        }
+        @media (max-width: 400px) {
+          height: 80px;
+          width: 80px;
+        }
+
+        &:hover {
+          scale: 1.02;
+          transform: translateY(-8px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+      }
+
+      p {
+        font-family: "Lato", sans-serif;
+        text-align: center;
+        font-size: 22px;
+        padding: 10px;
+        color: #c19a51;
+
+        @media (max-width: 1060px) {
+          font-size: 16px;
+        }
+      }
+
+      .chang {
+        color: #878787;
+      }
+      .change {
+        background-color: #878787;
+      }
+    }
+  }
+}
+
+/* Services Section */
+

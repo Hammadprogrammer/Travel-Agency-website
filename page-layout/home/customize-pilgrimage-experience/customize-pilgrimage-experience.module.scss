@@ -1,0 +1,123 @@
+.pilgrimageSection {
+  width: 75%;
+  margin-top: 70px;
+  padding: 10px;
+  margin: auto;
+
+  .heading {
+    text-align: center;
+    font-size: 36px;
+    font-family: "Lato", sans-serif;
+    color: black;
+  }
+
+  .subHeading {
+    text-align: center;
+    font-size: 21px;
+    font-family: "Lato", sans-serif;
+    max-width: 650px;
+    margin: auto;
+    margin-top: 12px;
+    color: black;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+
+  .pilgrimageContainer {
+    margin-top: 50px;
+
+    /* ✅ grid row wise cards */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @media (max-width: 991px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .boxes {
+    background-color: #0e224a;
+    border-radius: 10px;
+    transition: 0.4s;
+
+    &:hover {
+      scale: 1.02;
+      transform: translateY(-8px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    img {
+      width: 100%;
+    }
+
+    h5 {
+      color: white;
+      font-family: "Lato", sans-serif;
+      text-align: center;
+      padding: 10px;
+      font-size: 22px;
+      font-weight: 400;
+
+      @media (max-width: 767px) {
+        font-size: 15px;
+      }
+    }
+
+    ul {
+      list-style-type: none;
+
+      @media (max-width: 1200px) {
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        @media (max-width: 991px) {
+          margin-bottom: 15px;
+        }
+        @media (max-width: 767px) {
+          margin-bottom: 5px;
+        }
+
+        &:last-child {
+          margin: 0;
+        }
+
+        span {
+          color: white;
+          font-family: "Lato", sans-serif;
+          font-size: 22px;
+
+          @media (max-width: 991px) {
+            font-size: 15px;
+          }
+          @media (max-width: 767px) {
+            font-size: 10px;
+          }
+        }
+
+        .check {
+          width: 25px;
+
+          @media (max-width: 991px) {
+            width: 20px;
+          }
+        }
+      }
+    }
+
+    .description {
+      margin: 10px 0px 0px 20px;
+      padding-bottom: 10px;
+    }
+  }
+}

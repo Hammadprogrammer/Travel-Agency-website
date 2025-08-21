@@ -1,10 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import style from "./header.module.scss";
-
+import LoginForm from "../loginForm";
+import SignupForm from "../signupForm";
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false);
 
   const handleHamburgerClick = () => {
     setIsOpen((prev) => !prev);
@@ -45,57 +47,26 @@ const Navbar = () => {
           ☰
         </div>
       </nav>
-
-      {showLogin && <LoginForm onClose={() => setShowLogin(false)} />}
+      {showLogin && (
+        <LoginForm 
+          onClose={() => setShowLogin(false)} 
+          onSwitchToSignup={() => {
+            setShowLogin(false);
+            setShowSignup(true);
+          }} 
+        />
+      )}
+      {showSignup && (
+        <SignupForm
+          onClose={() => setShowSignup(false)}
+          onSwitchToLogin={() => {
+            setShowSignup(false);
+            setShowLogin(true); // 👈 login open karo
+          }}
+        />
+      )}
     </>
   );
 };
-
-// ---- Login Form Component ----
-function LoginForm({ onClose }) {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const email = e.target.email.value;
-    const password = e.target.password.value;
-    console.log("Email:", email, "Password:", password);
-  };
-
-  return (
-    <div className={style.overlay}>
-      <div className={style.loginBox}>
-        <button onClick={onClose} className={style.closeBtn}>
-          ✖
-        </button>
-
-        <h2 className={style.title}>Welcome Back 👋</h2>
-        <p className={style.subtitle}>Please log in to continue</p>
-
-        <form className={style.form} onSubmit={handleSubmit}>
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            className={style.input}
-          />
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            className={style.input}
-          />
-          <button type="submit" className={style.loginBtn}>
-            Login
-          </button>
-        </form>
-
-        <p className={style.registerText}>
-          Don’t have an account? <a href="#">Sign up</a>
-        </p>
-      </div>
-    </div>
-  );
-}
 
 export default Navbar;

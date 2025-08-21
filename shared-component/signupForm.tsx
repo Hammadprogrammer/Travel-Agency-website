@@ -31,8 +31,8 @@ export default function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps
 
       if (res.ok) {
         alert("Signup successful!");
-        onClose(); // form close kar do
-        onSwitchToLogin?.(); // agar login form kholna ho
+        onClose();
+        onSwitchToLogin?.(); 
       } else {
         alert(data.error);
       }

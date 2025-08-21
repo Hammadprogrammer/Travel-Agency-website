@@ -9,7 +9,7 @@ const InternationalTours = () => {
     { src: "/malaysia.png", title: "Malaysia" },
     { src: "/dubai.png", title: "Dubai" },
     { src: "/malaysia.png", title: "Malaysia" },
-    { src: "/dubai.png", title: "Dubai" },
+    { src: "/dubai.png", title: "Dubai" },                            
     { src: "/maldives.png", title: "Maldives" },
   ];
 
@@ -18,7 +18,7 @@ const InternationalTours = () => {
 
   // detect screen size
   useEffect(() => {
-    const checkScreen = () => setIsMobile(window.innerWidth < 768);
+    const checkScreen = () => setIsMobile(window.innerWidth < 1200);
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);

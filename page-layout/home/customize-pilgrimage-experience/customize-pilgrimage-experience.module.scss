@@ -1,19 +1,38 @@
+.main {
+  max-width: 1400px;
+  margin: auto;
+
+
+
 .pilgrimageSection {
-  width: 75%;
+  width: 100%;
   margin-top: 70px;
   padding: 10px;
   margin: auto;
 
   .heading {
+    margin-top: 50px;
     text-align: center;
     font-size: 36px;
     font-family: "Lato", sans-serif;
     color: black;
+    font-weight: bold;
+
+    @media (max-width: 991px) {
+        margin-top: 0px;
+      font-size: 28px;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 20px;
+      margin-top: 20px;
+      
+    }
   }
 
   .subHeading {
     text-align: center;
-    font-size: 21px;
+    font-size: 2  1px;
     font-family: "Lato", sans-serif;
     max-width: 650px;
     margin: auto;
@@ -21,29 +40,36 @@
     color: black;
     letter-spacing: 1px;
     font-weight: 300;
+
+    @media (max-width: 991px) {
+      font-size: 18px;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 14px;
+    }
   }
 
   .pilgrimageContainer {
     margin-top: 50px;
-
-    /* ✅ grid row wise cards */
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
+    gap: 25px;
 
-    @media (max-width: 991px) {
+    @media (max-width: 1200px) {
       grid-template-columns: repeat(2, 1fr);
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 767px) {
       grid-template-columns: 1fr;
     }
   }
 
   .boxes {
     background-color: #0e224a;
-    border-radius: 10px;
+    border-radius: 12px;
     transition: 0.4s;
+    overflow: hidden;
 
     &:hover {
       scale: 1.02;
@@ -53,39 +79,42 @@
 
     img {
       width: 100%;
+      height: auto;
+      display: block;
     }
 
     h5 {
       color: white;
       font-family: "Lato", sans-serif;
       text-align: center;
-      padding: 10px;
-      font-size: 22px;
-      font-weight: 400;
+      padding: 12px;
+      font-size: 22px; 
+      font-weight: bold;
 
-      @media (max-width: 767px) {
-        font-size: 15px;
+      @media (max-width: 991px) {
+        font-size: 18px;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 16px;
       }
     }
 
     ul {
       list-style-type: none;
-
-      @media (max-width: 1200px) {
-        padding: 0;
-      }
+      padding: 0;
 
       li {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
         display: flex;
         align-items: center;
         gap: 10px;
 
         @media (max-width: 991px) {
-          margin-bottom: 15px;
+          margin-bottom: 12px;
         }
         @media (max-width: 767px) {
-          margin-bottom: 5px;
+          margin-bottom: 8px;
         }
 
         &:last-child {
@@ -95,21 +124,13 @@
         span {
           color: white;
           font-family: "Lato", sans-serif;
-          font-size: 22px;
+          font-size: 20px; // ✅ text bigger
 
           @media (max-width: 991px) {
-            font-size: 15px;
+            font-size: 16px;
           }
           @media (max-width: 767px) {
-            font-size: 10px;
-          }
-        }
-
-        .check {
-          width: 25px;
-
-          @media (max-width: 991px) {
-            width: 20px;
+            font-size: 14px;
           }
         }
       }
@@ -117,7 +138,34 @@
 
     .description {
       margin: 10px 0px 0px 20px;
-      padding-bottom: 10px;
+      padding-bottom: 15px;
+
+      @media (max-width: 767px) {
+        margin: 8px 0px 0px 10px;
+      }
     }
   }
+}
+
+/* ✅ check icon wrapper (smaller size) */
+.iconWrapper {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #c29a51;
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 767px) {
+    width: 15px;
+    height: 15px;
+  }
+
+  svg {
+    font-size: 10px; // ✅ small check icon
+    color: black;
+  }
+}
 }

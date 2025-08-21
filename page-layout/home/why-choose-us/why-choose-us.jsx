@@ -64,9 +64,9 @@ const ChooseUs = () => {
       </div>
 
       {/* Shapes */}
-      <div className={style.line1}></div>
+      {/* <div className={style.line1}></div>
       <div className={style.line2}></div>
-      <div className={style.circle}></div>
+      <div className={style.circle}></div> */}
     </section>
   );
 };

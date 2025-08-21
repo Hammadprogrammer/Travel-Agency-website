@@ -1,6 +1,9 @@
 .experienceSection {
   width: 100%;
   padding-top: 80px;
+  @media (max-width: 576px) {
+     padding-top: 0px;
+  }
 
   .experienceTopSection {
     display: flex;
@@ -16,6 +19,13 @@
       font-weight: 300;
       color: #c19a52;
       margin: 0;
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+      }
+      @media (max-width: 400px) {
+        font-size: 12px;
+      }
     }
     .line {
       color: #c19a52;
@@ -29,7 +39,13 @@
     text-align: center;
     padding: 15px;
     font-family: "Lato", sans-serif;
-    font-size: 34px;
+    font-size: 38px;
+    font-weight: bold;
+
+    @media (max-width: 768px) {
+      font-size: 24px;
+    }
+  
   }
 
   .boxes {
@@ -75,6 +91,20 @@
           width: 80px;
         }
 
+        img {
+          max-width: 70%;
+          max-height: 70%;
+
+          @media (max-width: 550px) {
+            max-width: 60%;
+            max-height: 60%;
+          }
+          @media (max-width: 400px) {
+            max-width: 50%;
+            max-height: 50%;
+          }
+        }
+
         &:hover {
           scale: 1.02;
           transform: translateY(-8px);
@@ -92,6 +122,12 @@
         @media (max-width: 1060px) {
           font-size: 16px;
         }
+        @media (max-width: 550px) {
+          font-size: 14px;
+        }
+        @media (max-width: 400px) {
+          font-size: 12px;
+        }
       }
 
       .chang {
@@ -103,6 +139,3 @@
     }
   }
 }
-
-/* Services Section */
-

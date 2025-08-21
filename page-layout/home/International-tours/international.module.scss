@@ -110,13 +110,9 @@
       font-weight: bold;
       border-radius: 50%;
       z-index: 5;
-      background: rgba(0, 0, 0, 0.5);
       transition: background 0.3s ease;
 
-      &:hover {
-        background: rgba(0, 0, 0, 0.7);
-      }
-    }
+        }
 
     .prev {
       left: -60px;

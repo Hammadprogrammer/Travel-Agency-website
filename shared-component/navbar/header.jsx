@@ -37,7 +37,7 @@ const Navbar = () => {
           <a href="#">Selection</a>
           <a href="#">About Us</a>
 
-          {!isLoggedIn && ( // ✅ agar login nahi hai tabhi button dikhana
+          {!isLoggedIn && ( 
             <button
               onClick={() => setShowLogin(true)}
               className={style.loginBtn}

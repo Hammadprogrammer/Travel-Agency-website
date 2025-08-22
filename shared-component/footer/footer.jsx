@@ -19,6 +19,7 @@ const Footer = () => {
               bookings, and comfortable transport in Makkah and Madinah. Alongside
               our religious travel services, we provide customized domestic and
               international tours for families, individuals, and corporate clients.
+              
             </p>
           </div>
 

@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import style from "./header.module.scss";
 import LoginForm from "../loginForm";
 import SignupForm from "../signupForm";
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleHamburgerClick = () => {
     setIsOpen((prev) => !prev);
@@ -35,33 +37,45 @@ const Navbar = () => {
           <a href="#">Selection</a>
           <a href="#">About Us</a>
 
-          <button
-            onClick={() => setShowLogin(true)}
-            className={style.loginBtn}
-          >
-            Log In
-          </button>
+          {!isLoggedIn && ( // ✅ agar login nahi hai tabhi button dikhana
+            <button
+              onClick={() => setShowLogin(true)}
+              className={style.loginBtn}
+            >
+              Log In
+            </button>
+          )}
         </div>
 
         <div className={style.hamburger} onClick={handleHamburgerClick}>
           ☰
         </div>
       </nav>
+
       {showLogin && (
-        <LoginForm 
-          onClose={() => setShowLogin(false)} 
+        <LoginForm
+          onClose={() => setShowLogin(false)}
           onSwitchToSignup={() => {
             setShowLogin(false);
             setShowSignup(true);
-          }} 
+          }}
+          onLoginSuccess={() => {
+            setIsLoggedIn(true); 
+            setShowLogin(false);
+          }}
         />
       )}
+
       {showSignup && (
         <SignupForm
           onClose={() => setShowSignup(false)}
           onSwitchToLogin={() => {
             setShowSignup(false);
-            setShowLogin(true); // 👈 login open karo
+            setShowLogin(true);
+          }}
+          onSignupSuccess={() => {
+            setIsLoggedIn(true);
+            setShowSignup(false);
           }}
         />
       )}

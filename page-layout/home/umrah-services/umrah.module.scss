@@ -1,0 +1,101 @@
+.servicesSection {
+  width: 100%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 60px 30px;
+  margin-top: 30px;
+
+  background-image: linear-gradient(
+      to right,
+      rgba(21, 46, 109, 0.5),
+      rgba(15, 47, 101, 0.5)
+    ),
+    url("/umrabBackground.png");
+
+  h3 {
+    font-family: "Lato", sans-serif;
+    color: white;
+    text-align: center;
+    font-size: 33px;
+    margin-bottom: 15px;
+
+    @media (max-width: 530px) {
+      font-size: 26px;
+    }
+  }
+}
+
+.subHeading {
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 300;
+  max-width: 850px;
+  margin: 0 auto 40px auto;
+
+  @media (max-width: 530px) {
+    font-size: 14px;
+  }
+}
+
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);  
+  grid-template-rows: repeat(2, auto);    
+  gap: 25px 40px;                         
+  max-width: 1200px;
+  margin: 0 auto;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;           
+    grid-template-rows: auto;
+    gap: 20px;
+  }
+}
+
+.contentBox {
+  background: rgba(14, 34, 74, 0.95);
+  border-radius: 20px;
+  display: flex;
+  gap: 15px;
+  padding: 15px;
+  align-items: center;
+  transition: 0.3s ease;
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.logos {
+  flex: 0 0 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :global(img) {
+    max-width: 45px;
+    height: auto;
+  }
+}
+
+.boxContent {
+  flex: 1;
+
+  h5 {
+    font-family: "Open Sans", sans-serif;
+    color: white;
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+
+  .setting {
+    font-family: "Open Sans", sans-serif;
+    color: rgb(209, 208, 208);
+    font-size: 13px;
+    margin: 0;
+  }
+}

@@ -21,6 +21,7 @@
     margin-bottom: 15px;
     font-weight: bold;
 
+
     @media (max-width: 530px) {
       font-size: 26px;
     }
@@ -58,10 +59,10 @@
 
 .contentBox {
   background: rgba(14, 34, 74, 0.95);
-  border-radius: 10px;
+  border-radius: 20px;
   display: flex;
   gap: 15px;
-  padding: 20px;
+  padding: 15px;
   align-items: center;
   transition: 0.3s ease;
 
@@ -92,6 +93,7 @@
     font-size: 17px;
     margin-bottom: 5px;
     font-weight: bold;
+
   }
 
   .setting {

@@ -18,7 +18,9 @@ const Experience = () => {
         <div className={style.boxes}>
           <div className={style.group}>
             <div className={style.box}>
-            <Image src="/Hajj.png" alt="Hajj" width={80} height={80} />
+
+            <Image src="/hajj.png" alt="Hajj" width={80} height={80} />
+
             </div>
             <p>Hajj</p>
           </div>

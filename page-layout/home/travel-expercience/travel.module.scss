@@ -1,9 +1,11 @@
 .experienceSection {
   width: 100%;
   padding-top: 80px;
+
   @media (max-width: 576px) {
      padding-top: 0px;
   }
+
 
   .experienceTopSection {
     display: flex;
@@ -20,12 +22,14 @@
       color: #c19a52;
       margin: 0;
 
+
       @media (max-width: 576px) {
         font-size: 14px;
       }
       @media (max-width: 400px) {
         font-size: 12px;
       }
+
     }
     .line {
       color: #c19a52;
@@ -39,6 +43,9 @@
     text-align: center;
     padding: 15px;
     font-family: "Lato", sans-serif;
+
+    font-size: 34px;
+
     font-size: 38px;
     font-weight: bold;
 
@@ -46,6 +53,7 @@
       font-size: 24px;
     }
   
+
   }
 
   .boxes {
@@ -91,6 +99,7 @@
           width: 80px;
         }
 
+
         img {
           max-width: 70%;
           max-height: 70%;
@@ -122,12 +131,14 @@
         @media (max-width: 1060px) {
           font-size: 16px;
         }
+
         @media (max-width: 550px) {
           font-size: 14px;
         }
         @media (max-width: 400px) {
           font-size: 12px;
         }
+
       }
 
       .chang {
@@ -139,3 +150,6 @@
     }
   }
 }
+
+
+

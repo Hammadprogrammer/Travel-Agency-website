@@ -13,6 +13,7 @@ import Pilgrimage from '../page-layout/home/customize-pilgrimage-experience/cust
 import PeopleSection from '../page-layout/home/What-People-Say/people'
 
 
+
 const page = () => {
   return (
     <>

@@ -1,7 +1,9 @@
 .whyChooseUsSection {
   background-color: #f9f9f9;
   padding: 2rem 2rem;
-
+    @media (max-width: 576px) {
+      padding: 10px;
+  }
   .container {
     max-width: 1400px;
     margin: 0 auto;
@@ -21,7 +23,6 @@
     }
   }
 
-  /* Desktop grid of images */
   .desktopView {
     display: block;
   }
@@ -44,12 +45,15 @@
     }
   }
 
-  /* Mobile view (slider) */
+
   .mobileView {
     display: none;
   }
 
   @media (max-width: 768px) {
+    .header{
+      font-size: 28px;
+    }
     .desktopView {
       display: none;
     }
@@ -61,7 +65,7 @@
     .slider {
       display: flex;
       transition: transform 0.5s ease;
-          justify-content: center; // Center the cards inside
+          justify-content: center; 
 
     }
 
@@ -101,6 +105,9 @@
     display: flex;
     justify-content: center;
     width: 100%;
+    }
+    .whyChooseUsSection{
+      padding: 5px;
     }
 
    

@@ -9,6 +9,9 @@ import Footer from "../shared-component/footer/footer"
 import ChooseUsSection from "../page-layout/home/why-choose-us/why-choose-us"
 import Experience from "../page-layout/home/travel-expercience/travel"
 import Umrah from "../page-layout/home/umrah-services/umrah"
+import Pilgrimage from '../page-layout/home/customize-pilgrimage-experience/customize-pilgrimage-experience'
+import PeopleSection from '../page-layout/home/What-People-Say/people'
+
 
 
 const page = () => {
@@ -23,6 +26,8 @@ const page = () => {
     <ChooseUsSection/>
     <Experience/>
     <Umrah/>
+    <Pilgrimage/>
+    <PeopleSection/>
     <Footer/>
    
     </>

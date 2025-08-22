@@ -30,6 +30,7 @@ export default function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps
       const data = await res.json();
 
       if (res.ok) {
+        localStorage.setItem("token", data.token);
         alert("Signup successful!");
         onClose();
         onSwitchToLogin?.(); 

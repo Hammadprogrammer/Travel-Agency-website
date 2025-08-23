@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import style from "./loginForm.module.scss";
 
 type LoginFormProps = {
@@ -12,8 +13,12 @@ export default function LoginForm({
   onSwitchToSignup,
   onLoginSuccess,
 }: LoginFormProps) {
+  const [error, setError] = useState<string>("");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError(""); // reset error
+
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
     const password = formData.get("password");
@@ -29,15 +34,15 @@ export default function LoginForm({
       console.log("Login Response:", data);
 
       if (res.ok) {
-        alert("Login successful!");
+        localStorage.setItem("token", data.token); 
         onClose();
-        onLoginSuccess?.(); 
+        onLoginSuccess?.();
       } else {
-        alert(data.error || "Invalid credentials!");
+        setError(data.error || "Invalid credentials!");
       }
     } catch (err) {
       console.error(err);
-      alert("Something went wrong. Try again.");
+      setError("Something went wrong. Try again.");
     }
   };
 
@@ -66,6 +71,8 @@ export default function LoginForm({
             required
             className={style.input}
           />
+          {error && <p className={style.error}>{error}</p>}
+
           <button type="submit" className={style.loginBtn}>
             Login
           </button>
@@ -87,4 +94,3 @@ export default function LoginForm({
     </div>
   );
 }
-

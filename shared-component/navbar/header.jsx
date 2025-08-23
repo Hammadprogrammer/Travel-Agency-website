@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
@@ -11,15 +12,39 @@ const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const [loading, setLoading] = useState(true); // ✅ new state
+
   const [scrolled, setScrolled] = useState(false);
 
-  const handleHamburgerClick = () => {
-    setIsOpen((prev) => !prev);
+
+  // ✅ Check localStorage on first load
+  useEffect(() => {
+    const storedLoginStatus = localStorage.getItem("isLoggedIn");
+    if (storedLoginStatus === "true") {
+      setIsLoggedIn(true);
+    }
+    setLoading(false); // ✅ done checking
+  }, []);
+
+  const handleHamburgerClick = () => setIsOpen((prev) => !prev);
+  const handleCloseClick = () => setIsOpen(false);
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedIn");
   };
 
-  const handleCloseClick = () => {
-    setIsOpen(false);
-  };
+
+  if (loading) {
+    return null;
+  }
+
+  return (
+    <>
+      <nav className={style.navbar}>
+        <div className={style.navbarLeft}>
+          <img src="/logo.png" alt="Logo" className={style.logo} />
 
   useEffect(() => {
     const handleScroll = () => {
@@ -31,12 +56,28 @@ const Navbar = () => {
     };
     window.addEventListener("scroll", handleScroll);
 
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
   const handleLinkClick = () => {
   setIsOpen(false);
 };
 
+
+
+          {!isLoggedIn ? (
+            <button
+              onClick={() => setShowLogin(true)}
+              className={style.loginBtn}
+            >
+              Log In
+            </button>
+          ) : (
+            <button onClick={handleLogout} className={style.logoutBtn}>
+              Log Out
+            </button>
+          )}
+        </div>
 
   return (
     <>
@@ -68,6 +109,7 @@ const Navbar = () => {
                 Log In
               </button>
 
+
             )}
           </div>
           <div className={style.hamburger} onClick={handleHamburgerClick}>
@@ -86,6 +128,10 @@ const Navbar = () => {
           }}
           onLoginSuccess={() => {
             setIsLoggedIn(true);
+
+            localStorage.setItem("isLoggedIn", "true");
+
+
             setShowLogin(false);
           }}
         />
@@ -100,6 +146,7 @@ const Navbar = () => {
           }}
           onSignupSuccess={() => {
             setIsLoggedIn(true);
+            localStorage.setItem("isLoggedIn", "true");
             setShowSignup(false);
           }}
         />

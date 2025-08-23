@@ -169,6 +169,7 @@
   box-shadow: 0 0 6px rgba(0, 112, 243, 0.3);
 }
 
+
 .loginBtn {
   background: #0070f3;
   color: white;
@@ -227,3 +228,16 @@
     transform: scale(1);
   }
 }
+
+.logoutBtn {
+  background-color: red; 
+  color: white;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
+
+

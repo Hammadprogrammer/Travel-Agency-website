@@ -33,6 +33,10 @@ const Navbar = () => {
 
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+  const handleLinkClick = () => {
+  setIsOpen(false);
+};
+
 
   return (
     <>
@@ -49,22 +53,23 @@ const Navbar = () => {
               <FaTimes color="white" size={30} />
              </div>
             )}
-
-            <Link href="/">Home</Link>
-            <Link href="/destinations">Destinations</Link>
-            <Link href="/selection">Selection</Link>
-            <Link href="/about-us">About Us</Link>
-
+            <Link href="/" onClick={handleLinkClick}>Home</Link>
+            <Link href="/destinations" onClick={handleLinkClick}>Destinations</Link>
+            <Link href="/selection" onClick={handleLinkClick}>Selection</Link>
+            <Link href="/about" onClick={handleLinkClick}>About Us</Link>
             {!isLoggedIn && (
               <button
-                onClick={() => setShowLogin(true)}
+                onClick={() => {
+                  handleLinkClick();   
+                  setShowLogin(true);  
+                }}
                 className={style.loginBtn}
               >
                 Log In
               </button>
+
             )}
           </div>
-
           <div className={style.hamburger} onClick={handleHamburgerClick}>
             ☰
           </div>
@@ -77,6 +82,7 @@ const Navbar = () => {
           onSwitchToSignup={() => {
             setShowLogin(false);
             setShowSignup(true);
+            
           }}
           onLoginSuccess={() => {
             setIsLoggedIn(true);

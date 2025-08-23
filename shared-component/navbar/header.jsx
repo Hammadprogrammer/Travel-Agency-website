@@ -115,7 +115,7 @@ const Navbar = () => {
   };
 
   if (loading) {
-    return null; // ✅ Jab tak check nahi hota, kuch render na ho
+    return null;
   }
 
   return (

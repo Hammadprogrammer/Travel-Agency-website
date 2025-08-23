@@ -1,31 +1,48 @@
+.main {
+  width: 100%;   
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.scrolled {
+  background-color: #1c4171; 
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding:10px 0px 0px 0px ;
+}
 
 .navbar {
+  max-width: 1500px;
+  margin: 0 auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
-  width: 100%;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%); 
-  box-sizing: border-box;
-  // background-color: #dbae58;
-  max-width: 1500px;
+  height: 80px;
 }
 
 
 .navbarLeft img { 
+  margin-left: 20px;
   height: 100px;
   transition: 0.3s;
+
   &:hover {
     transform: scale(1.05);
   }
+
+  @media (max-width: 768px) {
+    margin-left: 0; 
+  }
 }
+
 
 .navbarLinks {
   display: flex;
   gap: 16px;
-   margin-right: 20px;
+  margin-right: 20px;
   transition: left 0.3s ease;
 
   a {
@@ -52,8 +69,7 @@
 
 .closeIcon {
   display: none;
-  font-size: 26px;
-  color: white;
+  font-size: 40px;
   position: absolute;
   top: 15px;
   right: 15px;
@@ -111,7 +127,6 @@
   z-index: 999;
 }
 
-/* Card Box */
 .loginBox {
   background: #fff;
   padding: 2rem;
@@ -135,7 +150,6 @@
   margin-bottom: 1.5rem;
 }
 
-/* Inputs */
 .form {
   display: flex;
   flex-direction: column;
@@ -165,13 +179,18 @@
   border-radius: 12px;
   cursor: pointer;
   transition: 0.3s;
+
+  @media (max-width: 768px) {
+    width: 70%;
+    margin: 20px auto 0 auto; 
+  }
 }
+
 
 .loginBtn:hover {
   background: #0059c9;
 }
 
-/* Signup text */
 .registerText {
   margin-top: 1rem;
   font-size: 0.85rem;
@@ -184,24 +203,21 @@
   font-weight: bold;
 }
 
-/* Close Button */
 .closeBtn {
   position: absolute;
   top: 12px;
   right: 12px;
   border: none;
   background: transparent;
-  font-size: 1.2rem;
+  font-size: 1.5rem;   
   cursor: pointer;
-  color: #888;
+  color: #ffffff !important;      
   transition: 0.3s;
 }
 
-.closeBtn:hover {
-  color: #222;
-}
 
-/* Animation */
+
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -212,6 +228,7 @@
     transform: scale(1);
   }
 }
+
 .logoutBtn {
   background-color: red; 
   color: white;
@@ -220,6 +237,7 @@
   border-radius: 4px;
   cursor: pointer;
 }
+
 
 
 

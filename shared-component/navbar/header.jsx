@@ -12,6 +12,16 @@ const Navbar = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  // check login status on load
+  useEffect(() => {
+    const storedLoginStatus = localStorage.getItem("isLoggedIn");
+    if (storedLoginStatus === "true") {
+      setIsLoggedIn(true);
+    }
+    setLoading(false);
+  }, []);
 
   const handleHamburgerClick = () => {
     setIsOpen((prev) => !prev);
@@ -19,6 +29,12 @@ const Navbar = () => {
 
   const handleCloseClick = () => {
     setIsOpen(false);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    localStorage.removeItem("isLoggedIn");
+    
   };
 
   useEffect(() => {
@@ -34,6 +50,8 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  if (loading) return null; // jab tak check ho raha hai, kuch render na karein
+
   return (
     <>
       {/* Full width wrapper */}
@@ -45,9 +63,9 @@ const Navbar = () => {
 
           <div className={`${style.navbarLinks} ${isOpen ? style.active : ""}`}>
             {isOpen && (
-             <div className={style.closeIcon} onClick={handleCloseClick}>
-              <FaTimes color="white" size={30} />
-             </div>
+              <div className={style.closeIcon} onClick={handleCloseClick}>
+                <FaTimes color="white" size={30} />
+              </div>
             )}
 
             <Link href="/">Home</Link>
@@ -55,12 +73,16 @@ const Navbar = () => {
             <Link href="/selection">Selection</Link>
             <Link href="/about">About Us</Link>
 
-            {!isLoggedIn && (
+            {!isLoggedIn ? (
               <button
                 onClick={() => setShowLogin(true)}
                 className={style.loginBtn}
               >
                 Log In
+              </button>
+            ) : (
+              <button onClick={handleLogout} className={style.loginBtn}>
+                Log Out
               </button>
             )}
           </div>
@@ -80,6 +102,7 @@ const Navbar = () => {
           }}
           onLoginSuccess={() => {
             setIsLoggedIn(true);
+            localStorage.setItem("isLoggedIn", "true");
             setShowLogin(false);
           }}
         />
@@ -94,6 +117,7 @@ const Navbar = () => {
           }}
           onSignupSuccess={() => {
             setIsLoggedIn(true);
+            localStorage.setItem("isLoggedIn", "true");
             setShowSignup(false);
           }}
         />

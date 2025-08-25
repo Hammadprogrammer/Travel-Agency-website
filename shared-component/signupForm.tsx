@@ -47,7 +47,7 @@ export default function SignupForm({ onClose, onSwitchToLogin }: SignupFormProps
 
       if (res.ok) {
         localStorage.setItem("token", data.token);
-        alert("Signup successful!");
+        // alert("Signup successful!");
         onClose();
         onSwitchToLogin?.();
       } else {

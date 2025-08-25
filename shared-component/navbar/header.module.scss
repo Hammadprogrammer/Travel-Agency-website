@@ -25,9 +25,10 @@
 
 
 .navbarLeft img { 
-  margin-left: 20px;
   height: 100px;
   transition: 0.3s;
+  margin-left: 15px;
+  padding: 10px;
 
   &:hover {
     transform: scale(1.05);

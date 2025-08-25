@@ -58,13 +58,13 @@ const Footer = () => {
               <h4>Contact Info</h4>
               <div className={style.contactSection}>
                 <div className={style.callSection}>
-                  <FaPhoneAlt /> <a href="tel:+923333032648">+92-333-3032648</a>
+                  <FaPhoneAlt /> <a href="tel:+92228254984">+92228254984</a>
                 </div>
                 <div className={style.callSection}>
-                  <FaWhatsapp /> <a href="https://wa.me/923128784703" target="_blank">+92-312-8784703</a>
+                  <FaWhatsapp /> <a href="https://wa.me/92228254984" target="_blank">+92228254984</a>
                 </div>
                 <div className={style.callSection}>
-                  <FaEnvelope /> <a href="mailto:saadkhalid7ctech@gmail.com">saadkhalid7ctech@gmail.com</a>
+                  <FaEnvelope /> <a href="mailto:almullaim@gmail.com">almullaim@gmail.com</a>
                 </div>
               </div>
             </div>

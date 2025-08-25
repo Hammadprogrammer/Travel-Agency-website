@@ -13,29 +13,41 @@
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    column-gap: 85px;
 
     .box {
       font-size: 14px;
       line-height: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      p {
+        width: 250px;
+      }
 
       h4 {
         font-size: 18px;
         font-weight: 600;
         margin-bottom: 12px;
-        text-transform: uppercase;
+        // text-transform: uppercase;
       }
 
       ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
         flex-direction: column;
-        gap: 6px;
+        gap: 13px;
+        width: 146px;
+        padding: 0;
+        list-style: none;
+        display: flex;
 
         li a {
           color: white;
           text-decoration: none;
           font-size: 14px;
+
           &:hover {
             text-decoration: underline;
           }
@@ -54,7 +66,7 @@
 
           a {
             color: white;
-            font-size: 13px;
+            font-size: 11px;
             text-decoration: none;
           }
         }
@@ -66,6 +78,8 @@
       p {
         font-size: 13px;
         margin-top: 10px;
+        text-align: start;
+        width: 282px;
       }
     }
 
@@ -73,7 +87,6 @@
       display: contents; // default: distribute 3 boxes normally
     }
   }
-
   .bottomTwo {
     background: #202020;
     padding: 15px 20px;
@@ -81,14 +94,12 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-
     p {
       font-size: 14px;
       margin: 0;
       text-align: center;
       flex: 1;
     }
-
     .social {
       display: flex;
       gap: 12px;
@@ -96,7 +107,6 @@
     }
   }
 }
-
 /* --- Responsive --- */
 
 /* Tablet: 2x2 grid */
@@ -120,19 +130,55 @@
         text-align: center;
       }
 
+      ul {
+        list-style: none;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        width: 98px;
+      }
+
       .bottomGroup {
         display: flex;
-        justify-content: space-between;
-        gap: 15px;
+        gap: 30px;
+        margin-left: 20px;
 
         .box {
           flex: 1;
           font-size: 12px;
+          margin-left: -14px;
+          max-width: 96px;
+
+
+
           h4 {
             font-size: 14px;
+            width: 120px;
           }
-          p, a, li a {
-            font-size: 12px;
+
+          a,
+          li a {
+            display: flex;
+            flex-direction: column;
+            font-size: 10px;
+
+          }
+
+          p {
+            max-width: 96px;
+            font-size: 10px;
+          }
+
+          .callSection {
+            font-size: 10px;
+
+                    a {
+            color: white;
+            font-size: 6px;
+            text-decoration: none;
+          }
+
           }
         }
       }
@@ -140,9 +186,14 @@
 
     .bottomTwo {
       flex-direction: column;
-      align-items: center;
-      text-align: center;
+      align-items: flex-end;
+      text-align: end;
       gap: 10px;
+      background-color: black;
+
+      p {
+        display: none;
+      }
 
       .social {
         justify-content: center;

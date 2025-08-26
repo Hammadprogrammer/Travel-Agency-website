@@ -7,7 +7,6 @@ interface Props {
 const page = (props: Props) => {
     return (
         <div>
-            destinations
         </div>
     )
 }

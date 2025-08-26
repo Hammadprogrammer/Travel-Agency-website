@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import style from "./header.module.scss";
-import LoginForm from "../loginForm";
-import SignupForm from "../signupForm";
+// import LoginForm from "../loginForm";
+// import SignupForm from "../signupForm";
 import Link from "next/link";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [showSignup, setShowSignup] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [loading, setLoading] = useState(true);
 
@@ -31,11 +31,11 @@ const Navbar = () => {
     setIsOpen(false);
   };
 
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    localStorage.removeItem("isLoggedIn");
+  // const handleLogout = () => {
+  //   setIsLoggedIn(false);
+  //   localStorage.removeItem("isLoggedIn");
     
-  };
+  // };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -70,10 +70,10 @@ const Navbar = () => {
 
             <Link href="/">Home</Link>
             <Link href="/destinations">Destinations</Link>
-            <Link href="/selection">Selection</Link>
             <Link href="/about">About Us</Link>
+            <Link href="/knowledge">Knowledge</Link>
 
-            {!isLoggedIn ? (
+            {/* {!isLoggedIn ? (
               <button
                 onClick={() => setShowLogin(true)}
                 className={style.loginBtn}
@@ -84,7 +84,7 @@ const Navbar = () => {
               <button onClick={handleLogout} className={style.loginBtn}>
                 Log Out
               </button>
-            )}
+            )} */}
           </div>
 
           <div className={style.hamburger} onClick={handleHamburgerClick}>
@@ -93,7 +93,7 @@ const Navbar = () => {
         </nav>
       </div>
 
-      {showLogin && (
+      {/* {showLogin && (
         <LoginForm
           onClose={() => setShowLogin(false)}
           onSwitchToSignup={() => {
@@ -106,9 +106,9 @@ const Navbar = () => {
             setShowLogin(false);
           }}
         />
-      )}
+      )} */}
 
-      {showSignup && (
+      {/* {showSignup && (
         <SignupForm
           onClose={() => setShowSignup(false)}
           onSwitchToLogin={() => {
@@ -121,7 +121,7 @@ const Navbar = () => {
             setShowSignup(false);
           }}
         />
-      )}
+      )} */}
     </>
   );
 };

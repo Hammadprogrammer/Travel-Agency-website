@@ -26,10 +26,12 @@ model User {
 model Trip {
   id          Int       @id @default(autoincrement())
   title       String
+  description String    // New field for description
   destination String
   price       Float
   startDate   DateTime
   endDate     DateTime
+  imageUrl    String    // New field for Cloudinary image URL
   bookings    Booking[] // relation to Booking
   createdAt   DateTime  @default(now())
 }

@@ -56,12 +56,11 @@ export default function AdminPage() {
         return;
       }
 
-      // reset form
+
       setTitle("");
       setDescription("");
       setImageUrl("");
 
-      // refresh list
       load();
     } catch (e) {
       console.error(e);

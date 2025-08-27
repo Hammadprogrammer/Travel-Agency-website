@@ -17,7 +17,7 @@ export default function AddTripForm() {
 
     setLoading(false);
     alert("Trip Added!");
-    e.currentTarget.reset(); // ✅ form clear
+    e.currentTarget.reset(); 
   }
 
   return (

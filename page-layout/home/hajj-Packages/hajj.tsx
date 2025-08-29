@@ -17,7 +17,7 @@
     useEffect(() => {
       async function fetchPackages() {
         try {
-          const res = await fetch("http://localhost:3001/api/hajj");
+          const res = await fetch("https://dashboard-rho-lake.vercel.app/api/hajj");
           if (!res.ok) throw new Error("Failed to fetch packages");
           const data: HajjPackage[] = await res.json();
           setPackages(Array.isArray(data) ? data : []);

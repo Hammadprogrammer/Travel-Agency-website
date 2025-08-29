@@ -4,7 +4,8 @@
   import { Swiper, SwiperSlide } from "swiper/react";
   import { Autoplay } from "swiper/modules";
   import "swiper/css";
-  
+  import { BeatLoader } from "react-spinners";
+
   interface HajjPackage {
     id: number;
     title: string;
@@ -21,7 +22,7 @@
     const [isMobile, setIsMobile] = useState<boolean>(false);
   
     useEffect(() => {
-      
+
       
       // async function fetchPackages() {
       //   try {
@@ -92,7 +93,14 @@
       return () => window.removeEventListener("resize", handleResize);
     }, []);
   
-    if (loading) return <p className="p-6 text-gray-500">Loading packages...</p>;
+    
+      if (loading) {
+        return (
+          <div className="flex justify-center items-center h-[70vh]">
+            <BeatLoader color="#4cafef" size={18} margin={3} />
+          </div>
+        );
+      }
   
     if (packages.length === 0)
       return (

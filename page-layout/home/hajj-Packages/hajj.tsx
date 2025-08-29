@@ -11,7 +11,8 @@
     price: number;
     imageUrl: string;
     createdAt: string;
-    isActive: boolean
+    isActive: boolean;
+    category: string
   }
   
   export default function HajjPackages() {
@@ -20,6 +21,7 @@
     const [isMobile, setIsMobile] = useState<boolean>(false);
   
     useEffect(() => {
+      
       
       // async function fetchPackages() {
       //   try {

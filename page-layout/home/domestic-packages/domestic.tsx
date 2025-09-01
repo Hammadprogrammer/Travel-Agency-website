@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import style from "./umrah.jsx.module.scss";
+import style from "./domestic.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { BeatLoader } from "react-spinners";
 
-interface UmrahPackage {
+interface DomesticPackage {
   id: number;
   title: string;
   price: number;
@@ -16,26 +16,24 @@ interface UmrahPackage {
   category: string;
 }
 
-export default function UmrahPackages() {
-  const [packages, setPackages] = useState<UmrahPackage[]>([]);
+export default function DomesticPackages() {
+  const [packages, setPackages] = useState<DomesticPackage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
   useEffect(() => {
     async function fetchPackages() {
       try {
-        const res = await fetch(
-          "https://dashboard-rho-lake.vercel.app/api/umrah"
-        );
-        if (!res.ok) throw new Error("Failed to fetch packages");
+        const res = await fetch("https://dashboard-rho-lake.vercel.app/api/domestic");
+        if (!res.ok) throw new Error("Failed to fetch domestic packages");
 
-        const data: UmrahPackage[] = await res.json();
+        const data: DomesticPackage[] = await res.json();
 
         const categoryOrder = ["economic", "standard", "premium"];
 
         const filteredAndSortedData = Array.isArray(data)
           ? data
-              .filter((pkg) => pkg.isActive)
+              .filter((pkg) => pkg.isActive) // sirf active packages
               .sort(
                 (a, b) =>
                   categoryOrder.indexOf(a.category.toLowerCase()) -
@@ -45,7 +43,7 @@ export default function UmrahPackages() {
 
         setPackages(filteredAndSortedData);
       } catch (err) {
-        console.error("Error fetching Umrah packages:", err);
+        console.error("Error fetching Domestic packages:", err);
         setPackages([]);
       } finally {
         setLoading(false);
@@ -74,7 +72,7 @@ export default function UmrahPackages() {
     return (
       <div className={style.container}>
         <h2 className="text-3xl font-bold mb-4 text-center text-black">
-          Umrah Packages
+          Domestic Packages
         </h2>
         <p className="text-gray-500 text-center">No packages available.</p>
       </div>
@@ -83,7 +81,7 @@ export default function UmrahPackages() {
   return (
     <section className={style.whyChooseUsSection}>
       <div className={style.container}>
-        <h2 className={style.header}>Umrah Packages</h2>
+        <h2 className={style.header}>Domestic Packages</h2>
 
         {isMobile ? (
           <Swiper

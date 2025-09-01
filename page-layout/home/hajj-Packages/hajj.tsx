@@ -23,33 +23,6 @@
   
     useEffect(() => {
 
-      
-      // async function fetchPackages() {
-      //   try {
-      //     const res = await fetch("https://dashboard-rho-lake.vercel.app/api/hajj");
-      //     if (!res.ok) throw new Error("Failed to fetch packages");
-      //     const data: HajjPackage[] = await res.json();
-      //     const categoryOrder = ["economic", "standard", "premium"];
-      //     const sortedData = Array.isArray(data)
-      //       ? data.sort(
-      //           (a, b) =>
-      //             categoryOrder.indexOf(a.category.toLowerCase()) -
-      //             categoryOrder.indexOf(b.category.toLowerCase())
-      //         )
-      //       : [];
-      
-      //     console.log("Sorted Packages:", sortedData);
-      
-      //     setPackages(sortedData);
-      //   } catch (err) {
-      //     console.error("Error fetching packages:", err);
-      //     setPackages([]);
-      //   } finally {
-      //     setLoading(false);
-      //   }
-      // }
-      
-      // fetchPackages();
       async function fetchPackages() {
         try {
           const res = await fetch("https://dashboard-rho-lake.vercel.app/api/hajj");
@@ -69,8 +42,6 @@
                     categoryOrder.indexOf(b.category.toLowerCase())
                 )
             : [];
-      
-          console.log("Filtered & Sorted Packages:", filteredAndSortedData);
       
           setPackages(filteredAndSortedData);
         } catch (err) {

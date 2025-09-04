@@ -2,16 +2,19 @@
   max-width: 1200px;
   margin: auto;
   padding: 20px;
+  h1 {
+    font-size: 32px;
+  }
 }
 
 .slider {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); /* 🖥️ Desktop: 3 columns */
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px;
   overflow: hidden;
 
   @media (max-width: 768px) {
-    grid-template-columns: 1fr; /* 📱 Mobile: 1 column */
+    grid-template-columns: 1fr;
   }
 }
 
@@ -21,14 +24,6 @@
   border-radius: 16px;
   transition: transform 0.3s ease;
   cursor: pointer;
-
-  &:hover {
-    transform: scale(1.05);
-
-    img {
-      transform: scale(1.1);
-    }
-  }
 }
 
 .image {
@@ -69,12 +64,12 @@
   transition: 0.3s ease;
 
   &.active {
-    background: #16a34a; // green
+    background: #16a34a;
     color: white;
   }
 
   &.inactive {
-    background: #dc2626; // red
+    background: #dc2626;
     color: white;
   }
 

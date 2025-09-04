@@ -54,13 +54,13 @@
 
     .sliderTrack {
       display: flex;
-      gap: 30px; 
+      gap: 30px;
       transition: transform 0.6s ease-in-out;
       width: 100%;
     }
 
     .slide {
-      flex: 0 0 calc((100% - (30px * 2)) / 3); 
+      flex: 0 0 calc((100% - (30px * 2)) / 3);
       max-width: calc((100% - (30px * 2)) / 3);
       position: relative;
       overflow: hidden;
@@ -72,10 +72,6 @@
         object-fit: cover;
         border-radius: 12px;
         transition: transform 0.5s ease-in-out;
-      }
-
-      &:hover .slideImage {
-        transform: scale(1.05);
       }
 
       .imageOverlay {
@@ -111,8 +107,7 @@
       border-radius: 50%;
       z-index: 5;
       transition: background 0.3s ease;
-
-        }
+    }
 
     .prev {
       left: -60px;
@@ -123,15 +118,24 @@
     }
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1199px) {
     .sliderContainer {
+      .sliderWrapper {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+      }
+
       .sliderTrack {
-        gap: 0px;
+        gap: 0;
+        transform: none !important;
+        width: auto !important;
       }
 
       .slide {
         flex: 0 0 100%;
         max-width: 100%;
+        scroll-snap-align: start;
       }
 
       .customButton {
@@ -139,4 +143,5 @@
       }
     }
   }
+  
 }

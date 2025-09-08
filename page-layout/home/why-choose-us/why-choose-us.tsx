@@ -5,13 +5,15 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
-import { Pagination } from "swiper/modules";
+import "swiper/css/autoplay";
+import { Pagination, Autoplay } from "swiper/modules";
 
 interface ChooseUsItem {
   id: number;
   title: string;
   description: string;
   imageUrl: string;
+  isActive?: boolean;
 }
 
 const ChooseUs = () => {
@@ -35,7 +37,6 @@ const ChooseUs = () => {
 
     fetchChooseUs();
 
-    // check screen size for mobile
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 500);
     };
@@ -51,17 +52,22 @@ const ChooseUs = () => {
     <section className={style.chooseUsSection}>
       <div className={style.content}>
         <h3>Why Choose Us</h3>
-        <p style={{color: "#000"}}>
+        <p style={{ color: "#000" }}>
           We provide the best travel services ensuring comfort, affordability
           and global reach.
         </p>
 
         {isMobile ? (
           <Swiper
+            className={style.mobileSwiper}
             spaceBetween={15}
-            slidesPerView={1}
+            slidesPerView={1.2}
             pagination={{ clickable: true }}
-            modules={[Pagination]}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            modules={[Pagination, Autoplay]}
           >
             {items.map((item, index) => (
               <SwiperSlide key={item.id}>
@@ -70,12 +76,14 @@ const ChooseUs = () => {
                     index === 0 ? style.color : index === 1 ? style.color1 : ""
                   }`}
                 >
-                  <Image
-                    src={item.imageUrl}
-                    alt={item.title}
-                    width={60}
-                    height={60}
-                  />
+                  <div className={style.imgWrap}>
+                    <Image
+                      src={item.imageUrl}
+                      alt={item.title}
+                      width={60}
+                      height={60}
+                    />
+                  </div>
                   <div className={style.chooseUsContent}>
                     <h4>{item.title}</h4>
                     <p>{item.description}</p>

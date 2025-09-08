@@ -84,11 +84,12 @@ const InternationalTours = () => {
       className={style.internationalTourSection}
       style={{
         backgroundImage: sectionData
-          ? `url(${sectionData.backgroundUrl})`
+          ? `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${sectionData.backgroundUrl})`
           : "none",
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
+      
     >
       <div className={style.contentSection}>
         <h3>{sectionData?.title}</h3>

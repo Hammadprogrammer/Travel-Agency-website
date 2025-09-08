@@ -7,13 +7,21 @@ import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
 
+interface InternationalData {
+  id: number;
+  title: string;
+  description: string;
+  backgroundUrl: string;
+  sliderImages: { url: string }[];
+}
+
 const InternationalTours = () => {
   const [tours, setTours] = useState<any[]>([]);
+  const [sectionData, setSectionData] = useState<InternationalData | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-  const fetchedRef = useRef(false); 
+  const fetchedRef = useRef(false);
 
-  // ✅ Fetch Tours (only once)
   useEffect(() => {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
@@ -23,15 +31,26 @@ const InternationalTours = () => {
         const res = await fetch(
           "https://dashboard-rho-lake.vercel.app/api/international-tour"
         );
-        const data = await res.json();
-        const formatted = data
-          .filter((tour: any) => tour.sliderImages.length > 0)
-          .map((tour: any) => ({
-            src: tour.sliderImages[0].url,
-            title: tour.title,
-            description: tour.description,
-          }));
-        setTours(formatted);
+        const data: InternationalData[] = await res.json();
+
+        if (Array.isArray(data) && data.length > 0) {
+          setSectionData({
+            id: data[0].id,
+            title: data[0].title,
+            description: data[0].description,
+            backgroundUrl: data[0].backgroundUrl,
+            sliderImages: data[0].sliderImages,
+          });
+
+          const formatted = data
+            .filter((tour) => tour.sliderImages.length > 0)
+            .map((tour) => ({
+              src: tour.sliderImages[0].url,
+              title: tour.title,
+              description: tour.description,
+            }));
+          setTours(formatted);
+        }
       } catch (error) {
         console.error("Error fetching tours:", error);
       }
@@ -39,10 +58,8 @@ const InternationalTours = () => {
 
     fetchTours();
   }, []);
-
-  // ✅ Screen resize detection
   useEffect(() => {
-    const checkScreen = () =>  setIsMobile(window.innerWidth < 1200);
+    const checkScreen = () => setIsMobile(window.innerWidth < 1200);
     checkScreen();
     window.addEventListener("resize", checkScreen);
     return () => window.removeEventListener("resize", checkScreen);
@@ -63,13 +80,19 @@ const InternationalTours = () => {
   };
 
   return (
-    <section className={style.internationalTourSection}>
+    <section
+      className={style.internationalTourSection}
+      style={{
+        backgroundImage: sectionData
+          ? `url(${sectionData.backgroundUrl})`
+          : "none",
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    >
       <div className={style.contentSection}>
-        <h3>International Tours</h3>
-        <p>
-          Explore our top-rated international travel packages. Designed for
-          comfort, adventure, and affordability.
-        </p>
+        <h3>{sectionData?.title}</h3>
+        <p>{sectionData?.description}</p>
       </div>
 
       <div className={style.sliderContainer}>
@@ -80,7 +103,7 @@ const InternationalTours = () => {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             pagination={{ clickable: true }}
             spaceBetween={20}
-            slidesPerView={1}
+            slidesPerView={1.2}
             loop={true}
             className={style.mobileSwiper}
           >
@@ -94,17 +117,12 @@ const InternationalTours = () => {
                     height={350}
                     className={style.slideImage}
                   />
-                  <div className={style.imageOverlay}>
-                    <h4>{tour.title}</h4>
-                    <p>{tour.description}</p>
-                  </div>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
         ) : (
           <>
-            {/* ✅ Desktop: Custom Slider */}
             {tours.length > 0 && (
               <button
                 className={`${style.customButton} ${style.prev}`}
@@ -118,7 +136,9 @@ const InternationalTours = () => {
               <div
                 className={style.sliderTrack}
                 style={{
-                  transform: `translateX(-${currentIndex * (100 / visibleSlides)}%)`,
+                  transform: `translateX(-${
+                    currentIndex * (100 / visibleSlides)
+                  }%)`,
                 }}
               >
                 {tours.map((tour, index) => (
@@ -130,10 +150,6 @@ const InternationalTours = () => {
                       height={350}
                       className={style.slideImage}
                     />
-                    <div className={style.imageOverlay}>
-                      <h4>{tour.title}</h4>
-                      <p>{tour.description}</p>
-                    </div>
                   </div>
                 ))}
               </div>
@@ -148,7 +164,6 @@ const InternationalTours = () => {
               </button>
             )}
           </>
-
         )}
       </div>
     </section>

@@ -57,6 +57,7 @@ const PeopleSection = () => {
                   alt={testimonial.name}
                   width={50}
                   height={50}
+                  className={style.circleImage}
                 />
                 <div className={style.ceo}>
                   <h5>{testimonial.name}</h5>

@@ -92,6 +92,11 @@
         .small {
           font-size: 9px; // extra small
         }
+
+        .circleImage {
+          border-radius: 50%;
+          object-fit: cover;
+        }
       }
     }
   }

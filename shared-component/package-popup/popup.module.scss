@@ -2,11 +2,11 @@
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center; /* 👈 ab har screen par vertical center */
+  align-items: center; 
   justify-content: center;
   background: rgba(0, 0, 0, 0.6);
   backdrop-filter: blur(4px);
-  z-index: 1050; /* z-index barha diya taake footer ke neeche na jaye */
+  z-index: 1050;
   padding: 1rem; 
   overflow-y: auto;
 }
@@ -150,8 +150,6 @@
     transform: scale(1);
   }
 }
-
-/* 📱 Mobile full-screen style */
 @media (max-width: 768px) {
   .popupContainer {
     width: 100%;

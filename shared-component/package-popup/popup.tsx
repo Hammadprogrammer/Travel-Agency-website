@@ -4,11 +4,12 @@ import style from './popup.module.scss';
 
 const Popup = ({ onClose }: { onClose?: () => void }) => {
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
     name: '',
+    fatherName: '',
+    nic: '',
+    category: '',
     email: '',
-    phone: '',
+    phone: ''
   });
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
@@ -37,11 +38,13 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
       setMessage(result.message);
       if (response.ok) {
         setFormData({
-          title: '',
-          description: '',
           name: '',
+          fatherName: '',
+          nic: '',
+          category: '',
           email: '',
-          phone: '',
+          phone: ''
+
         });
       }
     } catch (error) {
@@ -67,29 +70,9 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
         <div className={style.popupBody}>
           <form onSubmit={handleSubmit} className={style.form}>
             <div className={style.formGroup}>
-              <label htmlFor="title">Title</label>
-              <input
-                type="text"
-                name="title"
-                value={formData.title}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className={style.formGroup}>
-              <label htmlFor="description">Description</label>
-              <textarea
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-              />
-            </div>
-
-            <div className={style.formGroup}>
               <label htmlFor="name">Name</label>
               <input
+                placeholder='Enter your name' 
                 type="text"
                 name="name"
                 value={formData.name}
@@ -99,8 +82,47 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
             </div>
 
             <div className={style.formGroup}>
+              <label htmlFor="fatherName">Father Name</label>
+              <input
+                placeholder='Enter your father name'
+                type="text"
+                name="fatherName"
+                value={formData.fatherName}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className={style.formGroup}>
+              <label htmlFor="cnic">CNIC</label>
+              <input
+                placeholder="Enter your CNIC"
+                type="number"
+                name="nic"
+                value={formData.nic}
+                onChange={handleChange}
+                maxLength={13}
+                pattern="\d{13}"
+                title="CNIC must be exactly 13 digits" 
+                required
+              />
+            </div>
+
+            <div className={style.formGroup}>
+              <label htmlFor="category">Category</label>
+              <input
+                placeholder='Enter category'
+                type="text"
+                name="category"
+                value={formData.category}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className={style.formGroup}>
               <label htmlFor="email">Email</label>
               <input
+                placeholder='Enter your email address'
                 type="email"
                 name="email"
                 value={formData.email}
@@ -112,6 +134,7 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
             <div className={style.formGroup}>
               <label htmlFor="phone">Phone</label>
               <input
+                placeholder='Enter your phone number'
                 type="text"
                 name="phone"
                 value={formData.phone}

@@ -1,3 +1,4 @@
+
 "use client";
 import React, { useState, useEffect } from "react";
 import style from "./domestic.module.scss";
@@ -5,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { BeatLoader } from "react-spinners";
+import Popup from "@/shared-component/package-popup/popup";
 
 interface DomesticPackage {
   id: number;
@@ -20,6 +22,8 @@ export default function DomesticPackages() {
   const [packages, setPackages] = useState<DomesticPackage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState<DomesticPackage | null>(null);
 
   useEffect(() => {
     async function fetchPackages() {
@@ -33,7 +37,7 @@ export default function DomesticPackages() {
 
         const filteredAndSortedData = Array.isArray(data)
           ? data
-              .filter((pkg) => pkg.isActive) // sirf active packages
+              .filter((pkg) => pkg.isActive)
               .sort(
                 (a, b) =>
                   categoryOrder.indexOf(a.category.toLowerCase()) -
@@ -93,7 +97,13 @@ export default function DomesticPackages() {
           >
             {packages.map((pkg) => (
               <SwiperSlide key={pkg.id}>
-                <div className={style.slide}>
+                <div
+                  className={style.slide}
+                  onClick={() => {
+                    setSelectedPackage(pkg);
+                    setShowPopup(true);
+                  }}
+                >
                   <img
                     src={pkg.imageUrl}
                     alt={pkg.title}
@@ -102,6 +112,7 @@ export default function DomesticPackages() {
                         "https://via.placeholder.com/360x502?text=Image+Not+Found")
                     }
                   />
+                  <p className="text-center mt-2 font-semibold">{pkg.title}</p>
                 </div>
               </SwiperSlide>
             ))}
@@ -109,7 +120,14 @@ export default function DomesticPackages() {
         ) : (
           <div className={style.imageGrid}>
             {packages.map((pkg) => (
-              <div key={pkg.id} className={style.slide}>
+              <div
+                key={pkg.id}
+                className={style.slide}
+                onClick={() => {
+                  setSelectedPackage(pkg);
+                  setShowPopup(true);
+                }}
+              >
                 <img
                   src={pkg.imageUrl}
                   alt={pkg.title}
@@ -118,11 +136,17 @@ export default function DomesticPackages() {
                       "https://via.placeholder.com/360x502?text=Image+Not+Found")
                   }
                 />
+                <p className="text-center mt-2 font-semibold">{pkg.title}</p>
               </div>
             ))}
           </div>
         )}
       </div>
+      {showPopup && (
+        <Popup
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </section>
   );
 }

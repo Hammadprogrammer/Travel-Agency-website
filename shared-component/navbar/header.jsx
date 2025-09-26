@@ -32,7 +32,7 @@ const Navbar = () => {
     <div className={`${style.main} ${scrolled ? style.scrolled : ""}`}>
       <nav className={style.navbar}>
         <div className={style.navbarLeft}>
-          <img src="/logo.png" alt="Logo" className={style.logo} />
+          <Link href="/"><img src="/logo.png" alt="Logo" className={style.logo} /></Link>
         </div>
 
         <div className={`${style.navbarLinks} ${isOpen ? style.active : ""}`}>
@@ -43,7 +43,7 @@ const Navbar = () => {
           )}
 
           <Link href="/">Home</Link>
-          <Link href="/destinations">Destinations</Link>
+          <Link href="#destinations">Destinations</Link>
           <Link href="/about">About Us</Link>
           <Link href="/knowledge">Knowledge</Link>
         </div>

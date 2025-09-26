@@ -82,7 +82,7 @@ export default function DomesticPackages() {
     );
 
   return (
-    <section className={style.whyChooseUsSection}>
+    <section className={style.whyChooseUsSection} id="destinations">
       <div className={style.container}>
         <h2 className={style.header}>Domestic Packages</h2>
 

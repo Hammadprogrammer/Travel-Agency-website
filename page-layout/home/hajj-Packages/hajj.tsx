@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 import style from "./hajj-umrah.module.scss";
@@ -137,4 +136,3 @@ export default function HajjPackages() {
     </div>
   );
 }
-

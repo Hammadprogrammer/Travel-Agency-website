@@ -1,4 +1,3 @@
-
 "use client";
 import React, { useState, useEffect } from "react";
 import style from "./domestic.module.scss";
@@ -150,7 +149,3 @@ export default function DomesticPackages() {
     </section>
   );
 }
-
-
-
-

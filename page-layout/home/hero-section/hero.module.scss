@@ -6,23 +6,21 @@
 .heroImage {
   width: 100%;
   min-height: 100vh;
-  background: linear-gradient(
-      to right,
+  background: linear-gradient(to right,
       rgba(54, 103, 164, 0.776),
-      rgba(50, 70, 147, 0.8)
-    ),
+      rgba(50, 70, 147, 0.8)),
     url("../../../public/homebackground.png") no-repeat center/cover;
   position: relative;
   top: 0;
   left: 0;
   z-index: -1;
 
-  @media (max-width: 1024px)  {
+  @media (max-width: 1024px) {
     min-height: 100vh;
   }
 
   @media (max-width: 768px) {
-    min-height: 100vh;
+    min-height: 140vh;
   }
 
 }
@@ -37,7 +35,8 @@
   @media (max-width: 768px) {
     padding-top: 140px;
   }
-   @media (max-width: 576px) {
+
+  @media (max-width: 576px) {
     padding-top: 120px;
   }
 
@@ -55,7 +54,7 @@
 
     @media (max-width: 768px) {
       font-size: 35px;
-      max-width: 70%;
+      max-width: 100%;
       margin-left: 5%;
       padding-right: 5%;
     }
@@ -91,55 +90,60 @@
     }
   }
 
- .btn {
-  margin-left: 50px;
-  display: flex;
-  gap: 10px;
-
-  @media (max-width: 768px) {
-    flex-direction: column; // 768px se niche stack vertically
-    align-items: flex-start;
-    margin-left: 20px;
-    margin-top: 10px;
-    gap: 0px;
-  }
-
-  .btn1, .btn2 {
-    font-size: 20px;
-    font-weight: bold;
-    color: white;
-    background: transparent;
-    border: 2px solid white;
-    padding: 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    margin: 50px 10px;
-
-    &:hover {
-      background-color: #dbae58;
-      border-color: #dbae58;
-      color: #344160;
-    }
+  .btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 60px;
+    margin-left: 50px;
+    display: flex;
+    gap: 10px;
 
     @media (max-width: 768px) {
-      font-size: 14px;
-      padding: 10px 6px;
-      margin: 0;
-      margin-top: 20px;
-      width: 92%; // full width on small & medium screens
+      flex-direction: column; // 768px se niche stack vertically
+      align-items: flex-start;
+      margin-left: 20px;
+      margin-top: 10px;
+      gap: 0px;
     }
 
-    @media (max-width: 576px) {
-      font-size: 12px;
-      padding: 8px 8px;
-      margin-top: 15px;
+    .btn1,
+    .btn2 {
+      font-size: 20px;
+      font-weight: bold;
+      color: white;
+      background: transparent;
+      border: 2px solid white;
+      padding: 15px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 50px 10px;
+
+      &:hover {
+        background-color: #dbae58;
+        border-color: #dbae58;
+        color: #344160;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        padding: 10px 6px;
+        margin: 0;
+        margin-top: 20px;
+        width: 92%; // full width on small & medium screens
+      }
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+        padding: 8px 8px;
+        margin-top: 15px;
+      }
     }
   }
-}
 
 
 }
+
 .socialIcons {
   background-color: white;
   color: #000;
@@ -157,7 +161,9 @@
   border-radius: 8px 0 0 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 
-  
+
+
+
 
   @media (max-width: 1024px) {
     width: 40px;
@@ -165,25 +171,62 @@
     padding: 15px;
   }
 
-@media (max-width: 768px) {
-  background: none;
-  box-shadow: none;
-  left: 0;
-  right: auto;
-  bottom: 0;
-  flex-direction: row;
-  width: auto;
-  height: auto;
-  padding: 10px 15px;
-  gap: 15px;
-  color: white;
+  @media (max-width: 768px) {
+    background: none;
+    box-shadow: none;
+    left: 0;
+    right: auto;
+    bottom: 0;
+    flex-direction: row;
+    width: auto;
+    height: auto;
+    padding: 10px 15px;
+    gap: 15px;
+    color: white;
 
-  i {
-    color: white !important;
-    font-size: 25px !important;
-    line-height: 1;
+    i {
+      color: white !important;
+      font-size: 25px !important;
+      line-height: 1;
+    }
   }
 }
 
+.heroTextMain {
+  display: flex;
+  justify-content: center;
+  margin-top: 35px;
 
+  // padding: 10px;
+  @media (max-width: 768px) {
+    display: block;
+
+    .heroTextTwo {
+      margin-top: 1px;
+      
+
+      p {
+        margin-top: 7px;
+        text-align: right;
+      }
+
+      h1 {
+        margin-left: 70px;
+        text-align: right;
+      }
+    }
+  }
+}
+
+.heroTextTwo {
+  margin-top: 10px;
+
+  p {
+    margin-top: 87px;
+    text-align: right;
+  }
+
+  h1 {
+    text-align: right;
+  }
 }

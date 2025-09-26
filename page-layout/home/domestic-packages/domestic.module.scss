@@ -1,13 +1,13 @@
 .whyChooseUsSection {
   // background-color: #F9F9F9;
   padding: 2rem 2rem;
-  max-width: 1200px;
+  // max-width: 1200px;
   margin: auto;
     @media (max-width: 576px) {
       padding: 10px;
   }
   .container {
-    max-width: 1200px;
+    max-width: 1450px;
     margin: 0 auto;
     text-align: center;
   }
@@ -28,13 +28,16 @@
   .imageGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 40px;
+    gap: 50px;
+    margin-left: 46px;
+  
     img {
       // width: 95%;
       height: auto;
-      border-radius: 12px;
+      border-radius: 29px;
       object-fit: cover;
       transition: transform 0.3s ease;
+          cursor: pointer;
     }
   }
   .mobileView {

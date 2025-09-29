@@ -92,7 +92,7 @@ const InternationalTours = () => {
       
     >
       <div className={style.contentSection}>
-        <h3>{sectionData?.title}</h3>
+        <h3 id="holiday">{sectionData?.title}</h3>
         <p>{sectionData?.description}</p>
       </div>
 

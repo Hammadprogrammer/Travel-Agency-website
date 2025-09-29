@@ -2,102 +2,113 @@
   position: fixed;
   inset: 0;
   display: flex;
-  align-items: center; 
+  align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+  background: rgba(17, 17, 17, 0.6);
+  backdrop-filter: blur(6px);
   z-index: 1050;
-  padding: 1rem; 
+  padding: 1rem;
   overflow-y: auto;
 }
 
 .popupContainer {
-  position: relative;
   background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
   width: 100%;
-  max-width: 600px;
+  max-width: 700px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  animation: popupFadeIn 0.3s ease-in-out;
+  animation: popupFadeIn 0.3s ease;
 }
 
 .popupHeader {
-  position: sticky;
-  top: 0;
-  background: #fff;
-  padding: 1rem 2.5rem 1rem 2rem;
-  border-bottom: 1px solid #eee;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 10;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  background: #f9fafb;
+  flex-shrink: 0;
 }
 
 .popupTitle {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: #000;
-  text-align: center;
-  flex-grow: 1;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
 }
 
 .closeBtn {
   position: absolute;
   top: 16px;
-  right: 16px;
+  right: 20px;
   font-size: 1.4rem;
-  color: #555;
   background: none;
   border: none;
+  color: #6b7280;
   cursor: pointer;
   transition: color 0.2s;
 
   &:hover {
-    color: #000;
+    color: #111827;
   }
 }
 
 .popupBody {
-  flex-grow: 1;
+  padding: 1.8rem 2rem;
+  background: #fff;
   overflow-y: auto;
-  padding: 1.5rem 2rem;
+  flex-grow: 1;
 }
 
 /* Form */
 .form {
   display: flex;
   flex-direction: column;
-  gap: 1.2rem;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1.5rem;
+
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: 1rem;
+  }
 }
 
 .formGroup {
+  flex: 1;
   display: flex;
   flex-direction: column;
 
   label {
     font-size: 0.9rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 0.4rem;
-    color: #000;
+    color: #374151;
   }
 
   input,
+  select,
   textarea {
-    padding: 0.8rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
     font-size: 1rem;
-    color: #000;
-    outline: none;
+    color: #111827;
+    background: #f9fafb;
     transition: border 0.2s, box-shadow 0.2s;
 
     &:focus {
       border-color: #4f46e5;
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.25);
+      outline: none;
+      background: #fff;
     }
   }
 
@@ -107,55 +118,83 @@
   }
 }
 
+/* Remove number spinner */
+.noSpinner {
+  -moz-appearance: textfield;
+}
+.noSpinner::-webkit-outer-spin-button,
+.noSpinner::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .submitBtn {
-  padding: 0.9rem;
+  padding: 1rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 1rem;
   font-weight: 600;
   color: #fff;
-  background: #4f46e5;
+  background: linear-gradient(135deg, #4f46e5, #4338ca);
   cursor: pointer;
-  transition: background 0.3s, transform 0.1s;
+  transition: transform 0.1s, opacity 0.2s;
 
   &:hover {
-    background: #4338ca;
+    opacity: 0.9;
   }
 
   &:active {
-    transform: scale(0.98);
+    transform: scale(0.97);
   }
 
   &:disabled {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: not-allowed;
   }
 }
 
 .message {
   margin-top: 0.8rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 600;
   text-align: center;
-  color: #000;
+}
+
+.successMessage {
+  color: #16a34a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.successIcon {
+  width: 20px;
+  height: 20px;
+  color: #16a34a;
+}
+
+.errorMessage {
+  color: #dc2626;
+  text-align: center;
 }
 
 @keyframes popupFadeIn {
   from {
     opacity: 0;
-    transform: scale(0.95);
+    transform: scale(0.96);
   }
   to {
     opacity: 1;
     transform: scale(1);
   }
 }
+
 @media (max-width: 768px) {
   .popupContainer {
-    width: 100%;
-    height: 100%;
-    max-height: 100%;
-    border-radius: 0;
+    max-width: 95%;
+    max-height: 80vh;
+    border-radius: 12px;
   }
 
   .popupBody {

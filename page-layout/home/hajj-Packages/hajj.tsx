@@ -81,7 +81,7 @@ export default function HajjPackages() {
     );
 
   return (
-    <div className={style.packageContainer}>
+    <div className={style.packageContainer} id="hajj">
       <h1 className="text-2xl font-bold mb-6 text-center text-black">
         Hajj Packages
       </h1>

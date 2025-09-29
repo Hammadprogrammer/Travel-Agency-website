@@ -2,6 +2,7 @@
 import React from "react";
 import style from "./travel.module.scss";
 import Image from "next/image";
+import Link from "next/link";
 
 const Experience = () => {
   return (
@@ -18,8 +19,8 @@ const Experience = () => {
         <div className={style.boxes}>
           <div className={style.group}>
             <div className={style.box}>
-
-            <Image src="/Hajj.png" alt="Hajj" width={80} height={80} />
+    
+            <Link href="#hajj"><Image src="/Hajj.png" alt="Hajj" width={80} height={80} /></Link>
 
             </div>
             <p>Hajj</p>
@@ -27,14 +28,14 @@ const Experience = () => {
 
           <div className={style.group}>
             <div className={`${style.box} ${style.change}`}>
-              <Image src="/Mosque.png" alt="Umrah" width={80} height={80} />
+              <Link href="#umrah"><Image src="/Mosque.png" alt="Umrah" width={80} height={80} /></Link> 
             </div>
             <p className={style.chang}>Umrah</p>
           </div>
 
           <div className={style.group}>
             <div className={style.box}>
-              <Image src="/Umbrella.png" alt="Holidays" width={80} height={80} />
+              <Link href="#holiday"><Image src="/Umbrella.png" alt="Holidays" width={80} height={80} /></Link>
             </div>
             <p>Holidays</p>
           </div>

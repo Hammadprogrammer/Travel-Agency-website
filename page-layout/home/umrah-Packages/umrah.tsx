@@ -83,7 +83,7 @@ export default function UmrahPackages() {
     );
 
   return (
-    <section className={style.whyChooseUsSection}>
+    <section className={style.whyChooseUsSection} id="umrah">
       <div className={style.container}>
         <h2 className={style.header}>Umrah Packages</h2>
 

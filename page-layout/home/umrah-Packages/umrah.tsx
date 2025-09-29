@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import style from "./umrah.jsx.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 import { BeatLoader } from "react-spinners";
 import Popup from "@/shared-component/package-popup/popup";
 
@@ -21,7 +22,7 @@ export default function UmrahPackages() {
   const [packages, setPackages] = useState<UmrahPackage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [isPopupOpen, setIsPopupOpen] = useState(false); // popup state
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     async function fetchPackages() {
@@ -88,38 +89,54 @@ export default function UmrahPackages() {
         <h2 className={style.header}>Umrah Packages</h2>
 
         {isMobile ? (
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
-            spaceBetween={20}
-            slidesPerView={1.2}
-            loop={true}
-          >
-            {packages.map((pkg) => (
-              <SwiperSlide key={pkg.id}>
-                <div
-                  className={style.slide}
-                  onClick={() => setIsPopupOpen(true)} // 👈 click par popup open
-                >
-                  <img
-                    src={pkg.imageUrl}
-                    alt={pkg.title}
-                    onError={(e) =>
-                      (e.currentTarget.src =
-                        "https://via.placeholder.com/360x502?text=Image+Not+Found")
-                    }
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="relative">
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={10}
+              slidesPerView={1}
+              centeredSlides={true}
+              loop={true}
+              navigation={{
+                prevEl: ".custom-prev",
+                nextEl: ".custom-next",
+              }}
+            >
+              {packages.map((pkg, index) => (
+                <SwiperSlide key={pkg.id}>
+                  <div
+                    className={style.slide}
+                    onClick={() => setIsPopupOpen(true)}
+                  >
+                    <img
+                      src={pkg.imageUrl}
+                      alt={pkg.title}
+                      onError={(e) =>
+                        (e.currentTarget.src =
+                          "https://via.placeholder.com/360x502?text=Image+Not+Found")
+                      }
+                      className="cursor-pointer w-full h-auto object-contain"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* Left Arrow */}
+            <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+              ‹
+            </button>
+            {/* Right Arrow */}
+            <button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+              ›
+            </button>
+          </div>
         ) : (
           <div className={style.imageGrid}>
             {packages.map((pkg) => (
               <div
                 key={pkg.id}
                 className={style.slide}
-                onClick={() => setIsPopupOpen(true)} // 👈 click par popup open
+                onClick={() => setIsPopupOpen(true)}
               >
                 <img
                   src={pkg.imageUrl}
@@ -128,6 +145,7 @@ export default function UmrahPackages() {
                     (e.currentTarget.src =
                       "https://via.placeholder.com/360x502?text=Image+Not+Found")
                   }
+                  className="cursor-pointer"
                 />
               </div>
             ))}
@@ -135,7 +153,7 @@ export default function UmrahPackages() {
         )}
       </div>
 
-      {/* 👇 Popup yahan render hoga */}
+      {/* Popup */}
       {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
     </section>
   );

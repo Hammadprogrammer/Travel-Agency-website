@@ -35,7 +35,7 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
     if (!/^\d{10,15}$/.test(phone)) return 'Phone must be 10–15 digits';
     if (!category) return 'Please select a category';
     if (!service) return 'Please select a service';
-    if (!message.trim() || message.length < 5) return 'Message must be at least 5 characters';
+    if (!message.trim() ) return ;
     return null;
   };
 

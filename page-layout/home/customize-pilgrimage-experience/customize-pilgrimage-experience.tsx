@@ -7,6 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import { BeatLoader } from "react-spinners";
+import Popup from "@/shared-component/package-popup/popup"; // 👈 your form popup
 
 interface ApiResponse {
   id: number;
@@ -22,6 +23,7 @@ interface ApiResponse {
 interface PilgrimageItem {
   id: number;
   title: string;
+  type: string;
   imageUrl?: string;
   items: string[];
 }
@@ -31,6 +33,9 @@ export default function Pilgrimage() {
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
+
+  // popup state
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     setMounted(true);
@@ -52,10 +57,11 @@ export default function Pilgrimage() {
         const json: ApiResponse[] = await res.json();
 
         const formatted: PilgrimageItem[] = json
-          .filter((item) => item.isActive) 
+          .filter((item) => item.isActive)
           .map((item) => ({
             id: item.id,
             title: item.title,
+            type: "Pilgrimage",
             imageUrl: item.heroImage,
             items: [
               item.subtitle1,
@@ -90,7 +96,6 @@ export default function Pilgrimage() {
     <section>
       <div className={style.main}>
         <div className={style.pilgrimageSection}>
-          {/* Hard-coded heading */}
           <div className={style.heading}>
             <h3>Customize Your Pilgrimage Experience</h3>
           </div>
@@ -112,26 +117,39 @@ export default function Pilgrimage() {
             >
               {data.map((box) => (
                 <SwiperSlide key={box.id}>
-                  <PilgrimageBox box={box} />
+                  <PilgrimageBox box={box} onClick={() => setShowPopup(true)} />
                 </SwiperSlide>
               ))}
             </Swiper>
           ) : (
             <div className={style.pilgrimageContainer}>
               {data.map((box) => (
-                <PilgrimageBox key={box.id} box={box} />
+                <PilgrimageBox
+                  key={box.id}
+                  box={box}
+                  onClick={() => setShowPopup(true)}
+                />
               ))}
             </div>
           )}
         </div>
       </div>
+
+      {/* Popup with form */}
+      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </section>
   );
 }
 
-function PilgrimageBox({ box }: { box: PilgrimageItem }) {
+function PilgrimageBox({
+  box,
+  onClick,
+}: {
+  box: PilgrimageItem;
+  onClick: () => void;
+}) {
   return (
-    <div className={style.boxes}>
+    <div className={style.boxes} onClick={onClick} style={{ cursor: "pointer" }}>
       <Image
         src={box.imageUrl || "/placeholder-400x250.png"}
         alt={box.title}
@@ -141,18 +159,16 @@ function PilgrimageBox({ box }: { box: PilgrimageItem }) {
       <h5>{box.title}</h5>
       <div className={style.description}>
         <ul>
-          {Array.isArray(box.items) &&
-            box.items.map((item, i) => (
-              <li key={i}>
-                <span className={style.iconWrapper}>
-                  <FaCheck size={14} color="black" />
-                </span>
-                <span>{item}</span>
-              </li>
-            ))}
+          {box.items.map((item, i) => (
+            <li key={i}>
+              <span className={style.iconWrapper}>
+                <FaCheck size={14} color="black" />
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
         </ul>
       </div>
     </div>
   );
 }
-

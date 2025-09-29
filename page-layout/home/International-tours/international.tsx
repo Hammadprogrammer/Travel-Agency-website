@@ -6,6 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
+import Popup from "@/shared-component/package-popup/popup"; 
 
 interface InternationalData {
   id: number;
@@ -15,12 +16,22 @@ interface InternationalData {
   sliderImages: { url: string }[];
 }
 
+interface SliderTour {
+    src: string;
+    title: string;
+    description: string;
+}
+
 const InternationalTours = () => {
-  const [tours, setTours] = useState<any[]>([]);
+  const [tours, setTours] = useState<SliderTour[]>([]); // Use the new interface
   const [sectionData, setSectionData] = useState<InternationalData | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const fetchedRef = useRef(false);
+  
+  // 2. Add state for popup
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedTour, setSelectedTour] = useState<SliderTour | null>(null); // Use the new interface
 
   useEffect(() => {
     if (fetchedRef.current) return;
@@ -42,7 +53,7 @@ const InternationalTours = () => {
             sliderImages: data[0].sliderImages,
           });
 
-          const formatted = data
+          const formatted: SliderTour[] = data
             .filter((tour) => tour.sliderImages.length > 0)
             .map((tour) => ({
               src: tour.sliderImages[0].url,
@@ -58,6 +69,7 @@ const InternationalTours = () => {
 
     fetchTours();
   }, []);
+  
   useEffect(() => {
     const checkScreen = () => setIsMobile(window.innerWidth < 1200);
     checkScreen();
@@ -79,9 +91,15 @@ const InternationalTours = () => {
     );
   };
 
+  // 4. Click handler to open the popup
+  const handleSlideClick = (tour: SliderTour) => {
+    setSelectedTour(tour);
+    setShowPopup(true);
+  };
+
   return (
     <section
-      className={style.internationalTourSection}
+      className={style.internationalTourSection} id="holiday"
       style={{
         backgroundImage: sectionData
           ? `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${sectionData.backgroundUrl})`
@@ -92,12 +110,11 @@ const InternationalTours = () => {
       
     >
       <div className={style.contentSection}>
-        <h3 id="holiday">{sectionData?.title}</h3>
+        <h3>{sectionData?.title}</h3>
         <p>{sectionData?.description}</p>
       </div>
 
       <div className={style.sliderContainer}>
-        {/* ✅ Mobile: Swiper */}
         {isMobile ? (
           <Swiper
             modules={[Autoplay, Pagination]}
@@ -110,7 +127,10 @@ const InternationalTours = () => {
           >
             {tours.map((tour, index) => (
               <SwiperSlide key={index}>
-                <div className={style.slide}>
+                <div 
+                    className={style.slide}
+                    onClick={() => handleSlideClick(tour)} // Add click handler
+                >
                   <Image
                     src={tour.src}
                     alt={tour.title}
@@ -143,7 +163,11 @@ const InternationalTours = () => {
                 }}
               >
                 {tours.map((tour, index) => (
-                  <div key={index} className={style.slide}>
+                  <div 
+                    key={index} 
+                    className={style.slide}
+                    onClick={() => handleSlideClick(tour)} // Add click handler
+                  >
                     <Image
                       src={tour.src}
                       alt={tour.title}
@@ -167,6 +191,13 @@ const InternationalTours = () => {
           </>
         )}
       </div>
+
+      {/* 5. Conditionally render the Popup */}
+      {showPopup && (
+        <Popup
+          onClose={() => setShowPopup(false)}
+        />
+      )}
     </section>
   );
 };

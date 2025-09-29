@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import style from "./domestic.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 import { BeatLoader } from "react-spinners";
 import Popup from "@/shared-component/package-popup/popup";
 
@@ -21,8 +22,7 @@ export default function DomesticPackages() {
   const [packages, setPackages] = useState<DomesticPackage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedPackage, setSelectedPackage] = useState<DomesticPackage | null>(null);
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   useEffect(() => {
     async function fetchPackages() {
@@ -84,48 +84,57 @@ export default function DomesticPackages() {
   return (
     <section className={style.whyChooseUsSection} id="destinations">
       <div className={style.container}>
-        <h2 className={style.header}>Domestic Packages</h2>
+        <h2 className={style.header} >Domestic Packages</h2>
 
         {isMobile ? (
-          <Swiper
-            modules={[Autoplay]}
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
-            spaceBetween={20}
-            slidesPerView={1.2}
-            loop={true}
-          >
-            {packages.map((pkg) => (
-              <SwiperSlide key={pkg.id}>
-                <div
-                  className={style.slide}
-                  onClick={() => {
-                    setSelectedPackage(pkg);
-                    setShowPopup(true);
-                  }}
-                >
-                  <img
-                    src={pkg.imageUrl}
-                    alt={pkg.title}
-                    onError={(e) =>
-                      (e.currentTarget.src =
-                        "https://via.placeholder.com/360x502?text=Image+Not+Found")
-                    }
-                  />
-                  <p className="text-center mt-2 font-semibold">{pkg.title}</p>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+          <div className="relative">
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={10}
+              slidesPerView={1}
+              centeredSlides={true}
+              loop={true}
+              navigation={{
+                prevEl: ".domestic-prev",
+                nextEl: ".domestic-next",
+              }}
+            >
+              {packages.map((pkg) => (
+                <SwiperSlide key={pkg.id}>
+                  <div
+                    className={style.slide}
+                    onClick={() => setIsPopupOpen(true)}
+                  >
+                    <img
+                      src={pkg.imageUrl}
+                      alt={pkg.title}
+                      onError={(e) =>
+                        (e.currentTarget.src =
+                          "https://via.placeholder.com/360x502?text=Image+Not+Found")
+                      }
+                      className="cursor-pointer w-full h-auto object-contain"
+                    />
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* Left Arrow */}
+            <button className="domestic-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+              ‹
+            </button>
+            {/* Right Arrow */}
+            <button className="domestic-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+              ›
+            </button>
+          </div>
         ) : (
           <div className={style.imageGrid}>
             {packages.map((pkg) => (
               <div
                 key={pkg.id}
                 className={style.slide}
-                onClick={() => {
-                  setSelectedPackage(pkg);
-                  setShowPopup(true);
-                }}
+                onClick={() => setIsPopupOpen(true)}
               >
                 <img
                   src={pkg.imageUrl}
@@ -134,18 +143,16 @@ export default function DomesticPackages() {
                     (e.currentTarget.src =
                       "https://via.placeholder.com/360x502?text=Image+Not+Found")
                   }
+                  className="cursor-pointer"
                 />
-                <p className="text-center mt-2 font-semibold">{pkg.title}</p>
               </div>
             ))}
           </div>
         )}
       </div>
-      {showPopup && (
-        <Popup
-          onClose={() => setShowPopup(false)}
-        />
-      )}
+
+      {/* Popup */}
+      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
     </section>
   );
 }

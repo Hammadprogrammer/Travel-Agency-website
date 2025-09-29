@@ -2,8 +2,9 @@
 import React, { useState, useEffect } from "react";
 import style from "./hajj-umrah.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 import { BeatLoader } from "react-spinners";
 import Popup from "@/shared-component/package-popup/popup";
 
@@ -87,30 +88,47 @@ export default function HajjPackages() {
       </h1>
 
       {isMobile ? (
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 2000, disableOnInteraction: false }}
-          spaceBetween={20}
-          slidesPerView={1.2}
-          loop={true}
-        >
-          {packages.map((pkg, index) => (
-            <SwiperSlide key={pkg.id}>
-              <div className={style.slide}>
-                <img
-                  src={pkg.imageUrl}
-                  alt={`Hajj Package ${index + 1}`}
-                  onError={(e) =>
-                    (e.currentTarget.src =
-                      "https://via.placeholder.com/360x502?text=Image+Not+Found")
-                  }
-                  onClick={() => setIsPopupOpen(true)}
-                  className="cursor-pointer"
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+        <div className="relative">
+          {/* Swiper with navigation */}
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={10}
+            slidesPerView={1}
+            centeredSlides={true}
+            loop={true}
+            navigation={{
+              prevEl: ".custom-prev",
+              nextEl: ".custom-next",
+            }}
+          >
+            {packages.map((pkg, index) => (
+              <SwiperSlide key={pkg.id}>
+                <div className={style.slide}>
+                  <img
+                    src={pkg.imageUrl}
+                    alt={`Hajj Package ${index + 1}`}
+                    onError={(e) =>
+                      (e.currentTarget.src =
+                        "https://via.placeholder.com/360x502?text=Image+Not+Found")
+                    }
+                    onClick={() => setIsPopupOpen(true)}
+                    className="cursor-pointer w-full h-auto object-contain"
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Arrows without background */}
+         <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+  ‹
+</button>
+
+<button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+  ›
+</button>
+
+        </div>
       ) : (
         <div className={style.slider}>
           {packages.map((pkg, index) => (
@@ -132,7 +150,6 @@ export default function HajjPackages() {
 
       {/* Popup */}
       {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
-      
     </div>
   );
 }

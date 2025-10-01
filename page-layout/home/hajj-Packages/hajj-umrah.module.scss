@@ -1,7 +1,7 @@
 .packageContainer {
   max-width: 1500px;
   margin: auto;
-  padding: 20px;
+  padding: 10px;
   h1 {
     font-size: 32px;
   }
@@ -22,7 +22,7 @@
 
 .slide {
   position: relative;
-  overflow: hidden;
+  overflow: hidden; 
   border-radius: 16px;
   transition: transform 0.3s ease;
   cursor: pointer;

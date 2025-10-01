@@ -21,7 +21,6 @@
     margin-bottom: 15px;
     font-weight: bold;
 
-
     @media (max-width: 530px) {
       font-size: 26px;
     }
@@ -45,15 +44,17 @@
 .cardsGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);  
-  grid-template-rows: repeat(2, auto);    
-  gap: 25px 40px;                         
+  gap: 25px 40px;
   max-width: 1200px;
   margin: 0 auto;
 
+  @media (max-width: 992px) {
+    grid-template-columns: repeat(2, 1fr); // Tablet
+  }
+
   @media (max-width: 768px) {
-    grid-template-columns: 1fr;           
-    grid-template-rows: auto;
-    gap: 20px;
+    grid-template-columns: 1fr; // Mobile
+    gap: 15px;
   }
 }
 
@@ -66,6 +67,11 @@
   align-items: center;
   transition: 0.3s ease;
   cursor: pointer;
+
+  &:hover {
+    background: rgba(14, 34, 74, 1);
+    transform: translateY(-3px);
+  }
 }
 
 .logos {
@@ -89,7 +95,6 @@
     font-size: 17px;
     margin-bottom: 5px;
     font-weight: bold;
-
   }
 
   .setting {

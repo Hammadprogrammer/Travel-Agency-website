@@ -1,14 +1,14 @@
 .peopleSection {
   width: 100%;
-  padding: 30px;
+  padding: 20px;
+ 
 
   @media (max-width: 576px) {
-    padding: 10px;
   }
 
   h3 {
     text-align: center;
-    font-size: 32px; // smaller
+    font-size: 32px;
     font-family: "Lato", sans-serif;
     color: black;
     font-weight: bold;
@@ -16,7 +16,7 @@
 
   .subHeading {
     text-align: center;
-    font-size: 18px; // smaller
+    font-size: 18px;
     font-family: "Lato", sans-serif;
     max-width: 760px;
     margin: auto;
@@ -33,71 +33,80 @@
     justify-content: center;
     gap: 20px;
     flex-wrap: wrap;
+  }
 
-    .box {
-      background-color: #0e224a;
-      flex: 1 1 300px; 
-      max-width: 380px; // smaller card width
-      min-width: 260px;
-      padding: 20px; // reduced padding
-      border-radius: 18px;
-      font-family: "Lato", sans-serif;
-      font-weight: 400;
-      color: rgb(206, 206, 206);
-      transition: 0.4s;
+  .box {
+    background-color: #0e224a;
+    flex: 1 1 300px;
+    max-width: 380px;
+    min-width: 260px;
+    padding: 20px;
+    border-radius: 18px;
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    color: rgb(206, 206, 206);
+    transition: 0.4s;
 
-      &:hover {
-        scale: 1.02;
-        transform: translateY(-6px);
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    &:hover {
+      scale: 1.02;
+      transform: translateY(-6px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+    }
+
+    .styleText {
+      font-weight: 300;
+      letter-spacing: 0.5px;
+      font-size: 15px;
+      color: #fff;
+    }
+
+    .topSection {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+
+      .margin {
+        margin-right: 8px;
+        font-size: 16px;
       }
 
-      .styleText {
-        font-weight: 300;
-        letter-spacing: 0.5px;
-        font-size: 15px; // smaller text
+      span {
+        color: #f8dd00;
+        margin-right: 4px;
+        font-size: 18px;
+      }
+    }
+
+    .bottomSection {
+      display: flex;
+      margin-top: 15px;
+      gap: 8px;
+      align-items: center;
+
+      h5 {
+        font-size: 13px;
         color: #fff;
+        margin-bottom: 2px;
+        font-weight: 400;
       }
 
-      .topSection {
-        display: flex;
-        align-items: center;
-        margin-bottom: 18px;
-
-        .margin {
-          margin-right: 8px;
-          font-size: 16px;
-        }
-
-        span {
-          color: #f8dd00;
-          margin-right: 4px;
-          font-size: 18px;
-        }
+      .small {
+        font-size: 9px;
       }
 
-      .bottomSection {
-        display: flex;
-        margin-top: 15px;
-        gap: 8px;
-        align-items: center;
-
-        h5 {
-          font-size: 13px; // smaller text
-          color: #fff;
-          margin-bottom: 2px;
-          font-weight: 400;
-        }
-
-        .small {
-          font-size: 9px; // extra small
-        }
-
-        .circleImage {
-          border-radius: 50%;
-          object-fit: cover;
-        }
+      .circleImage {
+        border-radius: 50%;
+        object-fit: cover;
       }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .boxes {
+      display: none; // hide grid on mobile
+    }
+    .box {
+      min-width: 80% !important;
     }
   }
 
@@ -107,21 +116,6 @@
     }
     .subHeading {
       font-size: 14px;
-    }
-    .boxes {
-      width: 100%;
-      gap: 12px;
-    }
-    .box {
-      flex: 1 1 100%; 
-      min-width: 100%;
-      padding: 15px; // extra compact
-    }
-    .styleText {
-      font-size: 14px;
-    }
-    .bottomSection h5 {
-      font-size: 12px;
     }
   }
 }

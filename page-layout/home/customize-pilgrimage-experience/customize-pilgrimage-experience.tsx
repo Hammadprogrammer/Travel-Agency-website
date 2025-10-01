@@ -4,10 +4,11 @@ import style from "./customize-pilgrimage-experience.module.scss";
 import Image from "next/image";
 import { FaCheck } from "react-icons/fa";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
+import { Navigation } from "swiper/modules";
 import "swiper/css";
+import "swiper/css/navigation";
 import { BeatLoader } from "react-spinners";
-import Popup from "@/shared-component/package-popup/popup"; // 👈 your form popup
+import Popup from "@/shared-component/package-popup/popup";
 
 interface ApiResponse {
   id: number;
@@ -33,17 +34,13 @@ export default function Pilgrimage() {
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [mounted, setMounted] = useState(false);
-
-  // popup state
   const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     setMounted(true);
-
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
-
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -54,8 +51,8 @@ export default function Pilgrimage() {
           "https://dashboard-rho-lake.vercel.app/api/custom-pilgrimage"
         );
         if (!res.ok) throw new Error("Failed to fetch data");
-        const json: ApiResponse[] = await res.json();
 
+        const json: ApiResponse[] = await res.json();
         const formatted: PilgrimageItem[] = json
           .filter((item) => item.isActive)
           .map((item) => ({
@@ -93,49 +90,59 @@ export default function Pilgrimage() {
   }
 
   return (
-    <section>
-      <div className={style.main}>
-        <div className={style.pilgrimageSection}>
-          <div className={style.heading}>
-            <h3>Customize Your Pilgrimage Experience</h3>
-          </div>
-          <div className={style.subHeading}>
-            <p>
-              Select your destinations, holy sites, and transportation to tailor
-              your journey
-            </p>
-          </div>
-
-          {/* Mobile Swiper */}
-          {isMobile ? (
-            <Swiper
-              modules={[Autoplay]}
-              autoplay={{ delay: 2500, disableOnInteraction: false }}
-              spaceBetween={20}
-              slidesPerView={1.5}
-              loop
-            >
-              {data.map((box) => (
-                <SwiperSlide key={box.id}>
-                  <PilgrimageBox box={box} onClick={() => setShowPopup(true)} />
-                </SwiperSlide>
-              ))}
-            </Swiper>
-          ) : (
-            <div className={style.pilgrimageContainer}>
-              {data.map((box) => (
-                <PilgrimageBox
-                  key={box.id}
-                  box={box}
-                  onClick={() => setShowPopup(true)}
-                />
-              ))}
-            </div>
-          )}
-        </div>
+    <section className={style.pilgrimageSection} id="pilgrimage">
+      <div className={style.heading}>
+        <h3>Customize Your Pilgrimage Experience</h3>
+      </div>
+      <div className={style.subHeading}>
+        <p>
+          Select your destinations, holy sites, and transportation to tailor
+          your journey
+        </p>
       </div>
 
-      {/* Popup with form */}
+      {/* ✅ Mobile Swiper */}
+      {isMobile ? (
+        <div className={style.mobileSliderWrapper}>
+          <Swiper
+            modules={[Navigation]}
+            spaceBetween={10}
+            slidesPerView={1}
+            centeredSlides
+            loop
+            navigation={{
+              prevEl: ".custom-prev",
+              nextEl: ".custom-next",
+            }}
+          >
+            {data.map((box) => (
+              <SwiperSlide key={box.id}>
+                <PilgrimageBox box={box} onClick={() => setShowPopup(true)} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* Custom Prev / Next */}
+          <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+            ‹
+          </button>
+          <button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+            ›
+          </button>
+        </div>
+      ) : (
+        <div className={style.pilgrimageContainer}>
+          {data.map((box) => (
+            <PilgrimageBox
+              key={box.id}
+              box={box}
+              onClick={() => setShowPopup(true)}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* ✅ Popup */}
       {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </section>
   );
@@ -149,7 +156,7 @@ function PilgrimageBox({
   onClick: () => void;
 }) {
   return (
-    <div className={style.boxes} onClick={onClick} style={{ cursor: "pointer" }}>
+    <div className={style.boxes} onClick={onClick}>
       <Image
         src={box.imageUrl || "/placeholder-400x250.png"}
         alt={box.title}

@@ -4,9 +4,9 @@ import style from "./why-choose-us.module.scss";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
+import "swiper/css/navigation";
 import "swiper/css/autoplay";
-import { Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 
 interface ChooseUsItem {
   id: number;
@@ -37,9 +37,7 @@ const ChooseUs = () => {
 
     fetchChooseUs();
 
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 500);
-    };
+    const handleResize = () => setIsMobile(window.innerWidth <= 500);
     handleResize();
     window.addEventListener("resize", handleResize);
 
@@ -58,40 +56,52 @@ const ChooseUs = () => {
         </p>
 
         {isMobile ? (
-          <Swiper
-            className={style.mobileSwiper}
-            spaceBetween={15}
-            slidesPerView={1.2}
-            pagination={{ clickable: true }}
-            autoplay={{
-              delay: 3000,
-              disableOnInteraction: false,
-            }}
-            modules={[Pagination, Autoplay]}
-          >
-            {items.map((item, index) => (
-              <SwiperSlide key={item.id}>
-                <div
-                  className={`${style.box} ${
-                    index === 0 ? style.color : index === 1 ? style.color1 : ""
-                  }`}
-                >
-                  <div className={style.imgWrap}>
-                    <Image
-                      src={item.imageUrl}
-                      alt={item.title}
-                      width={60}
-                      height={60}
-                    />
+          <div className="relative">
+            <Swiper
+              modules={[Navigation]}
+              spaceBetween={15}
+              slidesPerView={1}
+              centeredSlides={true}
+              loop={true}
+              navigation={{
+                prevEl: ".choose-prev",
+                nextEl: ".choose-next",
+              }}
+
+              className={style.mobileSwiper}
+            >
+              {items.map((item, index) => (
+                <SwiperSlide key={item.id}>
+                  <div
+                    className={`${style.box} ${
+                      index === 0 ? style.color : index === 1 ? style.color1 : ""
+                    }`}
+                  >
+                    <div className={style.imgWrap}>
+                      <Image
+                        src={item.imageUrl}
+                        alt={item.title}
+                        width={60}
+                        height={60}
+                      />
+                    </div>
+                    <div className={style.chooseUsContent}>
+                      <h4>{item.title}</h4>
+                      <p>{item.description}</p>
+                    </div>
                   </div>
-                  <div className={style.chooseUsContent}>
-                    <h4>{item.title}</h4>
-                    <p>{item.description}</p>
-                  </div>
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+
+            {/* Custom Arrows */}
+            <button className="choose-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+              ‹
+            </button>
+            <button className="choose-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+              ›
+            </button>
+          </div>
         ) : (
           <div className={style.chooseContainer}>
             {items.map((item, index) => (

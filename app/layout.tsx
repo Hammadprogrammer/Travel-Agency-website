@@ -1,22 +1,27 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import Navbar from '../shared-component/navbar/header'
-import Footer from "../shared-component/footer/footer"
+import { Lato, Open_Sans } from "next/font/google";
+import Navbar from '../shared-component/navbar/header';
+import Footer from "../shared-component/footer/footer";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Open Sans font
+const openSans = Open_Sans({
+  variable: "--font-open-sans",
   subsets: ["latin"],
+  weight: ["400", "600", "700"], // jo weights chahiye wo likh do
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Lato font
+const lato = Lato({
+  variable: "--font-lato",
   subsets: ["latin"],
+  weight: ["400", "700"], // optional weights
 });
 
 export const metadata: Metadata = {
   title: "Al-Muallim",
-  description: "Best travel agency offering Umrah, Hajj, and international tour packages. Trusted services, affordable prices & hassle-free travel experience.",
+  description:
+    "Best travel agency offering Umrah, Hajj, and international tour packages. Trusted services, affordable prices & hassle-free travel experience.",
 };
 
 export default function RootLayout({
@@ -27,11 +32,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${openSans.variable} ${lato.variable} antialiased`}
       >
-        <Navbar/>
+        <Navbar />
         {children}
-        <Footer/>
+        <Footer />
       </body>
     </html>
   );

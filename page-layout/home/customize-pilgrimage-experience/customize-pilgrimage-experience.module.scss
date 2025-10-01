@@ -1,57 +1,40 @@
-.main {
+.pilgrimageSection {
   max-width: 1400px;
   margin: auto;
-
-
-
-.pilgrimageSection {
-  width: 100%;
   margin-top: 70px;
   padding: 10px;
-  margin: auto;
 
   .heading {
-    margin-top: 50px;
     text-align: center;
     font-size: 36px;
-    font-family: "Lato", sans-serif;
-    color: black;
     font-weight: bold;
+    color: black;
 
     @media (max-width: 991px) {
-        margin-top: 0px;
       font-size: 28px;
     }
-
     @media (max-width: 576px) {
       font-size: 20px;
-      margin-top: 20px;
-      
     }
   }
 
   .subHeading {
     text-align: center;
-    font-size: 2  1px;
-    font-family: "Lato", sans-serif;
+    font-size: 20px;
     max-width: 650px;
-    margin: auto;
-    margin-top: 12px;
+    margin: 12px auto 30px auto;
     color: black;
-    letter-spacing: 1px;
     font-weight: 300;
 
     @media (max-width: 991px) {
       font-size: 18px;
     }
-
     @media (max-width: 576px) {
       font-size: 14px;
     }
   }
 
   .pilgrimageContainer {
-    margin-top: 50px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 25px;
@@ -59,8 +42,7 @@
     @media (max-width: 1200px) {
       grid-template-columns: repeat(2, 1fr);
     }
-
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
       grid-template-columns: 1fr;
     }
   }
@@ -68,99 +50,78 @@
   .boxes {
     background-color: #0e224a;
     border-radius: 12px;
-    transition: 0.4s;
     overflow: hidden;
+    transition: 0.4s;
     cursor: pointer;
 
     img {
       width: 100%;
-      height: auto;
       display: block;
     }
 
     h5 {
       color: white;
-      font-family: "Lato", sans-serif;
       text-align: center;
       padding: 12px;
-      font-size: 22px; 
+      font-size: 22px;
       font-weight: bold;
-
-      @media (max-width: 991px) {
-        font-size: 18px;
-      }
 
       @media (max-width: 576px) {
         font-size: 16px;
       }
     }
 
-    ul {
-      list-style-type: none;
-      padding: 0;
-
-      li {
-        margin-bottom: 18px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-
-        @media (max-width: 991px) {
-          margin-bottom: 12px;
-        }
-        @media (max-width: 767px) {
-          margin-bottom: 8px;
-        }
-
-        &:last-child {
-          margin: 0;
-        }
-
-        span {
-          color: white;
-          font-family: "Lato", sans-serif;
-          font-size: 20px; // ✅ text bigger
-
-          @media (max-width: 991px) {
-            font-size: 16px;
-          }
-          @media (max-width: 767px) {
-            font-size: 14px;
-          }
-        }
-      }
-    }
-
     .description {
-      margin: 10px 0px 0px 20px;
+      margin: 10px 20px;
       padding-bottom: 15px;
 
-      @media (max-width: 767px) {
-        margin: 8px 0px 0px 10px;
+      ul {
+        list-style: none;
+        padding: 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          margin-bottom: 10px;
+
+          span {
+            color: white;
+            font-size: 16px;
+
+            @media (max-width: 767px) {
+              font-size: 14px;
+            }
+          }
+        }
       }
     }
   }
 }
 
-/* ✅ check icon wrapper (smaller size) */
 .iconWrapper {
   width: 18px;
   height: 18px;
   border-radius: 50%;
   background: #c29a51;
-  backdrop-filter: blur(6px);
   display: flex;
-  justify-content: center;
   align-items: center;
-
-  @media (max-width: 767px) {
-    width: 15px;
-    height: 15px;
-  }
-
-  svg {
-    font-size: 10px; // ✅ small check icon
-    color: black;
-  }
+  justify-content: center;
 }
+
+.mobileSliderWrapper {
+  position: relative;
+
+  .custom-prev,
+  .custom-next {
+    color: #fff;
+    background: #c29a51;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
 }

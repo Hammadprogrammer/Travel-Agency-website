@@ -8,8 +8,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* 👇 Yahan Lato & Open Sans bind kar do */
+  --font-sans: var(--font-open-sans); /* Body text */
+  --font-heading: var(--font-lato);   /* Headings */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -20,9 +22,6 @@
 }
 
 body {
-  /* background: var(--background); */
   color: var(--foreground);
-    overscroll-behavior-y: none;
-
-  /* overscroll-behavior-block: none; */
+  overscroll-behavior-y: none;
 }

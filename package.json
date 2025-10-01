@@ -10,6 +10,8 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@fontsource/lato": "^5.2.7",
+    "@fontsource/open-sans": "^5.2.7",
     "@fortawesome/fontawesome-free": "^7.0.0",
     "@fortawesome/free-brands-svg-icons": "^7.0.0",
     "@fortawesome/free-solid-svg-icons": "^7.0.0",

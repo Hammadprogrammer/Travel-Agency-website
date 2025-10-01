@@ -2,9 +2,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import style from "./umrah.module.scss";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay } from "swiper/modules";
-import "swiper/css";
 import { BeatLoader } from "react-spinners";
 
 interface ServiceImage {
@@ -27,7 +24,6 @@ export default function UmrahServices() {
   const [hero, setHero] = useState<UmrahService | null>(null);
   const [cards, setCards] = useState<UmrahService[]>([]);
   const [loading, setLoading] = useState(true);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     async function fetchServices() {
@@ -42,12 +38,14 @@ export default function UmrahServices() {
         if (Array.isArray(data)) {
           const active = data.filter((srv) => srv.isActive);
 
-          // hero service (jisme heroImage hai)
+          // hero service
           const heroData = active.find((srv) => srv.heroImage);
           setHero(heroData || null);
 
-          // card services (jisme images array hai)
-          const cardData = active.filter((srv) => srv.serviceImages?.length > 0);
+          // cards
+          const cardData = active.filter(
+            (srv) => srv.serviceImages?.length > 0
+          );
           setCards(cardData);
         }
       } catch (err) {
@@ -60,13 +58,6 @@ export default function UmrahServices() {
     }
 
     fetchServices();
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 768);
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
   }, []);
 
   if (loading) {
@@ -95,7 +86,7 @@ export default function UmrahServices() {
       className={style.servicesSection}
       style={{
         backgroundImage: `
-          linear-gradient(rgba(62,88,215 / 60%), rgba(0,0,0,0.6)),
+          linear-gradient(rgba(62,88,215,0.6), rgba(0,0,0,0.6)),
           url(${hero.heroImage})
         `,
         backgroundSize: "cover",
@@ -105,53 +96,24 @@ export default function UmrahServices() {
       <h3>{hero.title}</h3>
       <p className={style.subHeading}>{hero.description}</p>
 
-      {isMobile ? (
-        <Swiper
-          modules={[Autoplay]}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          spaceBetween={20}
-          slidesPerView={1.2}
-          loop
-        >
-          {cards.map((service) => (
-            <SwiperSlide key={service.id}>
-              <div className={style.contentBox}>
-                <div className={style.logos}>
-                  <Image
-                    src={service.serviceImages[0].url}
-                    width={56}
-                    height={56}
-                    alt={service.title}
-                  />
-                </div>
-                <div className={style.boxContent}>
-                  <h5>{service.title}</h5>
-                  <p className={style.setting}>{service.description}</p>
-                </div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      ) : (
-        <div className={style.cardsGrid}>
-          {cards.map((service) => (
-            <div key={service.id} className={style.contentBox}>
-              <div className={style.logos}>
-                <Image
-                  src={service.serviceImages[0].url}
-                  width={56}
-                  height={56}
-                  alt={service.title}
-                />
-              </div>
-              <div className={style.boxContent}>
-                <h5>{service.title}</h5>
-                <p className={style.setting}>{service.description}</p>
-              </div>
+      <div className={style.cardsGrid}>
+        {cards.map((service) => (
+          <div key={service.id} className={style.contentBox}>
+            <div className={style.logos}>
+              <Image
+                src={service.serviceImages[0].url}
+                width={56}
+                height={56}
+                alt={service.title}
+              />
             </div>
-          ))}
-        </div>
-      )}
+            <div className={style.boxContent}>
+              <h5>{service.title}</h5>
+              <p className={style.setting}>{service.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 }

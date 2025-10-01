@@ -9,7 +9,6 @@
   .bottomOne {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
@@ -18,11 +17,10 @@
     column-gap: 85px;
 
     .box {
-      font-size: 14px;
+      // font-size: 14px;
       line-height: 22px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
 
       p {
         width: 250px;
@@ -200,4 +198,9 @@
       }
     }
   }
+}
+
+
+.quick{
+  font-size: 50px;
 }

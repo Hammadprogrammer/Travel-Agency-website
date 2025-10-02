@@ -22,8 +22,6 @@
 
 }
 
-
-
 .headerContent {
   position: relative;
   z-index: 1;
@@ -96,7 +94,7 @@
 
 .btnBox {
   @media (max-width: 768px) {
-    width: 90%; // 👈 mobile me dono buttons same width
+    width: 90%; 
   }
 }
 
@@ -175,7 +173,6 @@
 }
 
 
-/* Text container */
 .heroTextMain {
   display: flex;
   justify-content: center;

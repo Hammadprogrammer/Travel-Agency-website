@@ -69,7 +69,9 @@ const Footer = () => {
 
         {/* Bottom Part: Copyright & Social */}
         <div className={style.bottomTwo}>
-          <p>Copyright Ⓒ 2025 ABC Travel. All Rights Reserved By ABC</p>
+        <p style={{ textAlign: "center" }}>
+          Copyright Ⓒ 2025 ABC Travel. All Rights Reserved By ABC
+        </p>
           <div className={style.social}>
             <a href="#"><FaFacebookF /></a>
             <a href="#"><FaInstagram /></a>

@@ -6,201 +6,233 @@
 }
 
 .lastSection {
+  
   .bottomOne {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    display: flex;
+    justify-content: space-between; 
+    column-gap: 40px;
     max-width: 1400px;
     margin: 0 auto;
     padding: 40px 20px;
-    display: flex;
-    justify-content: center;
-    column-gap: 85px;
-
-    .box {
-      // font-size: 14px;
-      line-height: 22px;
-      display: flex;
-      flex-direction: column;
-
-      p {
-        width: 250px;
-      }
-
-      h4 {
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 12px;
-        // text-transform: uppercase;
-      }
-
-      ul {
-        flex-direction: column;
-        gap: 13px;
-        width: 146px;
-        padding: 0;
-        list-style: none;
-        display: flex;
-
-        li a {
-          color: white;
-          text-decoration: none;
-          font-size: 14px;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
-      }
-
-      .contactSection {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        .callSection {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-
-          a {
-            color: white;
-            font-size: 11px;
-            text-decoration: none;
-          }
-        }
-      }
+    @media screen and (max-width: 1250px) {
+      column-gap: 0px;
+       padding: 40px 0px;
     }
+    @media screen and (max-width: 998px) {
 
-    .logoBox {
-      max-width: 360px;
-      p {
-        font-size: 13px;
-        margin-top: 10px;
-        text-align: start;
-        width: 282px;
-      }
-    }
-
-    .bottomGroup {
-      display: contents; // default: distribute 3 boxes normally
+       padding: 40px 20px;
     }
   }
+  
+
+  .box {
+    line-height: 22px;
+    display: flex;
+    flex-direction: column;
+    min-width: 150px;
+  }
+
+  .logoBox {
+    max-width: 350px; 
+    
+    .logoDescription {
+      font-size: 14px;
+      margin-top: 10px;
+      text-align: start;
+      width: auto; 
+      line-height: 1.6;
+    }
+  }
+
+  .bottomGroup {
+    display: flex;
+    flex-grow: 1;
+    // justify-content: space-between;
+    gap: 80px; 
+    margin-left: 50px;
+    @media screen and (max-width: 1250px) {
+      gap: 0px;
+      
+    }
+  }
+
+  
   .bottomTwo {
     background: #202020;
     padding: 15px 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: wrap; 
+    @media screen and (max-width: 600px) {
+     display: none;
+      
+    }
+
     p {
       font-size: 14px;
       margin: 0;
-      text-align: center;
-      flex: 1;
+      text-align: left; 
+      flex-grow: 1;
     }
+
     .social {
       display: flex;
-      gap: 12px;
+      gap: 15px;
       font-size: 20px;
-    }
-  }
-}
-/* --- Responsive --- */
-
-/* Tablet: 2x2 grid */
-@media (max-width: 992px) {
-  .lastSection {
-    .bottomOne {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-}
-
-/* Mobile: logo top, 3 boxes row-wise equal space */
-@media (max-width: 576px) {
-  .lastSection {
-    .bottomOne {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-
-      .logoBox {
-        text-align: center;
-      }
-
-      ul {
-        list-style: none;
-        padding: 0;
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-        width: 98px;
-      }
-
-      .bottomGroup {
-        display: flex;
-        gap: 30px;
-        margin-left: 20px;
-
-        .box {
-          flex: 1;
-          font-size: 12px;
-          margin-left: -14px;
-          max-width: 96px;
 
 
-
-          h4 {
-            font-size: 14px;
-            width: 120px;
-          }
-
-          a,
-          li a {
-            display: flex;
-            flex-direction: column;
-            font-size: 10px;
-
-          }
-
-          p {
-            max-width: 96px;
-            font-size: 10px;
-          }
-
-          .callSection {
-            font-size: 10px;
-
-                    a {
-            color: white;
-            font-size: 6px;
-            text-decoration: none;
-          }
-
-          }
+      a {
+        color: white;
+        &:hover {
+          color: lightgray;
         }
       }
     }
+  }
+}
 
-    .bottomTwo {
-      flex-direction: column;
-      align-items: flex-end;
-      text-align: end;
-      gap: 10px;
-      background-color: black;
+.footerHeading {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px; 
+}
 
-      p {
-        display: none;
+.footerLink {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  line-height: 1.8; 
+  display: inline-block; 
+  padding: 2px 0; 
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.officeContentWrapper {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start; 
+  margin-top: 10px;
+  max-width: 250px;
+
+  .officeIcon {
+    font-size: 30px;
+    position: relative;
+    bottom: 4px;
+  }
+
+  .officeContent {
+    font-size: 14px;
+    line-height: 1.6;
+    margin: 0;
+  }
+}
+
+.callSection{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 10px;
+
+
+  a {
+    font-size: 14px;
+    color: white;
+    text-decoration: none;
+    line-height: 1; 
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+
+@media (max-width: 992px) {
+  .lastSection {
+    .bottomOne {
+      flex-wrap: wrap; 
+      justify-content: flex-start; 
+      gap: 40px;
+
+      .logoBox {
+        max-width: 100%; 
       }
 
-      .social {
-        justify-content: center;
+      .bottomGroup {
+        flex-wrap: wrap;
+        width: 100%; 
+        gap: 40px; 
+        justify-content: space-between;
+        margin-left: 0px;
+      }
+      
+      .box {
+        flex: 1 1 200px; 
+        min-width: unset; 
+      }
+
+
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .lastSection {
+    .bottomOne {
+      gap: 40px;
+
+      .logoBox {
+        max-width: 100%; 
+      }
+
+      .bottomGroup {
+        flex-wrap: wrap;
+        width: 100%; 
+        gap: 0px; 
+        justify-content: space-between;
+      }
+      
+      .box {
+        flex: 1 1 200px; 
+        min-width: 100px; 
+      }
+
+
+    }
+  }
+}
+@media (max-width: 567px) {
+  .lastSection {
+    .bottomOne {
+      gap: 30px;
+
+      .logoBox {
+        max-width: 100%;
+      }
+      .officeIcon {
+    font-size: 40px;
+    margin-bottom: 100px;
+      position: relative;
+    bottom: 9px;
+  } 
+
+      .bottomGroup {
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 0px;
+        justify-content: space-between;
+      }
+
+      .box {
+        flex: 1 1 150px; 
+        min-width: 80px; 
       }
     }
   }
 }
 
 
-.quick{
-  font-size: 50px;
-}

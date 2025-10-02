@@ -14,8 +14,8 @@
   position: relative;
   top: 0px;
   left: 0;
-  padding: 50px;
-  padding-bottom: 100px;
+  padding-top: 80px;
+  padding-bottom: 10px;
   @media (max-width: 1200px) {
      padding-top: 40px;
   }
@@ -27,16 +27,16 @@
 .headerContent {
   position: relative;
   z-index: 1;
-  padding: 60 0 90 0;
+  padding: 60px 0 90px 0;
   max-width: 1500px;
   margin: auto;
 
   @media (max-width: 768px) {
-     padding: 70 30 100 30;
+     padding: 70px 30px 100px 30px;
   }
 
   @media (max-width: 576px) {
-    padding: 50 30 80 30;
+    padding: 50px 30px 80px 30px;
   }
 
   h1 {

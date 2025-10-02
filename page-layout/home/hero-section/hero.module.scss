@@ -12,7 +12,7 @@
     ),
     url("../../../public/homebackground.png") no-repeat center/cover;
   position: relative;
-  top: 0PX;
+  top: 0px;
   left: 0;
   padding-top: 80px;
   @media (max-width: 1200px) {
@@ -20,6 +20,8 @@
   }
 
 }
+
+
 
 .headerContent {
   position: relative;

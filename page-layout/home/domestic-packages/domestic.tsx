@@ -24,6 +24,7 @@ export default function DomesticPackages() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  // ✅ Fetch packages
   useEffect(() => {
     async function fetchPackages() {
       try {
@@ -31,7 +32,6 @@ export default function DomesticPackages() {
         if (!res.ok) throw new Error("Failed to fetch domestic packages");
 
         const data: DomesticPackage[] = await res.json();
-
         const categoryOrder = ["economic", "standard", "premium"];
 
         const filteredAndSortedData = Array.isArray(data)
@@ -56,11 +56,29 @@ export default function DomesticPackages() {
     fetchPackages();
   }, []);
 
+  // ✅ Detect mobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // ✅ Auto scroll when ?scroll=destinations
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const params = new URLSearchParams(window.location.search);
+    const scrollTarget = params.get("scroll");
+
+    if (scrollTarget === "destinations") {
+      const section = document.querySelector(".destination-section");
+      if (section) {
+        setTimeout(() => {
+          section.scrollIntoView({ behavior: "smooth" });
+        }, 800);
+      }
+    }
   }, []);
 
   if (loading) {
@@ -82,9 +100,10 @@ export default function DomesticPackages() {
     );
 
   return (
-    <section className={style.whyChooseUsSection} id="destinations">
+    // ✅ Add destination-section class here for scroll targeting
+    <section className={`${style.whyChooseUsSection} destination-section`}>
       <div className={style.container}>
-        <h2 className={style.header} >Domestic Packages</h2>
+        <h2 className={style.header}>Domestic Packages</h2>
 
         {isMobile ? (
           <div className="relative">

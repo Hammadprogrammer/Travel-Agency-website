@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lato, Open_Sans } from "next/font/google";
-import Navbar from '../shared-component/navbar/header';
+import Navbar from '../shared-component/navbar/header.jsx';
 import Footer from "../shared-component/footer/footer";
 import "./globals.css";
 

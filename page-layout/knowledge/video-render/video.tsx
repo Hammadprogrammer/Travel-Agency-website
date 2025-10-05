@@ -43,7 +43,7 @@ export default function VideoGallery() {
 
   return (
     <div className={style.container}>
-      <h1 className={style.heading}>🎥 Video Gallery</h1>
+      <h1 className={style.heading}> Videos</h1>
 
       {videos.length === 0 ? (
         <p className={style.noVideos}>No videos available yet.</p>

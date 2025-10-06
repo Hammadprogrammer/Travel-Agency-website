@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-import Popup from "@/shared-component/package-popup/popup"; 
+import Popup from "@/shared-component/package-popup/popup";
 
 interface InternationalData {
   id: number;
@@ -17,22 +17,22 @@ interface InternationalData {
 }
 
 interface SliderTour {
-    src: string;
-    title: string;
-    description: string;
+  src: string;
+  title: string;
+  description: string;
 }
 
 const InternationalTours = () => {
-  const [tours, setTours] = useState<SliderTour[]>([]); // Use the new interface
+  const [tours, setTours] = useState<SliderTour[]>([]);
   const [sectionData, setSectionData] = useState<InternationalData | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const fetchedRef = useRef(false);
-  
-  // 2. Add state for popup
-  const [showPopup, setShowPopup] = useState(false);
-  const [selectedTour, setSelectedTour] = useState<SliderTour | null>(null); // Use the new interface
 
+  const [showPopup, setShowPopup] = useState(false);
+  const [selectedTour, setSelectedTour] = useState<SliderTour | null>(null);
+
+  // Fetch international tours once
   useEffect(() => {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
@@ -45,13 +45,7 @@ const InternationalTours = () => {
         const data: InternationalData[] = await res.json();
 
         if (Array.isArray(data) && data.length > 0) {
-          setSectionData({
-            id: data[0].id,
-            title: data[0].title,
-            description: data[0].description,
-            backgroundUrl: data[0].backgroundUrl,
-            sliderImages: data[0].sliderImages,
-          });
+          setSectionData(data[0]);
 
           const formatted: SliderTour[] = data
             .filter((tour) => tour.sliderImages.length > 0)
@@ -69,13 +63,29 @@ const InternationalTours = () => {
 
     fetchTours();
   }, []);
-  
+
+  // Check for mobile view
   useEffect(() => {
-    const checkScreen = () => setIsMobile(window.innerWidth < 1200);
-    checkScreen();
-    window.addEventListener("resize", checkScreen);
-    return () => window.removeEventListener("resize", checkScreen);
+    const handleResize = () => setIsMobile(window.innerWidth < 1200);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
   }, []);
+
+  // Smooth scroll on load if hash exists (dynamic like Umrah)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth" });
+          }, 100); // slight delay for render
+        }
+      }
+    }
+  }, [sectionData]);
 
   const visibleSlides = 3;
 
@@ -91,7 +101,6 @@ const InternationalTours = () => {
     );
   };
 
-  // 4. Click handler to open the popup
   const handleSlideClick = (tour: SliderTour) => {
     setSelectedTour(tour);
     setShowPopup(true);
@@ -99,7 +108,8 @@ const InternationalTours = () => {
 
   return (
     <section
-      className={style.internationalTourSection} id="holiday"
+      className={style.internationalTourSection}
+      id="holiday"
       style={{
         backgroundImage: sectionData
           ? `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${sectionData.backgroundUrl})`
@@ -107,7 +117,6 @@ const InternationalTours = () => {
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      
     >
       <div className={style.contentSection}>
         <h3>{sectionData?.title}</h3>
@@ -127,9 +136,9 @@ const InternationalTours = () => {
           >
             {tours.map((tour, index) => (
               <SwiperSlide key={index}>
-                <div 
-                    className={style.slide}
-                    onClick={() => handleSlideClick(tour)} // Add click handler
+                <div
+                  className={style.slide}
+                  onClick={() => handleSlideClick(tour)}
                 >
                   <Image
                     src={tour.src}
@@ -163,10 +172,10 @@ const InternationalTours = () => {
                 }}
               >
                 {tours.map((tour, index) => (
-                  <div 
-                    key={index} 
+                  <div
+                    key={index}
                     className={style.slide}
-                    onClick={() => handleSlideClick(tour)} // Add click handler
+                    onClick={() => handleSlideClick(tour)}
                   >
                     <Image
                       src={tour.src}
@@ -192,12 +201,7 @@ const InternationalTours = () => {
         )}
       </div>
 
-      {/* 5. Conditionally render the Popup */}
-      {showPopup && (
-        <Popup
-          onClose={() => setShowPopup(false)}
-        />
-      )}
+      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
     </section>
   );
 };

@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { BeatLoader } from "react-spinners";
 import Popup from "@/shared-component/package-popup/popup";
+import { usePathname, useSearchParams } from "next/navigation";
 
 interface UmrahPackage {
   id: number;
@@ -23,6 +24,9 @@ export default function UmrahPackages() {
   const [loading, setLoading] = useState<boolean>(true);
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     async function fetchPackages() {
@@ -65,6 +69,21 @@ export default function UmrahPackages() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // Smooth scroll on load if hash exists
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth" });
+          }, 100); // slight delay to wait for render
+        }
+      }
+    }
+  }, [packages]);
+
   if (loading) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
@@ -101,7 +120,7 @@ export default function UmrahPackages() {
                 nextEl: ".custom-next",
               }}
             >
-              {packages.map((pkg, index) => (
+              {packages.map((pkg) => (
                 <SwiperSlide key={pkg.id}>
                   <div
                     className={style.slide}
@@ -121,11 +140,9 @@ export default function UmrahPackages() {
               ))}
             </Swiper>
 
-            {/* Left Arrow */}
             <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
               ‹
             </button>
-            {/* Right Arrow */}
             <button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
               ›
             </button>
@@ -153,7 +170,6 @@ export default function UmrahPackages() {
         )}
       </div>
 
-      {/* Popup */}
       {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
     </section>
   );

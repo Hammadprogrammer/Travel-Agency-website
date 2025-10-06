@@ -1,18 +1,33 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import style from "./footer.module.scss";
 import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt } from "react-icons/fa";
 import Image from "next/image";
-import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import Popup from "@/shared-component/package-popup/popup";
 
 const Footer = () => {
+  const router = useRouter();
+  const pathname = usePathname();
+
+  // State to open Contact Popup
+  const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
+
+  const handleScroll = (id: string) => {
+    if (pathname === "/") {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } else {
+      router.push(`/#${id}`);
+    }
+  };
+
   return (
     <footer className={style.footer}>
       <div className={style.lastSection}>
-        {/* Top Part: Logo, Links, Address, Contact */}
         <div className={style.bottomOne}>
-          
-          {/* Logo & Description */}
           <div className={`${style.box} ${style.logoBox}`}>
             <Image src="/logo.png" alt="logo" width={80} height={40} />
             <p className={style.logoDescription}>
@@ -24,54 +39,67 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links, Offices, Contact */}
           <div className={style.bottomGroup}>
-            
-            {/* Quick Links */}
             <div className={style.box}>
               <h4 className={style.footerHeading}>Quick Links</h4>
               <ul>
-                <li><Link className={style.footerLink} href="/about">About Us</Link></li>
-                <li><Link className={style.footerLink} href="#umrah">Umrah Packages</Link></li>
-                <li><Link className={style.footerLink} href="#international">International Tour</Link></li>
-                <li><Link className={style.footerLink} href="/contact">Contact Us</Link></li>
+                <li>
+                  <button className={style.footerLink} onClick={() => router.push("/about")}>
+                    About Us
+                  </button>
+                </li>
+                <li>
+                  <button className={style.footerLink} onClick={() => handleScroll("umrah")}>
+                    Umrah Packages
+                  </button>
+                </li>
+                <li>
+                  <button className={style.footerLink} onClick={() => handleScroll("holiday")}>
+                    International Tour
+                  </button>
+                </li>
+                <li>
+                  <button className={style.footerLink} onClick={() => setIsContactPopupOpen(true)}>
+                    Contact Us
+                  </button>
+                </li>
               </ul>
             </div>
 
-            {/* Offices */}
             <div className={`${style.box} ${style.officesBox}`}>
               <h4 className={style.footerHeading}>Office Address</h4>
               <div className={style.officeContentWrapper}>
                 <FaMapMarkerAlt className={style.officeIcon} />
                 <p className={style.officeContent}>
-                  Office # 58, 4th Floor, RJ Mall, Main Rashid Minhas Road, Karachi., Karachi, Pakistan
+                  Office # 58, 4th Floor, RJ Mall, Main Rashid Minhas Road, Karachi, Pakistan
                 </p>
               </div>
             </div>
 
-            {/* Contact Info */}
             <div className={style.box}>
               <h4 className={style.footerHeading}>Contact Info</h4>
               <div className={style.contactSection}>
                 <div className={style.callSection}>
-                  <FaPhoneAlt className={style.icon} /> <a className={style.footerLink} href="tel:+03213110100">0321 3110100</a>
+                  <FaPhoneAlt className={style.icon} /> 
+                  <a className={style.footerLink} href="tel:+03213110100">0321 3110100</a>
                 </div>
                 <div className={style.callSection}>
-                  <FaWhatsapp className={style.icon}/> <a className={style.footerLink} href="https://wa.me/92228254984" target="_blank">+92228254984</a>
+                  <FaWhatsapp className={style.icon}/> 
+                  <a className={style.footerLink} href="https://wa.me/92228254984" target="_blank">+92228254984</a>
                 </div>
                 <div className={style.callSection}>
-                  <FaEnvelope className={style.icon}/> <a className={style.footerLink} href="mailto:almuallimtravels@gmail.com">almuallimtravels@gmail.com</a>
+                  <FaEnvelope className={style.icon}/> 
+                  <a className={style.footerLink} onClick={() => setIsContactPopupOpen(true)}>almuallimtravels@gmail.com</a>
                 </div>
               </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Part: Copyright & Social */}
         <div className={style.bottomTwo}>
-        <p style={{ textAlign: "center" }}>
-          Copyright Ⓒ 2025 ABC Travel. All Rights Reserved By ABC
-        </p>
+          <p style={{ textAlign: "center" }}>
+            Copyright Ⓒ 2025 ABC Travel. All Rights Reserved By ABC
+          </p>
           <div className={style.social}>
             <a href="#"><FaFacebookF /></a>
             <a href="#"><FaInstagram /></a>
@@ -79,6 +107,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+
+      {/* Contact Popup */}
+      {isContactPopupOpen && <Popup onClose={() => setIsContactPopupOpen(false)} />}
     </footer>
   );
 };

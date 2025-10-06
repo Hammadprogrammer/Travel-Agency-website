@@ -12,7 +12,7 @@ const HeaderSection: React.FC = () => {
         We are dedicated to making every Hajj and Umrah journey a seamless,
         spiritual, and stress-free experience. With years of trusted service and
         a commitment to excellence, our team takes care of every detail—from
-        travel arrangements to personalized guidance—so that you can focus
+        travel arrangements to personalized guidance so that you can focus
         entirely on your faith. Our mission is to provide comfort, reliability,
         and peace of mind at every step of your sacred journey.
       </p>

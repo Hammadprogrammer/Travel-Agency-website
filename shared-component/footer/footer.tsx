@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import style from "./footer.module.scss";
-import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt } from "react-icons/fa";
+import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter, FaMapMarkerAlt, FaYoutube } from "react-icons/fa";
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Popup from "@/shared-component/package-popup/popup";
@@ -10,7 +10,6 @@ const Footer = () => {
   const router = useRouter();
   const pathname = usePathname();
 
-  // State to open Contact Popup
   const [isContactPopupOpen, setIsContactPopupOpen] = useState(false);
 
   const handleScroll = (id: string) => {
@@ -101,9 +100,9 @@ const Footer = () => {
             Copyright Ⓒ 2025 ABC Travel. All Rights Reserved By ABC
           </p>
           <div className={style.social}>
-            <a href="#"><FaFacebookF /></a>
-            <a href="#"><FaInstagram /></a>
-            <a href="#"><FaTwitter /></a>
+            <a href="https://www.facebook.com/Almuallimtravels/"><FaFacebookF /></a>
+            <a href="https://www.instagram.com/almuallimtravels/#"><FaInstagram /></a>
+            <a href="https://www.youtube.com/@almuallimtravels"><FaYoutube /></a>
           </div>
         </div>
       </div>

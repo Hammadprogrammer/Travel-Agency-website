@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import style from "./hero.module.scss";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import Link from "next/link";
-import Popup from "@/shared-component/package-popup/popup"; // 👈 import Popup
+import Popup from "@/shared-component/package-popup/popup"; 
+import { FaFacebookF, FaInstagram, FaYoutube } from "react-icons/fa";
 
 const Hero = () => {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
@@ -43,14 +44,12 @@ const Hero = () => {
   </div>
 </div>
 
-
-
       </div>
 
       <div className={style.socialIcons}>
-        <i className="fab fa-facebook-f"></i>
-        <i className="fab fa-instagram"></i>
-        <i className="fab fa-twitter"></i>
+            <a href="https://www.facebook.com/Almuallimtravels/"><FaFacebookF /></a>
+            <a href="https://www.instagram.com/almuallimtravels/#"><FaInstagram /></a>
+            <a href="https://www.youtube.com/@almuallimtravels"><FaYoutube /></a>
       </div>
 
       {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}

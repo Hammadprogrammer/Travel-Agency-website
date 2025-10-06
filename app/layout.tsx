@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lato, Open_Sans } from "next/font/google";
-import Navbar from '../shared-component/navbar/header.jsx';
+import Navbar from '../shared-component/navbar/header';
 import Footer from "../shared-component/footer/footer";
 import "./globals.css";
 
@@ -8,14 +8,14 @@ import "./globals.css";
 const openSans = Open_Sans({
   variable: "--font-open-sans",
   subsets: ["latin"],
-  weight: ["400", "600", "700"], // jo weights chahiye wo likh do
+  weight: ["400", "600", "700"],
 });
 
 // Lato font
 const lato = Lato({
   variable: "--font-lato",
   subsets: ["latin"],
-  weight: ["400", "700"], // optional weights
+  weight: ["400", "700"], 
 });
 
 export const metadata: Metadata = {

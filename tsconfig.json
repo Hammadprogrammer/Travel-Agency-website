@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "page-layout/home/umrah-Packages/umrah.tsx", "page-layout/home/customize-pilgrimage-experience/customize-pilgrimage-experience.jsx", "page-layout/home/travel-expercience/travel.tsx", "shared-component/navbar/header.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "page-layout/home/umrah-Packages/umrah.tsx", "page-layout/home/customize-pilgrimage-experience/customize-pilgrimage-experience.jsx", "page-layout/home/travel-expercience/travel.tsx", "shared-component/navbar/header.tsx"],
   "exclude": ["node_modules"]
 }

@@ -7,7 +7,6 @@ import "swiper/css";
 import "swiper/css/navigation";
 import { BeatLoader } from "react-spinners";
 import Popup from "@/shared-component/package-popup/popup";
-import { usePathname, useSearchParams } from "next/navigation";
 
 interface UmrahPackage {
   id: number;
@@ -25,15 +24,10 @@ export default function UmrahPackages() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
   useEffect(() => {
     async function fetchPackages() {
       try {
-        const res = await fetch(
-          "https://dashboard-rho-lake.vercel.app/api/umrah"
-        );
+        const res = await fetch("https://dashboard-rho-lake.vercel.app/api/umrah");
         if (!res.ok) throw new Error("Failed to fetch packages");
 
         const data: UmrahPackage[] = await res.json();
@@ -69,21 +63,6 @@ export default function UmrahPackages() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Smooth scroll on load if hash exists
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const hash = window.location.hash;
-      if (hash) {
-        const element = document.querySelector(hash);
-        if (element) {
-          setTimeout(() => {
-            element.scrollIntoView({ behavior: "smooth" });
-          }, 100); // slight delay to wait for render
-        }
-      }
-    }
-  }, [packages]);
-
   if (loading) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
@@ -113,8 +92,8 @@ export default function UmrahPackages() {
               modules={[Navigation]}
               spaceBetween={10}
               slidesPerView={1}
-              centeredSlides={true}
-              loop={true}
+              centeredSlides
+              loop
               navigation={{
                 prevEl: ".custom-prev",
                 nextEl: ".custom-next",

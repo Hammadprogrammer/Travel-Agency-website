@@ -31,10 +31,9 @@ export default function HajjPackages() {
         if (!res.ok) throw new Error("Failed to fetch packages");
 
         const data: HajjPackage[] = await res.json();
-
         const categoryOrder = ["economic", "standard", "premium"];
 
-        const filteredAndSortedData = Array.isArray(data)
+        const filteredData = Array.isArray(data)
           ? data
               .filter((pkg) => pkg.isActive)
               .sort(
@@ -44,7 +43,7 @@ export default function HajjPackages() {
               )
           : [];
 
-        setPackages(filteredAndSortedData);
+        setPackages(filteredData);
       } catch (err) {
         console.error("Error fetching packages:", err);
         setPackages([]);
@@ -73,7 +72,7 @@ export default function HajjPackages() {
 
   if (packages.length === 0)
     return (
-      <div className={style.packageContainer}>
+      <div className={style.packageContainer} id="hajj">
         <h1 className="text-3xl font-bold mb-4 text-center text-black">
           Hajj Packages
         </h1>
@@ -89,13 +88,12 @@ export default function HajjPackages() {
 
       {isMobile ? (
         <div className="relative">
-          {/* Swiper with navigation */}
           <Swiper
             modules={[Navigation]}
             spaceBetween={10}
             slidesPerView={1}
-            centeredSlides={true}
-            loop={true}
+            centeredSlides
+            loop
             navigation={{
               prevEl: ".custom-prev",
               nextEl: ".custom-next",
@@ -119,15 +117,13 @@ export default function HajjPackages() {
             ))}
           </Swiper>
 
-          {/* Arrows without background */}
-         <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
-  ‹
-</button>
+          <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+            ‹
+          </button>
 
-<button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
-  ›
-</button>
-
+          <button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+            ›
+          </button>
         </div>
       ) : (
         <div className={style.slider}>
@@ -148,7 +144,6 @@ export default function HajjPackages() {
         </div>
       )}
 
-      {/* Popup */}
       {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
     </div>
   );

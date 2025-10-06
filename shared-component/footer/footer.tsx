@@ -97,7 +97,7 @@ const Footer = () => {
 
         <div className={style.bottomTwo}>
           <p style={{ textAlign: "center" }}>
-            Copyright Ⓒ 2025 ABC Travel. All Rights Reserved By ABC
+            Copyright Ⓒ 2025 Al-Muallim Travel. All Rights Reserved By Al-Muallim
           </p>
           <div className={style.social}>
             <a href="https://www.facebook.com/Almuallimtravels/"><FaFacebookF /></a>

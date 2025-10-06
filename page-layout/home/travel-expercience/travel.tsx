@@ -9,7 +9,6 @@ const Experience = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedService, setSelectedService] = useState<string>("");
 
-  // Handle popup open
   const handleOpenPopup = (service: string) => {
     setSelectedService(service);
     setShowPopup(true);
@@ -17,7 +16,6 @@ const Experience = () => {
 
   return (
     <>
-      {/* Experience Section */}
       <section className={style.experienceSection}>
         <div className={style.experienceTopSection}>
           <div className={style.line}></div>
@@ -29,7 +27,6 @@ const Experience = () => {
         <h3>Travel Experience</h3>
 
         <div className={style.boxes}>
-          {/* Hajj */}
           <Link href="#hajj">
             <div className={style.group}>
               <div className={style.box}>
@@ -39,7 +36,6 @@ const Experience = () => {
             </div>
           </Link>
 
-          {/* Umrah */}
           <Link href="#umrah">
             <div className={style.group}>
               <div className={`${style.box} ${style.change}`}>
@@ -49,7 +45,6 @@ const Experience = () => {
             </div>
           </Link>
 
-          {/* Holidays */}
           <Link href="#holiday">
             <div className={style.group}>
               <div className={style.box}>

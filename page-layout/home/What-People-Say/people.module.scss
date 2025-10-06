@@ -1,10 +1,6 @@
 .peopleSection {
   width: 100%;
   padding: 20px;
- 
-
-  @media (max-width: 576px) {
-  }
 
   h3 {
     text-align: center;
@@ -27,8 +23,7 @@
 
   .boxes {
     width: 90%;
-    margin: auto;
-    margin-top: 20px;
+    margin: 20px auto 0;
     display: flex;
     justify-content: center;
     gap: 20px;
@@ -80,23 +75,27 @@
     .bottomSection {
       display: flex;
       margin-top: 15px;
-      gap: 8px;
+      gap: 10px;
       align-items: center;
 
+      .circleImage {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
       h5 {
-        font-size: 13px;
+        font-size: 16px;
         color: #fff;
         margin-bottom: 2px;
-        font-weight: 400;
+        font-weight: bolder;
       }
 
       .small {
-        font-size: 9px;
-      }
-
-      .circleImage {
-        border-radius: 50%;
-        object-fit: cover;
+        font-size: 12px;
+        color: #ccc;
+        font-weight: bolder;
       }
     }
   }

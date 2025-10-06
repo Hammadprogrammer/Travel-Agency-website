@@ -3,9 +3,9 @@
 import React from "react";
 
 const WhoWeAreSection: React.FC = () => {
-  // ✅ You can replace this with your own image from /public or Cloudinary
-  const kaabaImageUrl =
-    "https://media.istockphoto.com/id/1073004208/photo/mecca.jpg?s=612x612&w=0&k=20&c=j8S6j4I1TImsKbUCKbZb_3lvu9rp9k3R-TtLmAoz1Y0=";
+  // const kaabaImageUrl ="https://akcdn.detik.net.id/visual/2024/09/11/ilustrasi-mekkah_43.jpeg?w=720&q=90";
+  const kaabaImageUrl ="/about.jpeg";
+
 
   return (
     <section className="py-16 px-4 sm:px-8 lg:px-16">

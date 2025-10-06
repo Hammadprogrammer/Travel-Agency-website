@@ -5,7 +5,7 @@ import React from "react";
 interface ValueCardProps {
   title: string;
   content: string;
-  color: string; // Example: "blue", "red", "green"
+  color: string; 
 }
 
 // ✅ Safe Tailwind dynamic color handling

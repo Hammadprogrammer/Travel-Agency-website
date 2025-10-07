@@ -32,8 +32,7 @@ const InternationalTours = () => {
   const [showPopup, setShowPopup] = useState(false);
   const [selectedTour, setSelectedTour] = useState<SliderTour | null>(null);
 
-  // Fetch international tours once
-  useEffect(() => {
+ useEffect(() => {
     if (fetchedRef.current) return;
     fetchedRef.current = true;
 
@@ -64,7 +63,6 @@ const InternationalTours = () => {
     fetchTours();
   }, []);
 
-  // Check for mobile view
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 1200);
     handleResize();
@@ -72,7 +70,6 @@ const InternationalTours = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // Smooth scroll on load if hash exists (dynamic like Umrah)
   useEffect(() => {
     if (typeof window !== "undefined") {
       const hash = window.location.hash;
@@ -81,7 +78,7 @@ const InternationalTours = () => {
         if (element) {
           setTimeout(() => {
             element.scrollIntoView({ behavior: "smooth" });
-          }, 100); // slight delay for render
+          }, 5000);
         }
       }
     }

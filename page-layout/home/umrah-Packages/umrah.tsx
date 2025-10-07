@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState, useEffect } from "react";
 import style from "./umrah.jsx.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -24,6 +25,7 @@ export default function UmrahPackages() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
+  // ✅ Fetch Umrah packages from API
   useEffect(() => {
     async function fetchPackages() {
       try {
@@ -56,6 +58,7 @@ export default function UmrahPackages() {
     fetchPackages();
   }, []);
 
+  // ✅ Handle responsive layout
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
@@ -63,6 +66,22 @@ export default function UmrahPackages() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // ✅ Smooth scroll if hash exists in URL
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const hash = window.location.hash;
+      if (hash) {
+        const element = document.querySelector(hash);
+        if (element) {
+          setTimeout(() => {
+            element.scrollIntoView({ behavior: "smooth" });
+          }, 100); // slight delay to wait for render
+        }
+      }
+    }
+  }, [packages]);
+
+  // ✅ Loading state
   if (loading) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
@@ -71,6 +90,7 @@ export default function UmrahPackages() {
     );
   }
 
+  // ✅ No packages state
   if (packages.length === 0)
     return (
       <div className={style.container}>
@@ -81,19 +101,21 @@ export default function UmrahPackages() {
       </div>
     );
 
+  // ✅ Main render
   return (
     <section className={style.whyChooseUsSection} id="umrah">
       <div className={style.container}>
         <h2 className={style.header}>Umrah Packages</h2>
 
         {isMobile ? (
+          // ===== Mobile Swiper =====
           <div className="relative">
             <Swiper
               modules={[Navigation]}
               spaceBetween={10}
               slidesPerView={1}
-              centeredSlides
-              loop
+              centeredSlides={true}
+              loop={true}
               navigation={{
                 prevEl: ".custom-prev",
                 nextEl: ".custom-next",
@@ -127,6 +149,7 @@ export default function UmrahPackages() {
             </button>
           </div>
         ) : (
+          // ===== Desktop Grid =====
           <div className={style.imageGrid}>
             {packages.map((pkg) => (
               <div

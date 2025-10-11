@@ -70,7 +70,7 @@ const Footer = () => {
               <div className={style.officeContentWrapper}>
                 <FaMapMarkerAlt className={style.officeIcon} />
                 <p className={style.officeContent}>
-                  Office # 58, 4th Floor, RJ Mall, Main Rashid Minhas Road, Karachi, Pakistan
+                 Office #: 48-B he, RJ Mall, Main Rashid Minhas Road, Karachi, Pakistan
                 </p>
               </div>
             </div>
@@ -80,11 +80,11 @@ const Footer = () => {
               <div className={style.contactSection}>
                 <div className={style.callSection}>
                   <FaPhoneAlt className={style.icon} /> 
-                  <a className={style.footerLink} href="tel:+03213110100">0321 3110100</a>
+                  <a className={style.footerLink} href="tel:03213110100">0321-3110100</a>
                 </div>
                 <div className={style.callSection}>
                   <FaWhatsapp className={style.icon}/> 
-                  <a className={style.footerLink} href="https://wa.me/92228254984" target="_blank">+92228254984</a>
+                  <a className={style.footerLink} href="https://wa.me/92228254984" target="_blank">+92 321-3110100</a>
                 </div>
                 <div className={style.callSection}>
                   <FaEnvelope className={style.icon}/> 

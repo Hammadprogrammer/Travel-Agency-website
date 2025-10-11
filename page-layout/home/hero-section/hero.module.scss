@@ -198,10 +198,13 @@
 .heroTextTwo {
   margin-top: -5px;
   text-align: right;
+    font-family: 'Noto Nastaliq Urdu', serif;
+
 
   p {
     margin-top: 40px;
     text-align: right;
+    font-size: 30px;
   }
 
   @media (max-width: 768px) {

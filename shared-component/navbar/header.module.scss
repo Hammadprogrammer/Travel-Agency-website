@@ -1,11 +1,14 @@
 .main {
+  padding: 5px;
   width: 100%;   
   position: fixed;
   top: 0;
   left: 0;
   z-index: 1000;
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
-    background-color: #1c4171; 
+  // background-color: #1c4171; 
+  background: linear-gradient(90deg, #0b234a 0%, #153e72 100%);
+
 
 }
 

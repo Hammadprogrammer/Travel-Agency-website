@@ -61,16 +61,18 @@
 
   p {
     color: rgb(224, 223, 223);
-    font-size: 25px;
+    font-size: 30px;
     max-width: 670px;
     margin: 0 65px;
-    line-height: 1.6;
+    line-height: 40px;
 
     @media (max-width: 768px) {
       font-size: 20px;
       max-width: 100%;
       margin: 0;
       padding: 0;
+      margin-top: 20px;
+      line-height: 30px;
     }
 
     @media (max-width: 480px) {
@@ -198,26 +200,44 @@
 .heroTextTwo {
   margin-top: -5px;
   text-align: right;
-    font-family: 'Noto Nastaliq Urdu', serif;
-
+  font-family: 'Noto Nastaliq Urdu', serif;
+  h1 {
+    margin: 30px 65px;
+    font-size: 40px;
+    color: white;
+    max-width: 700px;
+    font-weight: bolder;
+    word-spacing: 10px;
+  }
 
   p {
-    margin-top: 40px;
     text-align: right;
     font-size: 30px;
+    line-height: 70px;
   }
 
   @media (max-width: 768px) {
     margin-top: 30px;
     text-align: right;
-    margin: 0px;
+    margin-top: 40px;  
     padding: 0;
 
     h1 {
+      margin-top: 20px;
       text-align: right;
+      font-size: 20px;
+      font-weight: bolder;
+      margin: 0;
+      padding: 0;
     }
     p {
       text-align: right;
+      font-size: 18px;
+      line-height: 50px;
+      margin-top: 30px;
+      padding: 0;
+
+      
     }
   }
 }

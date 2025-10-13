@@ -3,7 +3,8 @@ import React, { useState, FormEvent, useEffect } from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import style from './popup.module.scss';
 
-const Popup = ({ onClose }: { onClose?: () => void }) => {
+// Add initialService to props
+const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initialService?: string }) => {
   const [formData, setFormData] = useState({
     name: '',
     fatherName: '',
@@ -11,7 +12,8 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
     category: '',
     email: '',
     phone: '',
-    service: '',
+    // Use initialService for the default value
+    service: initialService, 
     message: ''
   });
   const [loading, setLoading] = useState(false);
@@ -35,7 +37,7 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
     if (!/^\d{10,15}$/.test(phone)) return 'Phone must be 10–15 digits';
     if (!category) return 'Please select a category';
     if (!service) return 'Please select a service';
-    if (!message.trim() ) return ;
+    if (!message.trim() ) return 'Message is required'; // Added validation for message
     return null;
   };
 
@@ -70,7 +72,7 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
           category: '',
           email: '',
           phone: '',
-          service: '',
+          service: initialService, // Reset service to initialService or empty string
           message: ''
         });
       } else {
@@ -195,9 +197,9 @@ const Popup = ({ onClose }: { onClose?: () => void }) => {
               <label>Service</label>
               <select name="service" value={formData.service} onChange={handleChange} required>
                 <option value="">Select Service</option>
-                <option value="Hajj">Hajj</option>
-                <option value="Umrah">Umrah</option>
-                <option value="International Packages">International Packages</option>
+                <option value="Hajj Packages">Hajj Packages</option>
+                <option value="Umrah Packages">Umrah Packages</option>
+                <option value="International Tours">International Tours</option>
                 <option value="Domestic Packages">Domestic Packages</option>
               </select>
             </div>

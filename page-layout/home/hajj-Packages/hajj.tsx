@@ -70,15 +70,7 @@ export default function HajjPackages() {
     );
   }
 
-  if (packages.length === 0)
-    return (
-      <div className={style.packageContainer} id="hajj">
-        <h1 className="text-3xl font-bold mb-4 text-center text-black">
-          Hajj Packages
-        </h1>
-        <p className="text-gray-500 text-center">No packages available.</p>
-      </div>
-    );
+  if (packages.length === 0) return null;
 
   return (
     <div className={style.packageContainer} id="hajj">
@@ -144,7 +136,7 @@ export default function HajjPackages() {
         </div>
       )}
 
-      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
+      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} initialService='Hajj Packages' />}
     </div>
   );
 }

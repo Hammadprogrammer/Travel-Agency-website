@@ -28,7 +28,7 @@ const Footer = () => {
       <div className={style.lastSection}>
         <div className={style.bottomOne}>
           <div className={`${style.box} ${style.logoBox}`}>
-            <Image src="/logos.png" alt="logo" width={80} height={40} />
+            <Image src="/logo.png" alt="logo" width={80} height={40} />
             <p className={style.logoDescription}>
               At Al Muallim Travels in Pakistan, we specialize in seamless Hajj
               and Umrah packages, offering visa assistance, 4- and 5-star hotel

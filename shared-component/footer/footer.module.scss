@@ -119,9 +119,9 @@
   max-width: 250px;
 
   .officeIcon {
-    font-size: 30px;
+    font-size: 20px;
     position: relative;
-    bottom: 4px;
+    margin-left: 5px;
   }
 
   .officeContent {
@@ -174,8 +174,6 @@
         flex: 1 1 200px; 
         min-width: unset; 
       }
-
-
     }
   }
 }
@@ -214,10 +212,10 @@
         max-width: 100%;
       }
       .officeIcon {
-    font-size: 40px;
-    margin-bottom: 100px;
+    font-size: 30px;
+    // margin-bottom: 100px;
       position: relative;
-    bottom: 9px;
+    bottom: 4px;
   } 
 
       .bottomGroup {

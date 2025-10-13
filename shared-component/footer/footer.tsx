@@ -67,12 +67,17 @@ const Footer = () => {
 
             <div className={`${style.box} ${style.officesBox}`}>
               <h4 className={style.footerHeading}>Office Address</h4>
-              <div className={style.officeContentWrapper}>
-                <FaMapMarkerAlt className={style.officeIcon} />
-                <p className={style.officeContent}>
-                 Office #: 48-B he, RJ Mall, Main Rashid Minhas Road, Karachi, Pakistan
-                </p>
-              </div>
+            <div className={style.officeContentWrapper}>
+              <FaMapMarkerAlt className={style.officeIcon} />
+              <a
+                href="https://www.google.com/maps/place/RJ+Mall+Karachi/@24.9026015,67.1120654,17z/data=!3m1!4b1!4m6!3m5!1s0x3eb339b315dd62cd:0x4814990e74e37937!8m2!3d24.9025967!4d67.1146403!16s%2Fg%2F11j1mht25j?entry=ttu&g_ep=EgoyMDI1MTAwOC4wIKXMDSoASAFQAw%3D%3D"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={style.officeContent}
+              >
+                48-B, RJ Mall, Main Rashid Minhas Road, Karachi, Pakistan
+              </a>
+            </div>
             </div>
 
             <div className={style.box}>

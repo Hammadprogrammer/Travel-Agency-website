@@ -24,7 +24,6 @@ export default function DomesticPackages() {
   const [isMobile, setIsMobile] = useState<boolean>(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  // ✅ Fetch packages
   useEffect(() => {
     async function fetchPackages() {
       try {
@@ -56,7 +55,6 @@ export default function DomesticPackages() {
     fetchPackages();
   }, []);
 
-  // ✅ Detect mobile
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768);
     handleResize();
@@ -64,7 +62,6 @@ export default function DomesticPackages() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  // ✅ Auto scroll when ?scroll=destinations
   useEffect(() => {
     if (typeof window === "undefined") return;
 
@@ -89,18 +86,9 @@ export default function DomesticPackages() {
     );
   }
 
-  if (packages.length === 0)
-    return (
-      <div className={style.container}>
-        <h2 className="text-3xl font-bold mb-4 text-center text-black">
-          Domestic Packages
-        </h2>
-        <p className="text-gray-500 text-center">No packages available.</p>
-      </div>
-    );
+  if (packages.length === 0)return 
 
   return (
-    // ✅ Add destination-section class here for scroll targeting
     <section className={`${style.whyChooseUsSection} destination-section`}>
       <div className={style.container}>
         <h2 className={style.header}>Domestic Packages</h2>
@@ -171,7 +159,7 @@ export default function DomesticPackages() {
       </div>
 
       {/* Popup */}
-      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
+      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} initialService="Domestic Packages"/>}
     </section>
   );
 }

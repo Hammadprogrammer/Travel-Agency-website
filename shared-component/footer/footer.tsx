@@ -92,8 +92,13 @@ const Footer = () => {
                   <a className={style.footerLink} href="https://wa.me/92228254984" target="_blank">+92 321-3110100</a>
                 </div>
                 <div className={style.callSection}>
-                  <FaEnvelope className={style.icon}/> 
-                  <a className={style.footerLink} onClick={() => setIsContactPopupOpen(true)}>almuallimtravels@gmail.com</a>
+                  <FaEnvelope className={style.icon} />
+                  <a
+                    className={style.footerLink}
+                    href="mailto:almuallimtravels@gmail.com"
+                  >
+                    almuallimtravels@gmail.com
+                  </a>
                 </div>
               </div>
             </div>

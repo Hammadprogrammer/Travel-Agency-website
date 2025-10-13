@@ -36,6 +36,7 @@ export default function Pilgrimage() {
   const [mounted, setMounted] = useState(false);
   const [showPopup, setShowPopup] = useState(false);
 
+  // ✅ Handle mount + resize
   useEffect(() => {
     setMounted(true);
     const handleResize = () => setIsMobile(window.innerWidth < 768);
@@ -44,12 +45,11 @@ export default function Pilgrimage() {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
+  // ✅ Fetch Data
   useEffect(() => {
     async function fetchData() {
       try {
-        const res = await fetch(
-          "https://dashboard-rho-lake.vercel.app/api/custom-pilgrimage"
-        );
+        const res = await fetch("https://dashboard-rho-lake.vercel.app/api/custom-pilgrimage");
         if (!res.ok) throw new Error("Failed to fetch data");
 
         const json: ApiResponse[] = await res.json();
@@ -76,11 +76,13 @@ export default function Pilgrimage() {
         setLoading(false);
       }
     }
+
     fetchData();
   }, []);
 
   if (!mounted) return null;
 
+  // ✅ Show loader while fetching
   if (loading) {
     return (
       <div className="flex justify-center items-center h-[50vh]">
@@ -89,6 +91,10 @@ export default function Pilgrimage() {
     );
   }
 
+  // ✅ If no data, show nothing (hide section)
+  if (data.length === 0) return null;
+
+  // ✅ Main render (only when data exists)
   return (
     <section className={style.pilgrimageSection} id="pilgrimage">
       <div className={style.heading}>
@@ -96,13 +102,12 @@ export default function Pilgrimage() {
       </div>
       <div className={style.subHeading}>
         <p>
-          Select your destinations, holy sites, and transportation to tailor
-          your journey
+          Select your destinations, holy sites, and transportation to tailor your journey
         </p>
       </div>
 
-      {/* ✅ Mobile Swiper */}
       {isMobile ? (
+        // ===== Mobile Swiper =====
         <div className={style.mobileSliderWrapper}>
           <Swiper
             modules={[Navigation]}
@@ -131,6 +136,7 @@ export default function Pilgrimage() {
           </button>
         </div>
       ) : (
+        // ===== Desktop Layout =====
         <div className={style.pilgrimageContainer}>
           {data.map((box) => (
             <PilgrimageBox
@@ -148,6 +154,7 @@ export default function Pilgrimage() {
   );
 }
 
+// ✅ Single Box Component
 function PilgrimageBox({
   box,
   onClick,

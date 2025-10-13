@@ -104,7 +104,7 @@ const InternationalTours = () => {
   };
 
   return (
-    <section
+    <section  
       className={style.internationalTourSection}
       id="holiday"
       style={{
@@ -198,7 +198,7 @@ const InternationalTours = () => {
         )}
       </div>
 
-      {showPopup && <Popup onClose={() => setShowPopup(false)} />}
+      {showPopup && <Popup onClose={() => setShowPopup(false)} initialService="International Tours" />}
     </section>
   );
 };

@@ -75,13 +75,13 @@ export default function UmrahPackages() {
         if (element) {
           setTimeout(() => {
             element.scrollIntoView({ behavior: "smooth" });
-          }, 100); // slight delay to wait for render
+          }, 100);
         }
       }
     }
   }, [packages]);
 
-  // ✅ Loading state
+  // ✅ Show loader while fetching
   if (loading) {
     return (
       <div className="flex justify-center items-center h-[70vh]">
@@ -90,18 +90,10 @@ export default function UmrahPackages() {
     );
   }
 
-  // ✅ No packages state
-  if (packages.length === 0)
-    return (
-      <div className={style.container}>
-        <h2 className="text-3xl font-bold mb-4 text-center text-black">
-          Umrah Packages
-        </h2>
-        <p className="text-gray-500 text-center">No packages available.</p>
-      </div>
-    );
+  // ✅ If no packages, show nothing
+  if (packages.length === 0) return null;
 
-  // ✅ Main render
+  // ✅ Render only when packages exist
   return (
     <section className={style.whyChooseUsSection} id="umrah">
       <div className={style.container}>
@@ -172,7 +164,7 @@ export default function UmrahPackages() {
         )}
       </div>
 
-      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} />}
+      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} initialService='Umrah Packages' />}
     </section>
   );
 }

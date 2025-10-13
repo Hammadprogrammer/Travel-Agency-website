@@ -177,4 +177,5 @@ function PilgrimageBox({
       </div>
     </div>
   );
+  
 }

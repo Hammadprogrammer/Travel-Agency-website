@@ -5,6 +5,7 @@ import { FaPhoneAlt, FaWhatsapp, FaEnvelope, FaFacebookF, FaInstagram, FaTwitter
 import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import Popup from "@/shared-component/package-popup/popup";
+import Link from "next/link";
 
 const Footer = () => {
   const router = useRouter();
@@ -104,9 +105,11 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
+        <div className={style.footerDivider}>
         <div className={style.bottomTwo}>
-          <p style={{ textAlign: "center" }}>
+          {/* <img src="/7ctech.png" alt="" /> */}
+          <Link href="https://www.7ctech.com/"><h1 style={{fontSize:"18px", fontWeight:"bolder"}}>Powered By 7CTECH</h1></Link>
+          <p style={{ textAlign: "center", fontWeight:"bold" }}>
             Copyright Ⓒ 2025 Al-Muallim Travel. All Rights Reserved By Al-Muallim
           </p>
           <div className={style.social}>
@@ -114,6 +117,7 @@ const Footer = () => {
             <a href="https://www.instagram.com/almuallimtravels/#"><FaInstagram /></a>
             <a href="https://www.youtube.com/@almuallimtravels"><FaYoutube /></a>
           </div>
+        </div>
         </div>
       </div>
 

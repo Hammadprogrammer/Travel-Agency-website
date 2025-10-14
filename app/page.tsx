@@ -25,7 +25,6 @@ const page = () => {
     <Umrah/>
     <Pilgrimage/>
     <PeopleSection/>
-   
     </>
   )
 }

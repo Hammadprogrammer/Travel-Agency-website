@@ -13,7 +13,7 @@ interface PopupProps {
 interface FormData {
   name: string;
   fatherName: string;
-  nic: string;
+  nic: string;  
   category: string;
   email: string;
   phone: string;

@@ -107,8 +107,7 @@ const Footer = () => {
         </div>
         <div className={style.footerDivider}>
         <div className={style.bottomTwo}>
-          {/* <img src="/7ctech.png" alt="" /> */}
-          <Link href="https://www.7ctech.com/"><h1 style={{fontSize:"18px", fontWeight:"bolder"}}>Powered By 7CTECH</h1></Link>
+          <Link href="https://www.7ctech.com/"><h1 style={{fontSize:"17px", fontWeight:"bold"}}>Powered By 7CTECH</h1></Link>
           <p style={{ textAlign: "center", fontWeight:"bold" }}>
             Copyright Ⓒ 2025 Al-Muallim Travel. All Rights Reserved By Al-Muallim
           </p>

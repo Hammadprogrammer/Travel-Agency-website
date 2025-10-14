@@ -1,24 +1,44 @@
 'use client';
+
 import React, { useState, FormEvent, useEffect } from 'react';
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import ReCAPTCHA from 'react-google-recaptcha';
 import style from './popup.module.scss';
 
-// Add initialService to props
-const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initialService?: string }) => {
-  const [formData, setFormData] = useState({
+interface PopupProps {
+  onClose?: () => void;
+  initialService?: string;
+}
+
+interface FormData {
+  name: string;
+  fatherName: string;
+  nic: string;
+  category: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+}
+
+const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
+  const [formData, setFormData] = useState<FormData>({
     name: '',
     fatherName: '',
     nic: '',
     category: '',
     email: '',
     phone: '',
-    // Use initialService for the default value
-    service: initialService, 
-    message: ''
+    service: initialService,
+    message: '',
   });
+
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [responseMsg, setResponseMsg] = useState('');
   const [success, setSuccess] = useState(false);
+
+  const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY as string;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -27,22 +47,29 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  const validateForm = () => {
-    const { name, fatherName, nic, email, phone, message, category, service } = formData;
+  const handleRecaptchaChange = (token: string | null) => {
+    setRecaptchaToken(token);
+  };
+
+  const validateForm = (): string | null => {
+    const { name, fatherName, nic, email, phone, category, service } = formData;
 
     if (!name.trim()) return 'Name is required';
     if (!fatherName.trim()) return 'Father Name is required';
-    if (!/^\d{13}$/.test(nic)) return 'CNIC must be 13 digits';
-    if (!/\S+@\S+\.\S+/.test(email)) return 'Invalid email format';
+    if (nic && !/^\d{13}$/.test(nic)) return 'CNIC must be 13 digits if provided';
+    if (email && !/\S+@\S+\.\S+/.test(email)) return 'Invalid email format';
     if (!/^\d{10,15}$/.test(phone)) return 'Phone must be 10–15 digits';
     if (!category) return 'Please select a category';
     if (!service) return 'Please select a service';
-    if (!message.trim() ) return 'Message is required'; // Added validation for message
+    if (!recaptchaToken) return 'Please complete the reCAPTCHA';
+
     return null;
   };
 
+  // Handle form submit
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
     const error = validateForm();
     if (error) {
       setResponseMsg(error);
@@ -52,16 +79,16 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
 
     setLoading(true);
     setResponseMsg('');
+
     try {
-      const response = await fetch(
-        'https://dashboard-rho-lake.vercel.app/api/contact',
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch('https://dashboard-rho-lake.vercel.app/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...formData, recaptchaToken }),
+      });
+
       const result = await response.json();
+
       if (response.ok) {
         setSuccess(true);
         setResponseMsg('Message Sent Successfully');
@@ -72,29 +99,31 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
           category: '',
           email: '',
           phone: '',
-          service: initialService, // Reset service to initialService or empty string
-          message: ''
+          service: initialService,
+          message: '',
         });
+        setRecaptchaToken(null);
       } else {
         setResponseMsg(result.message || 'Something went wrong.');
         setSuccess(false);
       }
     } catch (error) {
+      console.error('Form submit error:', error);
       setResponseMsg('An error occurred. Please try again.');
       setSuccess(false);
-      console.error(error);
     } finally {
       setLoading(false);
     }
   };
 
+  // Auto-close on success
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => {
         setSuccess(false);
         setResponseMsg('');
         if (onClose) onClose();
-      }, 1000);
+      }, 1200);
       return () => clearTimeout(timer);
     }
   }, [success, onClose]);
@@ -113,7 +142,6 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
 
         <div className={style.popupBody}>
           <form onSubmit={handleSubmit} className={style.form}>
-            {/* Row 1 */}
             <div className={style.formRow}>
               <div className={style.formGroup}>
                 <label>Name</label>
@@ -139,10 +167,9 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
               </div>
             </div>
 
-            {/* Row 2 */}
             <div className={style.formRow}>
               <div className={style.formGroup}>
-                <label>CNIC</label>
+                <label>CNIC (optional)</label>
                 <input
                   placeholder="13 digits CNIC"
                   type="text"
@@ -152,7 +179,6 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
                   inputMode="numeric"
                   pattern="\d{13}"
                   maxLength={13}
-                  required
                   className={style.noSpinner}
                 />
               </div>
@@ -167,17 +193,15 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
               </div>
             </div>
 
-            {/* Row 3 */}
             <div className={style.formRow}>
               <div className={style.formGroup}>
-                <label>Email</label>
+                <label>Email (optional)</label>
                 <input
                   placeholder="Enter your email"
                   type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  required
                 />
               </div>
               <div className={style.formGroup}>
@@ -193,6 +217,7 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
               </div>
             </div>
 
+            {/* Service */}
             <div className={style.formGroup}>
               <label>Service</label>
               <select name="service" value={formData.service} onChange={handleChange} required>
@@ -205,15 +230,22 @@ const Popup = ({ onClose, initialService = '' }: { onClose?: () => void, initial
             </div>
 
             <div className={style.formGroup}>
-              <label>Message</label>
+              <label>Message (optional)</label>
               <textarea
                 placeholder="Write your message..."
                 name="message"
                 rows={4}
                 value={formData.message}
                 onChange={handleChange}
-                required
               />
+            </div>
+
+            <div className={style.formGroup}>
+              {siteKey ? (
+                <ReCAPTCHA sitekey={siteKey} onChange={handleRecaptchaChange} />
+              ) : (
+                <p style={{ color: 'red' }}>reCAPTCHA site key missing!</p>
+              )}
             </div>
 
             <button type="submit" disabled={loading} className={style.submitBtn}>

@@ -66,7 +66,6 @@ const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
     return null;
   };
 
-  // Handle form submit
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
@@ -91,7 +90,7 @@ const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
 
       if (response.ok) {
         setSuccess(true);
-        setResponseMsg('Message Sent Successfully');
+        setResponseMsg('✅ Message Sent Successfully!');
         setFormData({
           name: '',
           fatherName: '',
@@ -116,14 +115,13 @@ const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
     }
   };
 
-  // Auto-close on success
   useEffect(() => {
     if (success) {
       const timer = setTimeout(() => {
+        if (onClose) onClose();
         setSuccess(false);
         setResponseMsg('');
-        if (onClose) onClose();
-      }, 1200);
+      }, 1000); 
       return () => clearTimeout(timer);
     }
   }, [success, onClose]);
@@ -177,7 +175,6 @@ const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
                   value={formData.nic}
                   onChange={handleChange}
                   inputMode="numeric"
-                  pattern="\d{13}"
                   maxLength={13}
                   className={style.noSpinner}
                 />
@@ -217,7 +214,6 @@ const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
               </div>
             </div>
 
-            {/* Service */}
             <div className={style.formGroup}>
               <label>Service</label>
               <select name="service" value={formData.service} onChange={handleChange} required>
@@ -252,11 +248,15 @@ const Popup: React.FC<PopupProps> = ({ onClose, initialService = '' }) => {
               {loading ? 'Submitting...' : 'Submit'}
             </button>
 
+            {/* ✅ Success / Error Message */}
             {responseMsg && (
               <p
                 className={`${style.message} ${
                   success ? style.successMessage : style.errorMessage
                 }`}
+                style={{
+                  animation: success ? 'fadeInUp 0.3s ease-in-out' : 'none',
+                }}
               >
                 {success && <CheckCircleIcon className={style.successIcon} />}
                 {responseMsg}

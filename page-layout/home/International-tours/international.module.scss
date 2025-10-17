@@ -25,6 +25,7 @@
       color: white;
       font-size: 38px;
       font-weight: bold;
+
       @media (max-width: 768px) {
         font-size: 26px;
       }
@@ -35,6 +36,7 @@
       color: white;
       font-size: 20px;
       margin-top: 10px;
+
       @media (max-width: 768px) {
         font-size: 16px;
       }
@@ -68,7 +70,7 @@
 
       .slideImage {
         width: 100%;
-        height: 100%;
+        height: 500px;
         border-radius: 12px;
         transition: transform 0.5s ease-in-out;
       }
@@ -98,6 +100,32 @@
     }
   }
 
+  /* ✅ Responsive Image Height Adjustments */
+  @media (max-width: 992px) {
+    .sliderContainer {
+      .slideImage {
+        height: 400px; /* Tablet size */
+      }
+    }
+  }
+
+  @media (max-width: 768px) {
+    .sliderContainer {
+      .slideImage {
+        height: 300px; /* Mobile landscape */
+      }
+    }
+  }
+
+  @media (max-width: 576px) {
+    .sliderContainer {
+      .slideImage {
+        height: 220px; /* Small mobile portrait */
+      }
+    }
+  }
+
+  /* 📱 Mobile slider layout adjustments */
   @media (max-width: 1199px) {
     .sliderContainer {
       .sliderWrapper {
@@ -123,5 +151,4 @@
       }
     }
   }
-  
 }

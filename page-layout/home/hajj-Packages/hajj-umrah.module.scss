@@ -9,33 +9,43 @@
 
 .slider {
   display: grid;
-  grid-template-columns: repeat(3, 1fr); 
+  grid-template-columns: repeat(3, 1fr);
   gap: 40px;
   overflow: hidden;
-  margin-left: 50px;
+  /* Adjusting margin-left to a more balanced margin, e.g., using padding on the container or a symmetrical margin */
+  margin: 0 50px; 
   
 
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
+    margin: 0 10px; /* Adjust margin for mobile to prevent bleed */
   }
 }
 
 .slide {
   position: relative;
   overflow: hidden; 
-  border-radius: 16px;
+  border-radius: 16px; /* Keep radius on the container for the overflow effect */
   transition: transform 0.3s ease;
   cursor: pointer;
+
+  /* Target the image element directly inside the slide */
+  img {
+    width: 100%;
+    /* Use a responsive height, or keep fixed height if desired, but auto is often better */
+    height: 100%; 
+    object-fit: cover;
+    transition: transform 0.3s ease;
+    /* --- FIX: Apply border-radius directly to the image element --- */
+    border-radius: 16px; 
+    /* Ensure the image fills the slide without showing container corners */
+    display: block; 
+  }
 }
 
-.image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  transition: transform 0.3s ease;
-
-
-}
+/* * NOTE: Removed the redundant .image class block below as it's not being used in your React component 
+* and the img styles are now within .slide 
+*/
 
 .overlay {
   position: absolute;

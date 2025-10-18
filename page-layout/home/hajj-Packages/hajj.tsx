@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import style from "./hajj-umrah.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
@@ -23,6 +23,10 @@ export default function HajjPackages() {
   const [loading, setLoading] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const swiperRef = useRef<any>(null);
+  const prevRef = useRef<HTMLButtonElement | null>(null);
+  const nextRef = useRef<HTMLButtonElement | null>(null);
 
   useEffect(() => {
     async function fetchPackages() {
@@ -86,10 +90,7 @@ export default function HajjPackages() {
             slidesPerView={1}
             centeredSlides
             loop
-            navigation={{
-              prevEl: ".custom-prev",
-              nextEl: ".custom-next",
-            }}
+            onSwiper={(swiper) => (swiperRef.current = swiper)} 
           >
             {packages.map((pkg, index) => (
               <SwiperSlide key={pkg.id}>
@@ -109,11 +110,19 @@ export default function HajjPackages() {
             ))}
           </Swiper>
 
-          <button className="custom-prev absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+          <button
+            ref={prevRef}
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="absolute left-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10"
+          >
             ‹
           </button>
 
-          <button className="custom-next absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+          <button
+            ref={nextRef}
+            onClick={() => swiperRef.current?.slideNext()}
+            className="absolute right-1 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-3xl rounded-full w-10 h-10 flex items-center justify-center z-10"
+          >
             ›
           </button>
         </div>
@@ -136,7 +145,12 @@ export default function HajjPackages() {
         </div>
       )}
 
-      {isPopupOpen && <Popup onClose={() => setIsPopupOpen(false)} initialService='Hajj Packages' />}
+      {isPopupOpen && (
+        <Popup
+          onClose={() => setIsPopupOpen(false)}
+          initialService="Hajj Packages"
+        />
+      )}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import style from "./people.module.scss";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -19,6 +19,7 @@ interface Testimonial {
 const PeopleSection = () => {
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
   const [isMobile, setIsMobile] = useState(false);
+  const swiperRef = useRef<any>(null);
 
   useEffect(() => {
     const fetchTestimonials = async () => {
@@ -27,9 +28,7 @@ const PeopleSection = () => {
           "https://dashboard-rho-lake.vercel.app/api/testimonials"
         );
         const data = await res.json();
-        if (Array.isArray(data)) {
-          setTestimonials(data);
-        }
+        if (Array.isArray(data)) setTestimonials(data);
       } catch (error) {
         console.error("Error fetching testimonials:", error);
       }
@@ -46,6 +45,19 @@ const PeopleSection = () => {
 
   if (testimonials.length === 0) return null;
 
+  const renderStars = (rating: number) => {
+    const fullStars = Math.floor(rating);
+    const hasHalf = rating % 1 !== 0;
+    return (
+      <>
+        {[...Array(fullStars)].map((_, i) => (
+          <span key={i} className="fa fa-star text-yellow-400"></span>
+        ))}
+        {hasHalf && <span className="fa fa-star-half text-yellow-400"></span>}
+      </>
+    );
+  };
+
   return (
     <section className={style.peopleSection}>
       <h3>What People Say</h3>
@@ -54,34 +66,30 @@ const PeopleSection = () => {
       </p>
 
       {isMobile ? (
-        <div className="relative">
+        <div className="relative flex justify-center items-center overflow-visible">
           <Swiper
             modules={[Navigation]}
             spaceBetween={15}
             slidesPerView={1}
-            centeredSlides={true}
-            loop={true}
-            navigation={{
-              prevEl: ".custom-prev",
-              nextEl: ".custom-next",
-            }}
+            centeredSlides
+            loop
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            className="max-w-[90%] mx-auto"
           >
             {testimonials.map((testimonial) => (
               <SwiperSlide key={testimonial.id}>
                 <div className={style.box}>
                   <div className={style.topSection}>
-                    <p className={style.margin}>{testimonial.rating.toFixed(2)}</p>
-                    {[...Array(testimonial.rating)].map((_, i) => (
-                      <span key={i} className="fa fa-star"></span>
-                    ))}
+                    <p className={style.margin}>{testimonial.rating.toFixed(1)}</p>
+                    {renderStars(testimonial.rating)}
                   </div>
                   <p className={style.styleText}>{testimonial.description}</p>
                   <div className={style.bottomSection}>
                     <Image
                       src={testimonial.image}
                       alt={testimonial.name}
-                      width={50}
-                      height={50}
+                      width={60}
+                      height={60}
                       className={style.circleImage}
                     />
                     <div>
@@ -94,31 +102,34 @@ const PeopleSection = () => {
             ))}
           </Swiper>
 
-          {/* Arrows */}
-          <button className="custom-prev absolute left-[-20px] top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-2xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+          <button
+            onClick={() => swiperRef.current?.slidePrev()}
+            className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white text-3xl rounded-full w-12 h-12 flex items-center justify-center z-[100] shadow-lg transition-all"
+          >
             ‹
           </button>
-          <button className="custom-next absolute right-[-20px] top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white text-2xl rounded-full w-10 h-10 flex items-center justify-center z-10">
+          <button
+            onClick={() => swiperRef.current?.slideNext()}
+            className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/60 hover:bg-black/80 text-white text-3xl rounded-full w-12 h-12 flex items-center justify-center z-[100] shadow-lg transition-all"
+          >
             ›
           </button>
         </div>
       ) : (
-        <div className={style.boxes}>
+        <div className={`${style.boxes} flex justify-center gap-6`}>
           {testimonials.map((testimonial) => (
             <div key={testimonial.id} className={style.box}>
               <div className={style.topSection}>
-                <p className={style.margin}>{testimonial.rating.toFixed(2)}</p>
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <span key={i} className="fa fa-star"></span>
-                ))}
+                <p className={style.margin}>{testimonial.rating.toFixed(1)}</p>
+                {renderStars(testimonial.rating)}
               </div>
               <p className={style.styleText}>{testimonial.description}</p>
               <div className={style.bottomSection}>
                 <Image
                   src={testimonial.image}
                   alt={testimonial.name}
-                  width={100}
-                  height={100}
+                  width={80}
+                  height={80}
                   className={style.circleImage}
                 />
                 <div>

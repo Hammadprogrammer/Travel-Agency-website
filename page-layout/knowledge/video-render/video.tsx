@@ -49,7 +49,7 @@ export default function VideoGallery() {
 
   return (
     <div className={style.container}>
-      <h1 className={style.heading}>Videos</h1>
+      <h1 className={style.heading}>Knowledge Base Videos</h1>
 
       <div className={style.videoList}>
         {videos.map((video) => (

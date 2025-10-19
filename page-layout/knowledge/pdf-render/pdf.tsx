@@ -1,6 +1,6 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
 import style from "./pdf.module.scss";
 
 interface KnowledgeItem {
@@ -8,144 +8,148 @@ interface KnowledgeItem {
   title: string;
   description: string;
   fileUrl: string | null;
+  publicId: string | null;
+  isActive: boolean;
 }
 
-const getFileExtension = (url: string | null): string | null => {
-  if (!url) return null;
-  const cleanUrl = url.split("?")[0];
-  const extMatch = cleanUrl.match(/\.([^.]+)$/);
-  return extMatch ? extMatch[1].toLowerCase() : null;
-};
+const App = () => {
+  const [items, setItems] = useState<KnowledgeItem[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-export default function KnowledgeList() {
-  const [data, setData] = useState<KnowledgeItem[]>([]);
-  const [loading, setLoading] = useState(true);
+  const API_ENDPOINT = "https://dashboard-rho-lake.vercel.app/api/knowledge";
+
+  const fetchItems = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch(API_ENDPOINT);
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.error || "Failed to fetch knowledge items.");
+      }
+
+      const data: KnowledgeItem[] = await res.json();
+      setItems(data.filter((item) => item.isActive));
+    } catch (err) {
+      const fetchError = err as Error;
+      console.error("Fetch Error:", fetchError.message);
+      setError(`Failed to load data: ${fetchError.message}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await fetch("https://dashboard-rho-lake.vercel.app/api/knowledge");
-        if (!res.ok) throw new Error("Failed to fetch data");
-        const json = await res.json();
-        setData(json);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
+    fetchItems();
   }, []);
 
-  if (loading) {
-    return (
-      <div className={style.loadingContainer}>
-        <p className={style.loadingText}>Loading knowledge items...</p>
-      </div>
-    );
-  }
+  // Detect Urdu text
+  const isUrdu = (text: string | null) => {
+    if (!text) return false;
+    const urduRegex = /[\u0600-\u06FF]/;
+    return urduRegex.test(text);
+  };
+
+  const handleDownload = async (url: string, title: string, id: number) => {
+    if (!url) return;
+
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error(`Failed to fetch file (Status: ${res.status})`);
+      const blob = await res.blob();
+      const link = document.createElement("a");
+      link.href = window.URL.createObjectURL(blob);
+
+      const safeTitle = (title.trim() || `knowledge_file_${id}`)
+        .replace(/[^a-z0-9\s]/gi, "_")
+        .toLowerCase();
+
+      link.download = safeTitle.endsWith(".pdf") ? safeTitle : `${safeTitle}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(link.href);
+    } catch (err) {
+      const error = err as Error;
+      console.error("Download failed:", error);
+    }
+  };
 
   return (
     <div className={style.container}>
-      <h1 className={style.heading}>📚 Knowledge Library</h1>
+      <div className={style.innerContainer}>
+        <header className={style.header}>
+          <h1 className={style.title}>Knowledge Base Material</h1>
+        </header>
 
-      {data.length === 0 && (
-        <div className={style.noItems}>
-          <p>No knowledge items found.</p>
-        </div>
-      )}
+        {isLoading && (
+          <div className={style.loading}>
+            <div className={style.spinner}></div>
+            <p>Loading knowledge items...</p>
+          </div>
+        )}
 
-      <div className={style.list}>
-        {data.map((item) => {
-          let fileUrl = item.fileUrl;
-          if (fileUrl && !fileUrl.endsWith(".pdf")) {
-            fileUrl = `${fileUrl}.pdf`;
-          }
+        {error && (
+          <div className={style.errorBox}>
+            <p className={style.errorTitle}>Error Loading Data</p>
+            <p className={style.errorText}>{error}</p>
+            <button onClick={fetchItems} className={style.retryBtn}>
+              Try Again
+            </button>
+          </div>
+        )}
 
-          const fileExt = getFileExtension(fileUrl);
-          const isPdf = fileExt === "pdf";
+        {!isLoading && !error && items.length === 0 && (
+          <div className={style.emptyBox}>
+            <p>No active knowledge documents found.</p>
+          </div>
+        )}
 
-          return (
-            <div key={item.id} className={style.card}>
-              <h2 className={style.title}>{item.title}</h2>
-              <p className={style.description}>{item.description}</p>
-
-              {fileUrl ? (
-                <div className={style.fileSection}>
-                  {isPdf ? (
-                    <iframe
-                      src={fileUrl}
-                      className={style.preview}
-                      title={`Preview of ${item.title}`}
-                    />
-                  ) : (
-                    <div className={style.noPreview}>
-                      <p>
-                        File Type:{" "}
-                        <strong>{fileExt ? fileExt.toUpperCase() : "Unknown"}</strong>. No inline
-                        preview available.
-                      </p>
-                    </div>
-                  )}
-
-                  <div className={style.buttons}>
-                    <a
-                      href={fileUrl}
-                      download={`${item.title}.pdf`}
-                      className={style.downloadBtn}
-                    >
-                      <svg
-                        className={style.icon}
-                        fill="currentColor"
-                        viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg"
+        {!isLoading && !error && items.length > 0 && (
+          <div className={style.grid}>
+            {items.map((item) => {
+              const urduTitle = isUrdu(item.title);
+              const urduDesc = isUrdu(item.description);
+              return (
+                <div
+                  key={item.id}
+                  className={`${style.card} ${
+                    urduTitle || urduDesc ? style.rtl : style.ltr
+                  }`}
+                >
+                  <h2 className={style.cardTitle}>
+                    {item.title || `Document #${item.id}`}
+                  </h2>
+                  <p className={style.cardDesc}>
+                    {item.description ||
+                      "No detailed description available for this document."}
+                  </p>
+                  <div className={style.cardFooter}>
+                    {item.fileUrl ? (
+                      <button
+                        onClick={() =>
+                          handleDownload(item.fileUrl!, item.title!, item.id)
+                        }
+                        className={style.downloadBtn}
+                        disabled={isLoading}
                       >
-                        <path
-                          fillRule="evenodd"
-                          d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L10 11.586l1.293-1.293a1 1 0 111.414 1.414l-2 2a1 1 0 01-1.414 0l-2-2a1 1 0 010-1.414z"
-                          clipRule="evenodd"
-                        ></path>
-                        <path
-                          fillRule="evenodd"
-                          d="M10 3a1 1 0 011 1v7a1 1 0 11-2 0V4a1 1 0 011-1z"
-                          clipRule="evenodd"
-                        ></path>
-                      </svg>
-                      Download PDF
-                    </a>
-
-                    <a
-                      href={fileUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={style.openBtn}
-                    >
-                      <svg
-                        className={style.icon}
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth="2"
-                          d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                        ></path>
-                      </svg>
-                      Open in New Tab
-                    </a>
+                        <ArrowDownTrayIcon className={style.downloadIcon} /> Download PDF
+                      </button>
+                    ) : (
+                      <div className={style.fileMissing}>
+                        File link missing or corrupted.
+                      </div>
+                    )}
                   </div>
                 </div>
-              ) : (
-                <p className={style.noFile}>No file attached.</p>
-              )}
-            </div>
-          );
-        })}
+              );
+            })}
+          </div>
+        )}
       </div>
     </div>
   );
-}
+};
+
+export default App;

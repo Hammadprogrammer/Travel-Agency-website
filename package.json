@@ -30,6 +30,7 @@
     "react-dom": "19.1.0",
     "react-google-recaptcha": "^3.1.0",
     "react-icons": "^5.5.0",
+    "react-pdf-flipbook-viewer": "^0.2.0",
     "react-slick": "^0.31.0",
     "react-spinners": "^0.17.0",
     "reactstrap": "^9.2.3",

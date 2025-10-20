@@ -19,21 +19,18 @@
   color: #111827;
 }
 
-.subtitle {
-  margin-top: 10px;
-  color: #6b7280;
-  font-size: 1.1rem;
-}
-
 .rtl {
   direction: rtl;
   text-align: right;
   font-family: "Noto Nastaliq Urdu", "Jameel Noori Nastaleeq", serif;
+  line-height: 1.8;
 }
 
 .ltr {
   direction: ltr;
   text-align: left;
+  font-family: "Lato", sans-serif;
+  line-height: 1.6;
 }
 
 .loading {
@@ -108,7 +105,6 @@
   color: #6b7280;
 }
 
-/* Grid Layout */
 .grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -135,18 +131,28 @@
   }
 }
 
+
 .cardTitle {
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 700;
   color: #111827;
-  margin-bottom: 10px;
+  margin-bottom: 12px;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+  }
 }
 
 .cardDesc {
+  margin-top: 15px;
   color: #4b5563;
-  font-size: 24px;
+  font-size: 20px;
   margin-bottom: 20px;
   flex-grow: 1;
+
+  @media (max-width: 768px) {
+    font-size: 1rem;
+  }
 }
 
 .downloadBtn {
@@ -155,7 +161,7 @@
   border: none;
   padding: 12px 16px;
   font-weight: 600;
-  font-size: 0.95rem;
+  font-size: 1rem;
   border-radius: 10px;
   width: 100%;
   cursor: pointer;
@@ -173,7 +179,6 @@
     height: 20px;
     width: 20px;
     margin-right: 8px;
-    background-color: #1f2937;
   }
 }
 

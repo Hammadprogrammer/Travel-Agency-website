@@ -44,7 +44,6 @@ const App = () => {
     fetchItems();
   }, []);
 
-  // Detect Urdu text
   const isUrdu = (text: string | null) => {
     if (!text) return false;
     const urduRegex = /[\u0600-\u06FF]/;

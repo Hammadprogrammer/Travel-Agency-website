@@ -9,6 +9,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+
   /* 👇 Yahan Lato & Open Sans bind kar do */
   --font-sans: var(--font-open-sans); /* Body text */
   --font-heading: var(--font-lato);   /* Headings */
@@ -23,5 +24,7 @@
 
 body {
   color: var(--foreground);
+}
+HTML {
   overscroll-behavior-y: none;
 }

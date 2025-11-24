@@ -136,8 +136,7 @@ const App = () => {
                         <ArrowDownTrayIcon className={style.downloadIcon} /> Download PDF
                       </button>
                     ) : (
-                      <div className={style.fileMissing}>
-                        File link missing or corrupted.
+                      <div>
                       </div>
                     )}
                   </div>

@@ -86,11 +86,11 @@ const Footer = () => {
               <div className={style.contactSection}>
                 <div className={style.callSection}>
                   <FaPhoneAlt className={style.icon} /> 
-                  <a className={style.footerLink} href="tel:03213110100">0321-3110100</a>
+                  <a className={style.footerLink} href="tel:03112774836">0311-2774836</a>
                 </div>
                 <div className={style.callSection}>
                   <FaWhatsapp className={style.icon}/> 
-                  <a className={style.footerLink} href="https://wa.me/92228254984" target="_blank">+92 321-3110100</a>
+                  <a className={style.footerLink} href="https://wa.me/923428011000" target="_blank">+92 342-8011000</a>
                 </div>
                 <div className={style.callSection}>
                   <FaEnvelope className={style.icon} />
